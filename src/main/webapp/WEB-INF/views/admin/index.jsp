@@ -14,10 +14,10 @@
         <form id="ad_loginForm">
             <div class="intotal">
                 <div class="adin1">
-                    <input type="text" class="loginid" value="" placeholder="아이디">
+                    <input type="text" class="loginid" name="aid" value="" placeholder="아이디">
                 </div>
                 <div class="adin2">
-                    <input type="password" class="loginpass" value="" placeholder="패스워드">
+                    <input type="password" class="loginpass" name="apw" value="" placeholder="패스워드">
                 </div>
             </div>
             <div class="adbt">
