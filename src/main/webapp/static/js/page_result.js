@@ -21,3 +21,13 @@ function login() {
     ad_loginForm.action = "";
     ad_loginForm.submit();
 }
+
+
+
+// 회원가입 Button Click !
+document.getElementById("member_add").addEventListener("click", function (e) {
+    e.preventDefault();
+    if(confirm("회원가입 페이지로 이동하시겠습니까 ?")){
+       location.href = "/admin/join";
+    }
+})
