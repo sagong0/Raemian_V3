@@ -18,6 +18,6 @@ loginBtn.addEventListener("click", function (e) {
 
 function login() {
     ad_loginForm.method = "POST";
-    ad_loginForm.action = "./login";
+    ad_loginForm.action = "";
     ad_loginForm.submit();
 }

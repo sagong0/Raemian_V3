@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_css.css?v=<%= System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin_css.css?v=<%= System.currentTimeMillis()%>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap">
     <title>관리자 페이지</title>
 </head>
@@ -38,5 +38,5 @@
 
 </div>
 </body>
-<script src="../js/page_result.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/static/js/page_result.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
