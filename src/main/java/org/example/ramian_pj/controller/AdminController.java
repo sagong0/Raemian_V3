@@ -36,4 +36,23 @@ public class AdminController {
             return "redirect:/admin/dashboard";
         }
     }
+
+    /*
+    회원가입 PAGE
+     */
+    @GetMapping("/join")
+    public String joinForm() {
+        log.info("join form !!!!!!");
+        return "admin/joinForm";
+    }
+
+    /**
+     * ID 중복체크 PART
+     */
+    @PostMapping("/id_ck")
+    @ResponseBody
+    public String idCheck(@RequestBody String aid) {
+        log.info("aid = {}", aid);
+        return null;
+    }
 }
