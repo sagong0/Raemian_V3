@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_css.css?v=<%= System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin_css.css?v=<%= System.currentTimeMillis()%>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap">
     <title>관리자 페이지</title>
 </head>
@@ -14,10 +14,10 @@
         <form id="ad_loginForm">
             <div class="intotal">
                 <div class="adin1">
-                    <input type="text" class="loginid" value="" placeholder="아이디">
+                    <input type="text" class="loginid" name="aid" value="" placeholder="아이디">
                 </div>
                 <div class="adin2">
-                    <input type="password" class="loginpass" value="" placeholder="패스워드">
+                    <input type="password" class="loginpass" name="apw" value="" placeholder="패스워드">
                 </div>
             </div>
             <div class="adbt">
@@ -38,5 +38,5 @@
 
 </div>
 </body>
-<script src="../js/page_result.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/static/js/page_result.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
