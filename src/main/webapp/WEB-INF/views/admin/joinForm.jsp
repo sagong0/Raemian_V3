@@ -102,7 +102,7 @@
                     <li class="memfont">연락처</li>
                     <li>
                         <select class="adnumber" name="atell1>
-                            <option value="010">011</option>
+                            <option value="010">010</option>
                             <option value="011">011</option>
                         </select>
                     </li>
@@ -115,7 +115,7 @@
                     <input type="text" class="adnumber" name="atell3" onkeyup="tell_value();" maxlength="4">
                     </li>
                     <li>
-                    <input type="hidden" name="atel"/>
+                    <input type="hidden" name="atell"/>
                     </li>
                 </ul>    
               </div> 

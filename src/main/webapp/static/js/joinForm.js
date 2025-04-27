@@ -68,6 +68,13 @@ joinBtn.addEventListener("click", function (e) {
 
 function save_admin() {
     if (confirm("관리자 등록을 하시겠습니까?")) {
+
+        // Form Submit 하기 직전 전화번호 합치는 PART
+        const tel1 = joinForm.atell1.value.trim();
+        const tel2 = joinForm.atell2.value.trim();
+        const tel3 = joinForm.atell3.value.trim();
+
+        joinForm.atell.value = `${tel1}-${tel2}-${tel3}`;
         joinForm.method = "POST";
         joinForm.action = "";
         joinForm.enctype = "application/x-www-form-urlencoded";
