@@ -1,6 +1,9 @@
 package org.example.ramian_pj.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.AdminLoginDTO;
+import org.example.ramian_pj.dto.AdminMemberTestDTO;
+import org.example.ramian_pj.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -8,12 +11,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequestMapping("/admin")
 @Controller
+@RequiredArgsConstructor
 public class AdminController {
 
     private final Logger log = LoggerFactory.getLogger(AdminController.class);
+
+    private final AdminService adminService;
 
     @GetMapping({"", "/"})
     public String loginPage() {
@@ -54,5 +61,15 @@ public class AdminController {
     public String idCheck(@RequestBody String aid) {
         log.info("aid = {}", aid);
         return null;
+    }
+
+    @GetMapping("/test")
+    public void testTest() {
+        List<AdminMemberTestDTO> admins = this.adminService.test();
+        for (AdminMemberTestDTO admin : admins) {
+            log.info("**********");
+            log.info(admin.toString());
+            log.info("**********");
+        }
     }
 }
