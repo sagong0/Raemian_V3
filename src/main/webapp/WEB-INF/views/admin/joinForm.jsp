@@ -101,18 +101,18 @@
                 <ul>
                     <li class="memfont">연락처</li>
                     <li>
-                        <select class="adnumber" name="atell1>
+                        <select class="adnumber" name="atell1">
                             <option value="010">010</option>
                             <option value="011">011</option>
                         </select>
                     </li>
                     <li class="ad_number">-</li>
                     <li>
-                    <input type="text" class="adnumber"  name="atell2" onkeyup="tell_value();" maxlength="4">
+                    <input type="text" class="adnumber"  name="atell2" maxlength="4">
                     </li>
                     <li class="ad_number">-</li>
                     <li>
-                    <input type="text" class="adnumber" name="atell3" onkeyup="tell_value();" maxlength="4">
+                    <input type="text" class="adnumber" name="atell3" maxlength="4">
                     </li>
                     <li>
                     <input type="hidden" name="atell"/>

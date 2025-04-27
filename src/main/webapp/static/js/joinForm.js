@@ -1,9 +1,3 @@
-/**
- * 전화번호 합치기
- */
-// function tell_value(){
-// 	joinForm.atel.value = joinForm.atell1.value + joinForm.atell2.value + joinForm.atell3.value;
-// }
 
 
 /**
@@ -52,19 +46,37 @@ joinBtn.addEventListener("click", function (e) {
     } else if (!emailRx.test(joinForm.aemail.value)) {
         alert("올바른 이메일 형식을 사용해주세요.");
         joinForm.aemail.focus();
-    } else if (joinForm.atel.value == "") {
+    }
+    else if (joinForm.atell1.value == "") {
         alert("전화번호를 입력해주세요.");
         joinForm.atell.focus();
-    } else if (joinForm.atel.value.length < 10) {
-        alert("전화번호를 확인해주세요.");
+    }
+    else if (joinForm.atell2.value == "") {
+        alert("전화번호를 입력해주세요.");
         joinForm.atell.focus();
-    } else if (isNaN(joinForm.atel.value)) {
+    }
+    else if (joinForm.atell3.value == "") {
+        alert("전화번호를 입력해주세요.");
+        joinForm.atell.focus();
+    }
+    else if (isNaN(joinForm.atell1.value)) {
         alert("전화번호 형식을 확인해주세요.");
         joinForm.atell.focus();
-    } else {
+    }
+    else if (isNaN(joinForm.atell2.value)) {
+        alert("전화번호 형식을 확인해주세요.");
+        joinForm.atell.focus();
+    }
+    else if (isNaN(joinForm.atell3.value)) {
+        alert("전화번호 형식을 확인해주세요.");
+        joinForm.atell.focus();
+    }
+    else {
         save_admin();
     }
 });
+
+const phoneFullRx = /^01[016789]-\d{3,4}-\d{4}$/; // 휴대폰 번호 포맷 정규식
 
 function save_admin() {
     if (confirm("관리자 등록을 하시겠습니까?")) {
@@ -73,8 +85,13 @@ function save_admin() {
         const tel1 = joinForm.atell1.value.trim();
         const tel2 = joinForm.atell2.value.trim();
         const tel3 = joinForm.atell3.value.trim();
-
-        joinForm.atell.value = `${tel1}-${tel2}-${tel3}`;
+        
+        const fullTell = `${tel1}-${tel2}-${tel3}`;
+        if(!phoneFullRx.test(fullTell)){
+            alert("전화번호 형식 확인해주세요.");
+            return;
+        }
+        joinForm.atell.value = fullTell; 
         joinForm.method = "POST";
         joinForm.action = "";
         joinForm.enctype = "application/x-www-form-urlencoded";

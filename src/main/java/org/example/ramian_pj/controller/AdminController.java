@@ -1,6 +1,7 @@
 package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.dto.AdminJoinDTO;
 import org.example.ramian_pj.dto.AdminLoginDTO;
 import org.example.ramian_pj.dto.AdminMemberDTO;
 import org.example.ramian_pj.service.AdminService;
@@ -49,8 +50,13 @@ public class AdminController {
      */
     @GetMapping("/join")
     public String joinForm() {
-        log.info("join form !!!!!!");
         return "admin/joinForm";
+    }
+
+    @PostMapping("/join")
+    public void joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
+        log.info("check here !!!!!!");
+        log.info(adminJoinDTO.toString());
     }
 
     /**
