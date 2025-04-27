@@ -3,7 +3,7 @@ package org.example.ramian_pj.dto;
 import lombok.Data;
 
 @Data
-public class AdminMemberTestDTO {
+public class AdminMemberDTO {
     // 소속
     private String department;
     // 부서

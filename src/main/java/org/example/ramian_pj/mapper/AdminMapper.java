@@ -1,9 +1,11 @@
 package org.example.ramian_pj.mapper;
 
-import org.example.ramian_pj.dto.AdminMemberTestDTO;
+import org.example.ramian_pj.dto.AdminMemberDTO;
 
 import java.util.List;
 
 public interface AdminMapper {
-    List<AdminMemberTestDTO> getAdmins();
+    List<AdminMemberDTO> getAdmins();
+
+    AdminMemberDTO getAdminById(String userid);
 }

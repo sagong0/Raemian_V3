@@ -1,9 +1,11 @@
 package org.example.ramian_pj.repository;
 
-import org.example.ramian_pj.dto.AdminMemberTestDTO;
+import org.example.ramian_pj.dto.AdminMemberDTO;
 
 import java.util.List;
 
 public interface AdminRepository {
-    List<AdminMemberTestDTO> getAdmins();
+    List<AdminMemberDTO> getAdmins();
+
+    AdminMemberDTO findAdminByUserId(String aid);
 }

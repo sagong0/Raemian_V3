@@ -93,17 +93,22 @@ idBtn.addEventListener("click", function (e) {
         alert("6자 이상의 아이디를 사용해 주세요.");
         joinForm.aid.focus();
     } else {
-        fetch('../admin/id_ck', {
+        fetch('/admin/id_ck', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
             body: joinForm.aid.value
         })
             .then(response => response.text())
             .then(data => {
-                if (data === "canuse") {
+                data = data.trim();
+                console.log(data);
+                if (data === "can_use") {
                     idDoubleCheck = true;
                     alert("사용 가능한 아이디입니다.");
                     joinForm.aid.readOnly = "readOnly";
-                } else if (data == "no_use") {
+                } else if (data === "no_use") {
                     alert("이미 사용중인 아이디입니다.");
                 }
             })

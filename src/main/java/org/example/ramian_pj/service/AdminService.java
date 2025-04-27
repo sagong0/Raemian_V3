@@ -1,7 +1,7 @@
 package org.example.ramian_pj.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.ramian_pj.dto.AdminMemberTestDTO;
+import org.example.ramian_pj.dto.AdminMemberDTO;
 import org.example.ramian_pj.repository.AdminRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,8 +11,12 @@ import java.util.List;
 public class AdminService {
     private final AdminRepository adminRepository;
 
-    public List<AdminMemberTestDTO> test(){
+    public List<AdminMemberDTO> test(){
 
         return this.adminRepository.getAdmins();
+    }
+
+    public AdminMemberDTO getAdminByUserId(String aid) {
+        return this.adminRepository.findAdminByUserId(aid);
     }
 }

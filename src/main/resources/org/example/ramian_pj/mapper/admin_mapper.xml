@@ -4,7 +4,7 @@
 
 <mapper namespace="org.example.ramian_pj.mapper.AdminMapper">
 
-    <select id="getAdmins" resultType="org.example.ramian_pj.dto.AdminMemberTestDTO">
+    <select id="getAdmins" resultType="org.example.ramian_pj.dto.AdminMemberDTO">
         SELECT
             department,
             sub_department,
@@ -15,6 +15,23 @@
             position
         FROM member
         WHERE deleted_at IS NULL
+    </select>
+
+
+    <select id="getAdminById" parameterType="String" resultType="org.example.ramian_pj.dto.AdminMemberDTO">
+        SELECT
+            department,
+            sub_department,
+            name,
+            userid,
+            email,
+            phone,
+            position
+        FROM member
+        WHERE
+            userid = #{aid}
+          AND
+            deleted_at IS NULL
     </select>
 
 

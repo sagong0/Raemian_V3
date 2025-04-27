@@ -1,7 +1,7 @@
 package org.example.ramian_pj.repository;
 
 import lombok.RequiredArgsConstructor;
-import org.example.ramian_pj.dto.AdminMemberTestDTO;
+import org.example.ramian_pj.dto.AdminMemberDTO;
 import org.example.ramian_pj.mapper.AdminMapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,12 @@ public class AdminRepoImpl implements AdminRepository{
     private final AdminMapper adminMapper;
 
     @Override
-    public List<AdminMemberTestDTO> getAdmins() {
+    public List<AdminMemberDTO> getAdmins() {
         return adminMapper.getAdmins();
+    }
+
+    @Override
+    public AdminMemberDTO findAdminByUserId(String aid) {
+        return adminMapper.getAdminById(aid);
     }
 }

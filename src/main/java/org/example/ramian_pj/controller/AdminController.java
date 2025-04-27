@@ -2,7 +2,7 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.AdminLoginDTO;
-import org.example.ramian_pj.dto.AdminMemberTestDTO;
+import org.example.ramian_pj.dto.AdminMemberDTO;
 import org.example.ramian_pj.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,17 +59,10 @@ public class AdminController {
     @PostMapping("/id_ck")
     @ResponseBody
     public String idCheck(@RequestBody String aid) {
-        log.info("aid = {}", aid);
-        return null;
-    }
-
-    @GetMapping("/test")
-    public void testTest() {
-        List<AdminMemberTestDTO> admins = this.adminService.test();
-        for (AdminMemberTestDTO admin : admins) {
-            log.info("**********");
-            log.info(admin.toString());
-            log.info("**********");
+        AdminMemberDTO findUserId = this.adminService.getAdminByUserId(aid);
+        if (findUserId == null) {
+            return "can_use";
         }
+        return "no_use";
     }
 }
