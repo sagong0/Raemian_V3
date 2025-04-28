@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.ramian_pj.mapper.AdminMapper">
+
+    <select id="getAdmins" resultType="org.example.ramian_pj.dto.AdminMemberDTO">
+        SELECT
+            department,
+            sub_department,
+            name,
+            userid,
+            email,
+            phone,
+            position
+        FROM member
+        WHERE deleted_at IS NULL
+    </select>
+
+
+    <select id="getAdminById" parameterType="String" resultType="org.example.ramian_pj.dto.AdminMemberDTO">
+        SELECT
+            department,
+            sub_department,
+            name,
+            userid,
+            email,
+            phone,
+            position
+        FROM member
+        WHERE
+            userid = #{aid}
+          AND
+            deleted_at IS NULL
+    </select>
+
+    <!--    회원가입시   -->
+    <insert id="saveAdmin" parameterType="org.example.ramian_pj.dto.AdminJoinDTO">
+        INSERT INTO member (
+            department,
+            sub_department,
+            name,
+            userid,
+            pw,
+            email,
+            phone,
+            position,
+            created_at,
+            updated_at
+        ) VALUES (
+                     #{aarea},
+                     #{adept},
+                     #{aname},
+                     #{aid},
+                     #{apw1},
+                     #{aemail},
+                     #{atell},
+                     #{aposition},
+                     NOW(),
+                     NOW()
+                 )
+    </insert>
+
+
+</mapper>
