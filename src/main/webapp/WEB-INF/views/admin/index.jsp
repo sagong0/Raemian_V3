@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 
 <html>
 <head>
@@ -32,6 +34,16 @@
                     <li class="adinfo">※ 퇴사시 해당 정보는 접속이 불가능 하게 됩니다.</li>
                 </ul>
             </div>
+
+
+            <c:if test="${not empty errorList}">
+                <c:forEach var="err" items="${errorList}">
+                    <div style="color:red; text-align:center; font-size:14px;">
+                            ${err}<br/>
+                    </div>
+                </c:forEach>
+            </c:if>
+
         </form>
     </div>
 

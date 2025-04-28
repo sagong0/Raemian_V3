@@ -8,10 +8,15 @@ import org.example.ramian_pj.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("/admin")
 @Controller
@@ -28,18 +33,34 @@ public class AdminController {
     }
 
     @PostMapping
-    public String login(@Valid AdminLoginDTO adminLoginDTO, BindingResult bindingResult) {
-        log.info(adminLoginDTO.toString());
+    public String login(@Valid AdminLoginDTO adminLoginDTO,
+                        BindingResult bindingResult,
+                        Model model,
+                        HttpSession session) {
+
+        log.info("****");
+        log.info("adminLoginDTO : " + adminLoginDTO);
 
         if (bindingResult.hasErrors()) {
-            log.info("Admin login failed !");
-            return "admin";
+            List<String> errorMessages = bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            model.addAttribute("errorList", errorMessages); // 리스트로 넘긴다
+            return "admin/index";
         }
-        else {
-            //TODO :  성공 로직
-            log.info("Admin logged in successfully !");
-            return "redirect:/admin/dashboard";
+
+
+        AdminMemberDTO admin = adminService.login(adminLoginDTO);
+        if(admin == null){
+            log.info("틀렷어요 !!!!");
+            bindingResult.reject("loginFail", "아이디 또는 패스워드를 확인해주세요.");
         }
+        // 로그인 성공 (Session SAVE)
+        session.setAttribute("admin", admin);
+
+        // redirect 부분 TODO
+        return "";
     }
 
     /*
