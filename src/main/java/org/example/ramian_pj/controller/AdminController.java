@@ -34,8 +34,6 @@ public class AdminController {
 
         if (bindingResult.hasErrors()) {
             log.info("Admin login failed !");
-            //TODO :  실패 로직
-
             return "admin";
         }
         else {
@@ -55,11 +53,6 @@ public class AdminController {
 
     @PostMapping("/join")
     public String joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
-        /**
-         * 1. 해당 adminJoinDTO --> service.saveAdmin(adminJoinDTO)
-         * 2. 성공시 -> redirect
-         *    실패시 -> joinForm 으로
-         */
         if(bindingResult.hasErrors()){
             log.info("회원가입 validation 실패!");
             return "admin/joinForm";
@@ -85,4 +78,6 @@ public class AdminController {
         }
         return "no_use";
     }
+
+
 }
