@@ -54,9 +54,23 @@ public class AdminController {
     }
 
     @PostMapping("/join")
-    public void joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
-        log.info("check here !!!!!!");
-        log.info(adminJoinDTO.toString());
+    public String joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
+        /**
+         * 1. 해당 adminJoinDTO --> service.saveAdmin(adminJoinDTO)
+         * 2. 성공시 -> redirect
+         *    실패시 -> joinForm 으로
+         */
+        if(bindingResult.hasErrors()){
+            log.info("회원가입 validation 실패!");
+            return "admin/joinForm";
+        }
+        adminService.saveAdmin(adminJoinDTO);
+        return "redirect:/admin/joinSuccess";
+    }
+
+    @GetMapping("/joinSuccess")
+    public String joinFormSuccess() {
+        return "admin/joinSuccess";
     }
 
     /**
