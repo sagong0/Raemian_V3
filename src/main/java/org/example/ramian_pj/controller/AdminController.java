@@ -50,13 +50,22 @@ public class AdminController {
         AdminMemberDTO admin = adminService.login(adminLoginDTO);
         if(admin == null){
             log.info("틀렷어요 !!!!");
-            bindingResult.reject("loginFail", "아이디 또는 패스워드를 확인해주세요.");
+            model.addAttribute("loginFail", "아이디 또는 패스워드를 확인해주세요.");
+            return "admin/index";
         }
         // 로그인 성공 (Session SAVE)
         session.setAttribute("admin", admin);
 
         // redirect 부분 TODO
         return "redirect:/admin/dashboard";
+    }
+
+    // 로그아웃 PART
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+
+        return "redirect:/admin";
     }
 
     /*
@@ -102,5 +111,8 @@ public class AdminController {
         log.info("대쉬 보드 진입 ");
         return "admin/admin_main";
     }
+
+
+
 
 }

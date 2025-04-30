@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/admin_css.css?v=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" href="../css/page_default.css?v=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin_css.css?v=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/page_default.css?v=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap">
 <title>관리자 페이지</title>
 </head>
 <body>
-<%--<%@ include file="./fragments/header.jsp"%>--%>
+<%@ include file="/WEB-INF/views/admin/fragments/header.jsp"%>
 
 
 <main>
@@ -91,6 +91,6 @@
    <div class="ad_botom"></div>
 </section>
 </main>
-<%--<%@ include file="./fragments/footer.jsp" %>--%>
+<%@ include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
 </body>
 </html>
