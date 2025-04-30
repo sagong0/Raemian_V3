@@ -1,5 +1,10 @@
+<%@ page import="org.example.ramian_pj.domain.AdminMember" %>
+<%@ page import="org.example.ramian_pj.dto.AdminMemberDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    AdminMemberDTO adminMember = (AdminMemberDTO) session.getAttribute("admin");
+%>
 
 <nav>
     <div class="menusize">
@@ -11,7 +16,7 @@
             <li class="topmenu2"><a href="">FAQ</a></li>
             <li class="topmenu2"><a href="">예약현황</a></li>
             <li class="topmenu2"><a href="">관리자현황</a></li>
-            <li class="topmenu3">000님 환영합니다<a href="/admin/logout">[로그아웃]</a></li>
+            <li class="topmenu3"><%=adminMember.getName()%>님 환영합니다<a href="/admin/logout">[로그아웃]</a></li>
         </ul>
     </div>
     <div class="menuline"></div>
