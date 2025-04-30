@@ -38,18 +38,14 @@ public class AdminController {
                         Model model,
                         HttpSession session) {
 
-        log.info("****");
-        log.info("adminLoginDTO : " + adminLoginDTO);
-
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getAllErrors()
                     .stream()
                     .map(ObjectError::getDefaultMessage)
                     .collect(Collectors.toList());
-            model.addAttribute("errorList", errorMessages); // 리스트로 넘긴다
+            model.addAttribute("loginFail", errorMessages); // 리스트로 넘긴다
             return "admin/index";
         }
-
 
         AdminMemberDTO admin = adminService.login(adminLoginDTO);
         if(admin == null){
@@ -60,7 +56,7 @@ public class AdminController {
         session.setAttribute("admin", admin);
 
         // redirect 부분 TODO
-        return "";
+        return "redirect:/admin/dashboard";
     }
 
     /*
@@ -69,21 +65,6 @@ public class AdminController {
     @GetMapping("/join")
     public String joinForm() {
         return "admin/joinForm";
-    }
-
-    @PostMapping("/join")
-    public String joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            log.info("회원가입 validation 실패!");
-            return "admin/joinForm";
-        }
-        adminService.saveAdmin(adminJoinDTO);
-        return "redirect:/admin/joinSuccess";
-    }
-
-    @GetMapping("/joinSuccess")
-    public String joinFormSuccess() {
-        return "admin/joinSuccess";
     }
 
     /**
@@ -99,5 +80,27 @@ public class AdminController {
         return "no_use";
     }
 
+
+    // 회원가입 요청
+    @PostMapping("/join")
+    public String joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            log.info("회원가입 validation 실패!");
+            return "admin/joinForm";
+        }
+        adminService.saveAdmin(adminJoinDTO);
+        return "redirect:/admin/joinSuccess";
+    }
+
+    @GetMapping("/joinSuccess")
+    public String joinFormSuccess() {
+        return "admin/joinSuccess";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        log.info("대쉬 보드 진입 ");
+        return "admin/admin_main";
+    }
 
 }

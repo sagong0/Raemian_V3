@@ -35,9 +35,9 @@
                 </ul>
             </div>
 
-
-            <c:if test="${not empty errorList}">
-                <c:forEach var="err" items="${errorList}">
+            <!-- 로그인 validation 실패 메세지 출력 PART -->
+            <c:if test="${not empty loginFail}">
+                <c:forEach var="err" items="${loginFail}">
                     <div style="color:red; text-align:center; font-size:14px;">
                             ${err}<br/>
                     </div>
@@ -47,7 +47,7 @@
         </form>
     </div>
 
-    <!-- 로그인 실패시 실패 메세지 출력 PART -->
+
 
 </div>
 </body>
