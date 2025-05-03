@@ -21,4 +21,9 @@ public class ClientController {
 
         return "client/index";
     }
+
+    @GetMapping("/agree")
+    public String joinAgree() {
+        return "client/join_agree";
+    }
 }
