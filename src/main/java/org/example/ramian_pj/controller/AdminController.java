@@ -8,10 +8,15 @@ import org.example.ramian_pj.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("/admin")
 @Controller
@@ -28,18 +33,39 @@ public class AdminController {
     }
 
     @PostMapping
-    public String login(@Valid AdminLoginDTO adminLoginDTO, BindingResult bindingResult) {
-        log.info(adminLoginDTO.toString());
+    public String login(@Valid AdminLoginDTO adminLoginDTO,
+                        BindingResult bindingResult,
+                        Model model,
+                        HttpSession session) {
 
         if (bindingResult.hasErrors()) {
-            log.info("Admin login failed !");
-            return "admin";
+            List<String> errorMessages = bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            model.addAttribute("loginFail", errorMessages); // 리스트로 넘긴다
+            return "admin/index";
         }
-        else {
-            //TODO :  성공 로직
-            log.info("Admin logged in successfully !");
-            return "redirect:/admin/dashboard";
+
+        AdminMemberDTO admin = adminService.login(adminLoginDTO);
+        if(admin == null){
+            log.info("틀렷어요 !!!!");
+            model.addAttribute("loginFail", "아이디 또는 패스워드를 확인해주세요.");
+            return "admin/index";
         }
+        // 로그인 성공 (Session SAVE)
+        session.setAttribute("admin", admin);
+
+        // redirect 부분 TODO
+        return "redirect:/admin/dashboard";
+    }
+
+    // 로그아웃 PART
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+
+        return "redirect:/admin";
     }
 
     /*
@@ -50,6 +76,21 @@ public class AdminController {
         return "admin/joinForm";
     }
 
+    /**
+     * ID 중복체크 PART
+     */
+    @PostMapping("/id_ck")
+    @ResponseBody
+    public String idCheck(@RequestBody String aid) {
+        AdminMemberDTO findUserId = this.adminService.getAdminByUserId(aid);
+        if (findUserId == null) {
+            return "can_use";
+        }
+        return "no_use";
+    }
+
+
+    // 회원가입 요청
     @PostMapping("/join")
     public String joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
@@ -65,18 +106,13 @@ public class AdminController {
         return "admin/joinSuccess";
     }
 
-    /**
-     * ID 중복체크 PART
-     */
-    @PostMapping("/id_ck")
-    @ResponseBody
-    public String idCheck(@RequestBody String aid) {
-        AdminMemberDTO findUserId = this.adminService.getAdminByUserId(aid);
-        if (findUserId == null) {
-            return "can_use";
-        }
-        return "no_use";
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        log.info("대쉬 보드 진입 ");
+        return "admin/admin_main";
     }
+
+
 
 
 }

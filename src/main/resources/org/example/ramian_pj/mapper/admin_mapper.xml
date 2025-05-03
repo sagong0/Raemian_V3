@@ -6,10 +6,12 @@
 
     <select id="getAdmins" resultType="org.example.ramian_pj.dto.AdminMemberDTO">
         SELECT
+            id,
             department,
             sub_department,
             name,
             userid,
+            pw,
             email,
             phone,
             position
@@ -20,10 +22,12 @@
 
     <select id="getAdminById" parameterType="String" resultType="org.example.ramian_pj.dto.AdminMemberDTO">
         SELECT
+            id,
             department,
             sub_department,
             name,
             userid,
+            pw,
             email,
             phone,
             position
