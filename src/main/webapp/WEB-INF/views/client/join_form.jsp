@@ -42,9 +42,9 @@
                 <p>MEMBER-SHIP</p>
                 <ul>
                     <li style="color: #000;">01. 약관동의</li>
-                    <li><img src="./img/step_off.png" /></li>
+                    <li><img src="${pageContext.request.contextPath}/static/img/client/step_off.png" /></li>
                     <li style="color: #1B9C9E;">02. 정보입력</li>
-                    <li><img src="./img/step_on.png" /></li>
+                    <li><img src="${pageContext.request.contextPath}/static/img/client/step_on.png" /></li>
                     <li>03. 가입완료</li>
                 </ul>
             </label>
