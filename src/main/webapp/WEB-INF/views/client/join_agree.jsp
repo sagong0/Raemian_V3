@@ -54,13 +54,13 @@
                     <h3>약관동의</h3>
                     <span class="agree_span">
         <label class="mbship_text">
-          <input type="checkbox" id="all_agree" name="all" onclick="allagree(this.checked)"/> 의 모든 약관을 확인하고 전체 동의 합니다.
+          <input type="checkbox" id="all_agree" class="all-agree" name="all" onclick="allagree(this.checked)"/> 의 모든 약관을 확인하고 전체 동의 합니다.
           (전체동의, 선택항목도 포함됩니다.)
         </label>
         <label class="mbship_text">
             <input type="checkbox" class="agree-check" id="a1" name="a1" onclick="updateAgree();"><font color="red"> (필수)</font>이용약관
         </label>
-        <div id="agree1">
+        <div id="agree1" class="agreement-box">
             <jsp:include page="/WEB-INF/views/client/fragments/agree1.jsp"/>
         </div>
         <label class="mbship_text">

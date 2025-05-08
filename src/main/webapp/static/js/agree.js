@@ -10,10 +10,10 @@ function allagree(ck){
 }
 
 
-// function updateAgree(){
-//     const allAgree = document.querySelector('.all-agree');
-//     const checks = document.querySelectorAll('.agree-check');
-//
-//     allAgree.checked = Array.from(checks).every(ch => ch.checked);
-// }
+function updateAgree(){
+    const allAgree = document.querySelector('.all-agree');
+    const checks = document.querySelectorAll('.agree-check');
+
+    allAgree.checked = Array.from(checks).every(ch => ch.checked);
+}
 
