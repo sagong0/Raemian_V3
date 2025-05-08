@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/common.css?v=<%=System.currentTimeMillis()%>">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/client/sweetalert.min.css?v=<%=System.currentTimeMillis()%>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js?v=<%=System.currentTimeMillis()%>"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/css/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/top.css?v=<%=System.currentTimeMillis()%>">
 
@@ -58,13 +58,13 @@
           (전체동의, 선택항목도 포함됩니다.)
         </label>
         <label class="mbship_text">
-            <input type="checkbox" id="a1" name="a1" onclick="chbox(this.checked);"><font color="red"> (필수)</font>이용약관
+            <input type="checkbox" class="agree-check" id="a1" name="a1" onclick="updateAgree();"><font color="red"> (필수)</font>이용약관
         </label>
         <div id="agree1">
             <jsp:include page="/WEB-INF/views/client/fragments/agree1.jsp"/>
         </div>
         <label class="mbship_text">
-            <input type="checkbox" id="a2" name="a2" onclick="chbox(this.checked);"><font color="red"> (필수)</font> 개인정보 수집 및 이용
+            <input type="checkbox" class="agree-check" id="a2" name="a2" onclick="updateAgree();"><font color="red"> (필수)</font> 개인정보 수집 및 이용
         </label>
         <div id="agree2">
             <jsp:include page="/WEB-INF/views/client/fragments/agree2.jsp" />
@@ -77,7 +77,7 @@
         </div>
         <!-- 카피라이터 시작 -->
         <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
-<%--        <script src="../js/login/agree.js?v=<%=System.currentTimeMillis()%>"></script>--%>
+        <script src="${pageContext.request.contextPath}/static/js/agree.js?v=<%=System.currentTimeMillis()%>"></script>
         <!-- 카피라이터 종료 -->
     </div>
 </div>
