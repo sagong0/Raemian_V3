@@ -22,8 +22,16 @@ public class ClientController {
         return "client/index";
     }
 
+
+    // 약관 동의 PART
     @GetMapping("/agree")
     public String joinAgree() {
         return "client/join_agree";
+    }
+
+    // 약관 동의 후 회원가입 PAGE
+    @GetMapping("/join")
+    public String joinAgreeForm() {
+        return "client/join_form";
     }
 }

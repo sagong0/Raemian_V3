@@ -51,26 +51,26 @@
 
             <form id="agreeForm">
                 <fieldset class="mbship_box">
-                    <h3>약관동의</h3>
-                    <span class="agree_span">
-        <label class="mbship_text">
-          <input type="checkbox" id="all_agree" class="all-agree" name="all" onclick="allagree(this.checked)"/> 의 모든 약관을 확인하고 전체 동의 합니다.
-          (전체동의, 선택항목도 포함됩니다.)
-        </label>
-        <label class="mbship_text">
-            <input type="checkbox" class="agree-check" id="a1" name="a1" onclick="updateAgree();"><font color="red"> (필수)</font>이용약관
-        </label>
-        <div id="agree1" class="agreement-box">
-            <jsp:include page="/WEB-INF/views/client/fragments/agree1.jsp"/>
-        </div>
-        <label class="mbship_text">
-            <input type="checkbox" class="agree-check" id="a2" name="a2" onclick="updateAgree();"><font color="red"> (필수)</font> 개인정보 수집 및 이용
-        </label>
-        <div id="agree2">
-            <jsp:include page="/WEB-INF/views/client/fragments/agree2.jsp" />
-        </div>
-        </span>
-                    <button type="button" id="nextBtn" class="next_btn">다음단계</button>
+                        <h3>약관동의</h3>
+                        <span class="agree_span">
+                    <label class="mbship_text">
+                      <input type="checkbox" id="all_agree" class="all-agree" name="all" onclick="allagree(this.checked)"/> 의 모든 약관을 확인하고 전체 동의 합니다.
+                      (전체동의, 선택항목도 포함됩니다.)
+                    </label>
+                    <label class="mbship_text">
+                        <input type="checkbox" class="agree-check" id="a1" name="a1" onclick="updateAgree();"><font color="red"> (필수)</font>이용약관
+                    </label>
+                    <div id="agree1" class="agreement-box">
+                        <jsp:include page="/WEB-INF/views/client/fragments/agree1.jsp"/>
+                    </div>
+                    <label class="mbship_text">
+                        <input type="checkbox" class="agree-check" id="a2" name="a2" onclick="updateAgree();"><font color="red"> (필수)</font> 개인정보 수집 및 이용
+                    </label>
+                    <div id="agree2">
+                        <jsp:include page="/WEB-INF/views/client/fragments/agree2.jsp" />
+                    </div>
+                    </span>
+                            <button type="button" id="nextBtn" class="next_btn">다음단계</button>
                 </fieldset>
             </form>
             <!-- 서브 화면 종료 -->
