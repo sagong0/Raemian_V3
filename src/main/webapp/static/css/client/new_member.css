@@ -811,3 +811,12 @@ p {
 .newmembtn > button:nth-of-type(2) {
   background-color: #646464;
 }
+
+.agreement-box{
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    font-size: 14px;
+}

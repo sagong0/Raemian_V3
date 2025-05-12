@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<pre>
 제1조(목적)
 
 표준약관 제10023호
@@ -216,3 +217,4 @@
 부칙
 
 1. 이 약관은 년 월 일부터 적용됩니다.
+</pre>
