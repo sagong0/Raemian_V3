@@ -29,3 +29,15 @@ document.getElementById("nextBtn")
         }
         location.href = "/join";
     });
+
+
+
+
+
+
+
+
+
+
+
+

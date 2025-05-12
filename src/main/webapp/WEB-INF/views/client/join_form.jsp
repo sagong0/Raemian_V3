@@ -97,8 +97,8 @@
         <li style="height: 125px;"><em class="ck_font">■</em> 주소</li>
         <li style="height: 120px; line-height: normal; margin-top: 5px;">
         <input type="text" name="mzipcode" class="mbinput1" placeholder="우편번호" maxlength="5" readonly>
-        <button type="button" id="findAddrBtn" class="mb_btn1">주소찾기</button>
-        <input type="text" name="mstreetaddr" class="mbinput4" placeholder="도로명 주소" readonly>
+        <button type="button" id="findAddrBtn" onclick="sample6_execDaumPostcode()" class="mb_btn1">주소찾기</button>
+        <input type="text" name="mstreetaddr" class="mbinput4" id="sample6_extraAddress" placeholder="도로명 주소" readonly>
         <input type="text" name="mdetailaddr" class="mbinput4" placeholder="상세주소를 입력하세요">
         </li>
         <li style="height: 100px;"> 마케팅 수신여부</li>
@@ -127,9 +127,10 @@
         </div>
         <!-- 카피라이터 시작 -->
         <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
-        <script src="${pageContext.request.contextPath}/static/js/agree.js?v=<%=System.currentTimeMillis()%>"></script>
+        <script src="${pageContext.request.contextPath}/static/js/client_joinForm.js?v=<%=System.currentTimeMillis()%>"></script>
         <!-- 카피라이터 종료 -->
-    </div>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</div>
 </div>
 </body>
 </html>
