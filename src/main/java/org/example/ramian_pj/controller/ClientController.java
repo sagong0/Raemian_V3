@@ -41,9 +41,7 @@ public class ClientController {
     @PostMapping("/id_check")
     @ResponseBody
     public String idCheck(@RequestBody String mid) {
-        log.info("mid = {}", mid);
-        UserDTO findUser = userService.findUserById(mid);
-        log.info("findUser = {}", findUser);
-        return "";
+
+        return userService.findUserById(mid) ? "can_use" : "no_use";
     }
 }
