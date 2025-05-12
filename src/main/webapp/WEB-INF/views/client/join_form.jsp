@@ -127,9 +127,9 @@
         </div>
         <!-- 카피라이터 시작 -->
         <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
-        <script src="${pageContext.request.contextPath}/static/js/client_joinForm.js?v=<%=System.currentTimeMillis()%>"></script>
-        <!-- 카피라이터 종료 -->
+        <script src="${pageContext.request.contextPath}/static/js/kakao_api.js?v=<%=System.currentTimeMillis()%>"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <!-- 카피라이터 종료 -->
 </div>
 </div>
 </body>
