@@ -35,7 +35,7 @@
     }).open();
 }
 
-    // ✅ 버튼 클릭 시 함수 연결
+    // 버튼 클릭 시 함수 연결
     document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("findAddrBtn").addEventListener("click", function() {
         sample6_execDaumPostcode();
