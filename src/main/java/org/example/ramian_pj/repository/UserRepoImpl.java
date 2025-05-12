@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class ClientRepoImpl implements ClientRepository {
+public class UserRepoImpl implements UserRepository {
 
     private final ClientMapper clientMapper;
 

@@ -2,7 +2,7 @@ package org.example.ramian_pj.domain;
 
 import java.time.LocalDateTime;
 
-public class ClientMember {
+public class User {
     private Long id;
     // 아이디
     private String userid;

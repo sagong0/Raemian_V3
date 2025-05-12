@@ -3,16 +3,16 @@ package org.example.ramian_pj.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.UserDTO;
-import org.example.ramian_pj.repository.ClientRepository;
+import org.example.ramian_pj.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ClientService {
+public class UserService {
 
-    private final ClientRepository clientRepository;
+    private final UserRepository userRepository;
 
     public UserDTO findUserById(String mid) {
-        return clientRepository.findUserById(mid);
+        return userRepository.findUserById(mid);
     }
 }

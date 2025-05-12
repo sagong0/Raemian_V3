@@ -3,7 +3,7 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.UserDTO;
-import org.example.ramian_pj.service.ClientService;
+import org.example.ramian_pj.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ public class ClientController {
 
     private final Logger log = LoggerFactory.getLogger(ClientController.class);
 
-    private final ClientService clientService;
+    private final UserService userService;
 
     @GetMapping("")
     public String index() {
@@ -42,7 +42,7 @@ public class ClientController {
     @ResponseBody
     public String idCheck(@RequestBody String mid) {
         log.info("mid = {}", mid);
-        UserDTO findUser = clientService.findUserById(mid);
+        UserDTO findUser = userService.findUserById(mid);
         log.info("findUser = {}", findUser);
         return "";
     }
