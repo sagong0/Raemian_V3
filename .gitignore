@@ -16,3 +16,7 @@ mvnw.cmd
 *.iws
 *.iml
 *.ipr
+
+# Firebase Admin SDK Key
+/WEB-INF/firebase-adminsdk.json
+
