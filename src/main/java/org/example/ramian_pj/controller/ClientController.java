@@ -63,11 +63,15 @@ public class ClientController {
     @GetMapping("/sub03")
     public String sub03() {
         return "client/sub/sub03";
+    }
+
+
 
     // 휴대폰 - 인증번호 (dummy Random)
     @PostMapping("/sendDummyCode")
     @ResponseBody
     public ResponseEntity<Map<String,String>> sendDummyCode(@RequestParam String phoneNumber) {
+        log.info("test here !!!!!!!!!");
         Map<String, String> response = new HashMap<>();
 
         if(!phoneNumber.matches("^01[016789]\\d{3,4}\\d{4}$")){
