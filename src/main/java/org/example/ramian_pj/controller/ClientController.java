@@ -49,6 +49,21 @@ public class ClientController {
         return userService.findUserById(mid) ? "can_use" : "no_use";
     }
 
+    /**
+     * Sub Page 추가
+     */
+    @GetMapping("/sub01")
+    public String sub01() {
+        return "client/sub/sub01";
+    }
+    @GetMapping("/sub02")
+    public String sub02() {
+        return "client/sub/sub02";
+    }
+    @GetMapping("/sub03")
+    public String sub03() {
+        return "client/sub/sub03";
+
     // 휴대폰 - 인증번호 (dummy Random)
     @PostMapping("/sendDummyCode")
     @ResponseBody
