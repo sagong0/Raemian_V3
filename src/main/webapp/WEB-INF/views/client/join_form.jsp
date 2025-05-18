@@ -81,8 +81,8 @@
         </li>
         <li><em class="ck_font">■</em>휴대전화번호</li>
         <li>
-        <input type="text" name="mtel" class="mbinput2" placeholder="숫자만 입력하세요">
-        <button type="button" id="sendSmsBtn" class="mb_btn1">인증발송</button>
+        <input type="text" name="mtel" id="mtel" class="mbinput2" placeholder="숫자만 입력하세요">
+        <button type="button" id="sendSmsBtn"  class="mb_btn1">인증발송</button>
         </li>
         <li><em class="ck_font">■</em> 인증번호</li>
         <li>
@@ -129,6 +129,7 @@
         <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
         <script src="${pageContext.request.contextPath}/static/js/kakao_api.js?v=<%=System.currentTimeMillis()%>"></script>
         <script src="${pageContext.request.contextPath}/static/js/client_joinForm.js?v=<%=System.currentTimeMillis()%>"></script>
+        <%-- DAUM 도로명 주소 API   --%>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <!-- 카피라이터 종료 -->
 </div>
