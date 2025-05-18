@@ -8,7 +8,7 @@
 	        <c:choose>
 			    <c:when test="${empty sessionScope.mainMember}">
 			        <!-- 세션에 로그인 정보가 없는 경우 -->
-			        <li><a href="/raemian/client/login">로그인</a></li>
+			        <li><a href="/login">로그인</a></li>
 			        <li><a href="/agree">회원가입</a></li>
 			        <li><a href="/raemian/faqs/">FAQ</a></li>
 			        <li><a href="/raemian/notices/">공지사항</a></li>
@@ -31,9 +31,9 @@
                 <li>
                     <a href=""><span>사업정보</span></a>
                     <ul>
-                        <li><a href="/raemian/client/sub01">지구안내</a></li>
-                        <li><a href="/raemian/client/sub02">입지안내</a></li>
-                        <li><a href="">지역조감도</a></li>
+                        <li><a href="/sub01">지구안내</a></li>
+                        <li><a href="/sub02">입지안내</a></li>
+                        <li><a href="/sub03">지역조감도</a></li>
                     </ul>
                 </li>
                 <li>
