@@ -43,3 +43,58 @@ document.getElementById("checkIdBtn")
         }
 
 });
+
+
+/**
+ * 휴대전화 인증번호 PART
+ */
+const phonePattern = /^\d{3}\d{3,4}\d{4}$/;
+
+document.getElementById("sendSmsBtn")
+    .addEventListener("click", function () {
+        // 버튼 클릭시의 값
+        const phoneNumber = document.getElementById('mtel').value;
+        
+        if(phoneNumber === ""){
+            alert("휴대번호를 입력해주세요.");
+            joinForm.mtel.focus();
+            return;
+        } else if(!phonePattern.test(phoneNumber)){
+            alert("올바른 휴대번호를 입력해주세요.");
+            joinForm.mtel.focus();
+            return;
+        }
+        else {
+            requestCode(phoneNumber);
+        }
+    });
+
+function requestCode(phoneNumber){
+    fetch('/sendDummyCode', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `phoneNumber=${encodeURIComponent(phoneNumber)}`
+    })
+        .then(response => {
+            if(!response.ok){
+                return response.json().then(err => {throw new Error(err.message)});
+            }
+        })
+        .then(result => {
+            alert(`${result.message} : ${result.code}`);
+        })
+        .catch(error => alert(`오류 : ${error.message}`));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

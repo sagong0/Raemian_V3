@@ -2,12 +2,16 @@ package org.example.ramian_pj.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.ramian_pj.dto.UserDTO;
 import org.example.ramian_pj.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/")
@@ -45,7 +49,6 @@ public class ClientController {
         return userService.findUserById(mid) ? "can_use" : "no_use";
     }
 
-
     /**
      * Sub Page 추가
      */
@@ -60,5 +63,21 @@ public class ClientController {
     @GetMapping("/sub03")
     public String sub03() {
         return "client/sub/sub03";
+
+    // 휴대폰 - 인증번호 (dummy Random)
+    @PostMapping("/sendDummyCode")
+    @ResponseBody
+    public ResponseEntity<Map<String,String>> sendDummyCode(@RequestParam String phoneNumber) {
+        Map<String, String> response = new HashMap<>();
+
+        if(!phoneNumber.matches("^01[016789]\\d{3,4}\\d{4}$")){
+            response.put("message", "올바르지 않은 휴대폰 번호입니다.");
+            return ResponseEntity.badRequest().body(response);
+        }
+        String code = String.format("%06d", new Random().nextInt(999999));
+        response.put("code", code);
+        response.put("message", "인증번호 발급 완료");
+
+        return ResponseEntity.ok(response);
     }
 }
