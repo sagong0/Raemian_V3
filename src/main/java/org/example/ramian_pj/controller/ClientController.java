@@ -3,6 +3,7 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.service.UserService;
+import org.example.ramian_pj.util.DummyCodeStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -71,17 +72,41 @@ public class ClientController {
     @PostMapping("/sendDummyCode")
     @ResponseBody
     public ResponseEntity<Map<String,String>> sendDummyCode(@RequestParam String phoneNumber) {
-        log.info("test here !!!!!!!!!");
-        Map<String, String> response = new HashMap<>();
+        HashMap<String, String> responseMap = new HashMap<>();
 
         if(!phoneNumber.matches("^01[016789]\\d{3,4}\\d{4}$")){
-            response.put("message", "올바르지 않은 휴대폰 번호입니다.");
-            return ResponseEntity.badRequest().body(response);
+            responseMap.put("message", "올바르지 않은 휴대폰 번호입니다.");
+            return ResponseEntity.badRequest().body(responseMap);
         }
         String code = String.format("%06d", new Random().nextInt(999999));
-        response.put("code", code);
-        response.put("message", "인증번호 발급 완료");
+        responseMap.put("code", code);
+        responseMap.put("message", "인증번호 발급 완료");
 
-        return ResponseEntity.ok(response);
+        // 추후 검증용 메모리 저장 PART
+        DummyCodeStorage.codeStorageMap.put(phoneNumber, code);
+
+        return ResponseEntity.ok(responseMap);
+    }
+
+    @PostMapping("/checkDummyCode")
+    public ResponseEntity<Map<String,String >> checkDummyCode(@RequestParam String phoneNumber, @RequestParam String inputCode){
+        log.info("phoneNumber : {}, inputCode : {}", phoneNumber, inputCode);
+        HashMap<String, String> responseMap = new HashMap<>();
+
+        String savedCode = DummyCodeStorage.codeStorageMap.get(phoneNumber);
+        if(savedCode == null){
+            responseMap.put("message", "인증번호를 확인해주세요.");
+            return ResponseEntity.badRequest().body(responseMap);
+        }
+
+        if(!savedCode.equals(inputCode)){
+            responseMap.put("message", "인증번호가 일치하지 않습니다.");
+            return ResponseEntity.badRequest().body(responseMap);
+        }
+
+        // 인증성공 -> 메모리에서 삭제 (1회성)
+        DummyCodeStorage.codeStorageMap.remove(phoneNumber);
+        responseMap.put("message", "인증 성공!");
+        return ResponseEntity.ok(responseMap);
     }
 }

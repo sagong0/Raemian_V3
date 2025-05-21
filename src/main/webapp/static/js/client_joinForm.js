@@ -46,7 +46,7 @@ document.getElementById("checkIdBtn")
 
 
 /**
- * 휴대전화 인증번호 PART
+ * 휴대전화 인증번호 발송 PART
  */
 const phonePattern = /^\d{3}\d{3,4}\d{4}$/;
 
@@ -89,6 +89,38 @@ function requestCode(phoneNumber) {
         .catch(error => alert(`오류 : ${error}`));
 }
 
+/**
+ * 인증번호 - 인증완료 PART
+ */
+document.getElementById("checkSms")
+    .addEventListener("click", function () {
+        const phoneNumber = document.getElementById('mtel').value;
+        const inputCode = document.getElementById('certification_num').value;
+
+        if(inputCode === ""){
+            alert("인증번호를 입력해주세요.");
+            document.getElementById('certification_num').focus();
+            return;
+        }
+
+        fetch('/checkDummyCode', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `phoneNumber=${encodeURIComponent(phoneNumber)}&inputCode=${encodeURIComponent(inputCode)}`
+        })
+            .then(response => {
+                return response.json().then(data =>{
+                    if(!response.ok){
+                        throw new Error(data.message);
+                    }
+                    return data;
+                });
+            })
+            .then(result => {
+                alert(result.message);
+            })
+            .catch(e => alert(e));
+    });
 
 
 
