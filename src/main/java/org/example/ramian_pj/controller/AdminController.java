@@ -111,8 +111,4 @@ public class AdminController {
         log.info("대쉬 보드 진입 ");
         return "admin/admin_main";
     }
-
-
-
-
 }

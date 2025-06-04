@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.example.ramian_pj.mapper.ClientMapper">
-    <select id="findUserById" parameterType="String" resultType="org.example.ramian_pj.dto.UserDTO">
+    <select id="findUserById" parameterType="String" resultType="org.example.ramian_pj.dto.UserJoinDTO">
         SELECT
             id,
             userid,

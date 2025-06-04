@@ -2,6 +2,7 @@ package org.example.ramian_pj.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.service.UserService;
 import org.example.ramian_pj.util.DummyCodeStorage;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -41,12 +43,18 @@ public class ClientController {
         return "client/join_form";
     }
 
+    @PostMapping("/join")
+    public String joinAgreeFormSubmit(@Valid UserJoinDTO userJoinDTO){
+        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        log.info("userJoinDto = {}", userJoinDTO);
+        return "abc";
+    }
+
 
     // 회원가입 - 아이디 중복체크
     @PostMapping("/id_check")
     @ResponseBody
     public String idCheck(@RequestBody String mid) {
-
         return userService.findUserById(mid) ? "can_use" : "no_use";
     }
 
