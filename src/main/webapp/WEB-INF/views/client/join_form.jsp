@@ -103,7 +103,7 @@
         </li>
         <li> 이메일</li>
         <li>
-        <input type="text" name="memail" onkeyup="emailcheck(this.value);" class="mbinput3"
+        <input type="text" name="memail" class="mbinput3"
                placeholder="이메일을 입력하세요">
         </li>
         <li style="height: 125px;"><em class="ck_font">■</em> 주소</li>

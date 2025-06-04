@@ -168,6 +168,10 @@ document.getElementById("joinBtn").addEventListener("click", function () {
         form.mname.focus();
         return;
     }
+    if(!idCheck){
+        alert("아이디 중복 체크를 진행해주세요.");
+        return;
+    }
 
     // 비밀번호 확인 일치 여부
     if (pw !== pw2) {
@@ -192,8 +196,8 @@ document.getElementById("joinBtn").addEventListener("click", function () {
     }
 
     // 모든 검증 통과 → 폼 제출
-    // form.action = "/join";
-    // form.method = "post";
+    form.action="/join"
+    form.method="POST"
     form.submit();
 });
 

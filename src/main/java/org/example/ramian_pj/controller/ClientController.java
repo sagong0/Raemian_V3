@@ -41,6 +41,12 @@ public class ClientController {
         return "client/join_form";
     }
 
+    @PostMapping("/join")
+    public String joinAgreeFormSubmit(){
+        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        return "abc";
+    }
+
 
     // 회원가입 - 아이디 중복체크
     @PostMapping("/id_check")
