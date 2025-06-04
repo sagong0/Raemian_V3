@@ -195,6 +195,15 @@ document.getElementById("joinBtn").addEventListener("click", function () {
         return;
     }
 
+    
+    // 마케팅 checkbox 부분
+    ["agreeEmail", "agreeTel", "agreePost", "agreeSms"].forEach(function (id) {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+            checkbox.value = checkbox.checked ? "Y" : "N";
+        }
+    });
+
     // 모든 검증 통과 → 폼 제출
     form.action="/join";
     form.method="POST";

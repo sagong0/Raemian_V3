@@ -46,6 +46,7 @@ public class ClientController {
     @PostMapping("/join")
     public String joinAgreeFormSubmit(@Valid UserJoinDTO userJoinDTO){
         log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        log.info("userJoinDto = {}", userJoinDTO);
         return "abc";
     }
 
@@ -54,7 +55,6 @@ public class ClientController {
     @PostMapping("/id_check")
     @ResponseBody
     public String idCheck(@RequestBody String mid) {
-
         return userService.findUserById(mid) ? "can_use" : "no_use";
     }
 

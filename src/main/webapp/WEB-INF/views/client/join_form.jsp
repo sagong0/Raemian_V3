@@ -115,15 +115,22 @@
         </li>
         <li style="height: 100px;"> 마케팅 수신여부</li>
         <li style="height: 100px;">
-        <label class="ck_label"><input type="checkbox" id="ckemail" disabled="disabled"
-                                       class="mbinput5"> 이메일 </label>
-         <input type="hidden" value="N" name="ckemail" id="ckemailHidden" class="mbinput5">
-        <label class="ck_label"><input type="checkbox" id="cktel" class="mbinput5"> 전화 </label>
-        <input type="hidden" value="N" name="cktel" id="cktelHidden" class="mbinput5">
-        <label class="ck_label"><input type="checkbox" id="ckaddr" class="mbinput5"> 우편물 </label>
-        <input type="hidden" value="N" name="ckaddr" id="ckaddrHidden" class="mbinput5">
-        <label class="ck_label"><input type="checkbox" id="cksms" class="mbinput5"> SMS (문자 메세지)</label><br>
-        <input type="hidden" value="N" name="cksms" id="cksmsHidden" class="mbinput5">
+        <label class="ck_label">
+            <input type="checkbox" id="agreeEmail" name="agreeEmail" disabled="disabled" class="mbinput5" value="Y">
+            이메일
+        </label>
+        <label class="ck_label">
+            <input type="checkbox" id="agreeTel" name="agreeTel" value="Y" class="mbinput5">
+            전화
+        </label>
+        <label class="ck_label">
+            <input type="checkbox" id="agreePost" name="agreePost"  value="Y"  class="mbinput5">
+            우편물
+        </label>
+        <label class="ck_label">
+            <input type="checkbox" id="agreeSms" name="agreeSms" value="Y" class="mbinput5"> SMS (문자 메세지)
+        </label>
+            <br>
         선택하신 정보 수신에 동의하겠습니다. (서비스, 이벤트 소식 등의 홍보/마케팅 정보를 수신하게 됩니다.)
         </li>
         </ol>
