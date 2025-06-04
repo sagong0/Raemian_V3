@@ -97,7 +97,7 @@
         <li style="height: 125px;"><em class="ck_font">■</em> 주소</li>
         <li style="height: 120px; line-height: normal; margin-top: 5px;">
         <input type="text" name="mzipcode" class="mbinput1" placeholder="우편번호" maxlength="5" readonly>
-        <button type="button" id="findAddrBtn" onclick="sample6_execDaumPostcode()" class="mb_btn1">주소찾기</button>
+        <button type="button" id="findAddrBtn" class="mb_btn1">주소찾기</button>
         <input type="text" name="mstreetaddr" class="mbinput4" id="sample6_extraAddress" placeholder="도로명 주소" readonly>
         <input type="text" name="mdetailaddr" class="mbinput4" placeholder="상세주소를 입력하세요">
         </li>

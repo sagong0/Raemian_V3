@@ -41,7 +41,6 @@ document.getElementById("checkIdBtn")
                     alert(e);
                 });
         }
-
     });
 
 
