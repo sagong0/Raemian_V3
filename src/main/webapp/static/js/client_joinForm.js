@@ -1,3 +1,6 @@
+// 현재 휴대전화 인증 여부
+var isAuthenticated = false;
+
 /* 아이디 중복화인 PART */
 var id_regex = /^[a-zA-Z0-9]+$/;
 var idCheck = false;
@@ -48,6 +51,16 @@ document.getElementById("checkIdBtn")
  * 휴대전화 인증번호 발송 PART
  */
 const phonePattern = /^\d{3}\d{3,4}\d{4}$/;
+var inPhoneRegaxCheck = false;
+
+// 사용자 전화번호 수정 --> inPhoneRegaxCheck 다시 false 처리
+
+document.getElementById('mtel').addEventListener('input', function () {
+    // 사용자가 번호를 수정했으므로 재검증 필요
+    isPhoneRegexCheck = false;
+    // 사용자가 번호를 수정했으므로 인증여부도 재 인증 필요
+    isAuthenticated = false;
+});
 
 document.getElementById("sendSmsBtn")
     .addEventListener("click", function () {
@@ -57,12 +70,15 @@ document.getElementById("sendSmsBtn")
         if (phoneNumber === "") {
             alert("휴대번호를 입력해주세요.");
             joinForm.mtel.focus();
+            inPhoneRegaxCheck = false;
             return;
         } else if (!phonePattern.test(phoneNumber)) {
             alert("올바른 휴대번호를 입력해주세요.");
             joinForm.mtel.focus();
+            inPhoneRegaxCheck = false;
             return;
         } else {
+            inPhoneRegaxCheck = true;
             requestCode(phoneNumber);
         }
     });
@@ -117,13 +133,69 @@ document.getElementById("checkSms")
             })
             .then(result => {
                 alert(result.message);
+                // 인증 상태 true
+                isAuthenticated = true;
             })
             .catch(e => alert(e));
     });
 
 
 
+// 회원가입 Button Click PART
+document.getElementById("joinBtn").addEventListener("click", function () {
+    const form = document.getElementById("joinForm");
 
+    const name = form.mname.value.trim();
+    const userid = form.mid.value.trim();
+    const pw = form.mpw.value.trim();
+    const pw2 = form.mpw2.value.trim();
+    const phone = form.mtel.value.trim();
+    const smsCode = form.certification_num.value.trim();
+    const email = form.memail.value.trim();
+    const zipcode = form.mzipcode.value.trim();
+    const streetAddr = form.mstreetaddr.value.trim();
+    const detailAddr = form.mdetailaddr.value.trim();
+
+    const nameRegex = /^[가-힣]+$/;
+
+    // 빈 값 체크
+    if (!name || !userid || !pw || !pw2 || !phone || !smsCode || !email || !zipcode || !streetAddr || !detailAddr) {
+        alert("모든 필수 입력 항목을 입력해 주세요.");
+        return;
+    }
+    if(!nameRegex.test(name)){
+        alert("이름을 확인해주세요.");
+        form.mname.focus();
+        return;
+    }
+
+    // 비밀번호 확인 일치 여부
+    if (pw !== pw2) {
+        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        return;
+    }
+
+    // 휴대폰 번호 숫자 체크
+    if (!inPhoneRegaxCheck) {
+        alert("휴대폰 번호는 숫자만 입력해야 합니다.");
+        return;
+    }
+    if(!isAuthenticated){
+        alert("휴대전화 인증 진행해주세요.");
+        return;
+    }
+
+    // 이메일 형식 확인 (간단하게)
+    if (!/^[\w-.]+@[\w-]+\.[a-z]{2,}$/i.test(email)) {
+        alert("이메일 형식이 올바르지 않습니다.");
+        return;
+    }
+
+    // 모든 검증 통과 → 폼 제출
+    // form.action = "/join";
+    // form.method = "post";
+    form.submit();
+});
 
 
 
