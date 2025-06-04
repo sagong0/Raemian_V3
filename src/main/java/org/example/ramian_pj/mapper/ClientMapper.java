@@ -1,7 +1,7 @@
 package org.example.ramian_pj.mapper;
 
-import org.example.ramian_pj.dto.UserDTO;
+import org.example.ramian_pj.dto.UserJoinDTO;
 
 public interface ClientMapper {
-    UserDTO findUserById(String mid);
+    UserJoinDTO findUserById(String mid);
 }

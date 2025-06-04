@@ -196,8 +196,8 @@ document.getElementById("joinBtn").addEventListener("click", function () {
     }
 
     // 모든 검증 통과 → 폼 제출
-    form.action="/join"
-    form.method="POST"
+    form.action="/join";
+    form.method="POST";
     form.submit();
 });
 
