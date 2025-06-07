@@ -4,11 +4,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class UserLoginDTO {
-    @NotBlank
+    @NotBlank(message = "아이디를 입력해주세요.")
     @Size(min = 6,message = "6자 이상의 아이디를 입력해주세요.")
-    private String id;
+    private String aid;
 
-    @NotBlank
+    @NotBlank(message = "비밀번호를 입력해주세요.")
     @Size(min = 6, message = "패스워드를 확인해주세요." )
-    private String pw;
+    private String apw;
 }
