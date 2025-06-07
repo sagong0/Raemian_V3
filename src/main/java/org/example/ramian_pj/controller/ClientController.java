@@ -55,7 +55,11 @@ public class ClientController {
     @PostMapping("/id_check")
     @ResponseBody
     public String idCheck(@RequestBody String mid) {
-        return userService.findUserById(mid) ? "can_use" : "no_use";
+        log.info("mid = {}", mid);
+        UserJoinDTO user = userService.findUserById(mid.trim());
+        log.info("user = {}", user);
+
+        return user == null ? "can_use" : "no_use";
     }
 
     /**

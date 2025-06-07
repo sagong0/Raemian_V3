@@ -3,7 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.example.ramian_pj.mapper.ClientMapper">
-    <select id="findUserById" parameterType="String" resultType="org.example.ramian_pj.dto.UserJoinDTO">
+
+    <resultMap id="userJoinResultMap" type="org.example.ramian_pj.dto.UserJoinDTO">
+        <result property="mid" column="userid"/>
+        <result property="mname" column="username"/>
+        <result property="mpw" column="pw"/>
+        <result property="mtel" column="phone_number"/>
+        <result property="memail" column="email"/>
+        <result property="mzipcode" column="zipcode"/>
+        <result property="mstreetaddr" column="street_address"/>
+        <result property="mdetailaddr" column="detail_address"/>
+        <result property="agreeEmail" column="agree_email"/>
+        <result property="agreeTel" column="agree_tel"/>
+        <result property="agreePost" column="agree_post"/>
+        <result property="agreeSms" column="agree_sms"/>
+    </resultMap>
+
+    <select id="findUserById" parameterType="String" resultMap="userJoinResultMap">
         SELECT
             id,
             userid,
