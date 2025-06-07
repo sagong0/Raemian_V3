@@ -67,6 +67,14 @@
         </ul>
         </span>
                 </fieldset>
+                <!-- 로그인 validation 실패 메세지 출력 PART -->
+                <c:if test="${not empty loginFail}">
+                    <c:forEach var="err" items="${loginFail}">
+                        <div style="color:red; text-align:center; font-size:14px;">
+                                ${err}<br/>
+                        </div>
+                    </c:forEach>
+                </c:if>
             </form>
 
             <!-- 로그인 화면 종료 -->
@@ -77,7 +85,10 @@
 <%--        <c:if test="${not empty msg}">--%>
 <%--            <script>alert("${msg}");</script>--%>
 <%--        </c:if>--%>
+
+
     </div>
 </div>
 </body>
+<script src="${pageContext.request.contextPath}/static/js/client/client_login.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

@@ -3,6 +3,7 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.UserJoinDTO;
+import org.example.ramian_pj.dto.UserLoginDTO;
 import org.example.ramian_pj.service.UserService;
 import org.example.ramian_pj.util.DummyCodeStorage;
 import org.slf4j.Logger;
@@ -10,12 +11,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -73,7 +78,26 @@ public class ClientController {
         return "client/login";
     }
 
+    @PostMapping("/login")
+    public String loginRequest(@Valid UserLoginDTO userLoginDTO,
+                               BindingResult bindingResult,
+                               Model model){
+        log.info("test");
+        if(bindingResult.hasErrors()){
+            // TODO : ERROR MESSAGE
+            List<String> errMessages = bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            model.addAttribute("loginFail", errMessages);
+            return "client/login";
+        }
 
+//        userService.login(userLoginDTO);
+        // TODO 상위 로그인에서 나온 user가 null or NOT NULL 로직
+
+        return null;
+    }
 
 
 
