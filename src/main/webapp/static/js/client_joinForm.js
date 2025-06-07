@@ -199,8 +199,16 @@ document.getElementById("joinBtn").addEventListener("click", function () {
     // 마케팅 checkbox 부분
     ["agreeEmail", "agreeTel", "agreePost", "agreeSms"].forEach(function (id) {
         const checkbox = document.getElementById(id);
-        if (checkbox) {
-            checkbox.value = checkbox.checked ? "Y" : "N";
+        if (checkbox && checkbox.checked) {
+            checkbox.value = "Y";
+        }
+        // 미 체크시
+        else {
+            const hiddenInput = document.createElement("input");
+            hiddenInput.type = "hidden";
+            hiddenInput.name = id;
+            hiddenInput.value = "N"
+            document.getElementById("joinForm").appendChild(hiddenInput);
         }
     });
 
