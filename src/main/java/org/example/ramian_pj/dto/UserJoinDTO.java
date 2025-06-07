@@ -18,4 +18,7 @@ public class UserJoinDTO {
     private String agreeTel;
     private String agreePost;
     private String agreeSms;
+
+    // 서버 기본 정책값 → 기본값 true 로
+    private Boolean phoneVerified = true;
 }

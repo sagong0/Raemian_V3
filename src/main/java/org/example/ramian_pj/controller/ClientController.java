@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,10 +45,18 @@ public class ClientController {
     }
 
     @PostMapping("/join")
-    public String joinAgreeFormSubmit(@Valid UserJoinDTO userJoinDTO){
-        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    public String joinAgreeFormSubmit(@Valid UserJoinDTO userJoinDTO, Model model){
         log.info("userJoinDto = {}", userJoinDTO);
-        return "abc";
+
+        int result = userService.joinUser(userJoinDTO);
+        log.info("result = {}", result);
+
+        if(result <= 0){
+            model.addAttribute("error", "회원가입 실패하였습니다. 잠시 후 다시 시도해주세요." );
+        }
+
+        // 성공 로직
+        return "redirect:/login";
     }
 
 
@@ -55,12 +64,18 @@ public class ClientController {
     @PostMapping("/id_check")
     @ResponseBody
     public String idCheck(@RequestBody String mid) {
-        log.info("mid = {}", mid);
-        UserJoinDTO user = userService.findUserById(mid.trim());
-        log.info("user = {}", user);
-
-        return user == null ? "can_use" : "no_use";
+        return userService.findUserById(mid.trim()) == null ? "can_use" : "no_use";
     }
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "";
+    }
+
+
+
+
 
     /**
      * Sub Page 추가

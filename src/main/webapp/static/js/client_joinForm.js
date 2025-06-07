@@ -31,9 +31,6 @@ document.getElementById("checkIdBtn")
                 })
                 .then(resp => {
                     if (resp.trim() === "can_use") {
-                        alert("[" + resp + "]");  // ✅ 값 확인
-                        console.log("응답 로그:", "[" + resp + "]");  // ✅ 줄바꿈 포함 확인
-
                         alert("사용 가능한 아이디입니다.");
                         joinForm.mid.readOnly = "readOnly";
                         idCheck = true;
@@ -183,7 +180,7 @@ document.getElementById("joinBtn").addEventListener("click", function () {
     }
 
     // 휴대폰 번호 숫자 체크
-    if (!inPhoneRegaxCheck) {
+    if (!isPhoneRegexCheck) {
         alert("휴대폰 번호는 숫자만 입력해야 합니다.");
         return;
     }

@@ -16,4 +16,9 @@ public class UserRepoImpl implements UserRepository {
     public UserJoinDTO findUserById(String mid) {
         return clientMapper.findUserById(mid);
     }
+
+    @Override
+    public int joinUser(UserJoinDTO userJoinDTO) {
+        return clientMapper.joinUser(userJoinDTO);
+    }
 }

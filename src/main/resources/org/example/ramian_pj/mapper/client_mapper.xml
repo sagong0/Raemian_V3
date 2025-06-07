@@ -36,16 +36,17 @@
             userid = #{mid};
     </select>
 
-<!--    <resultMap id="userMap" type="org.example.ramian_pj.dto.UserDTO">-->
-<!--        <id property="id" column="id"/>-->
-<!--        <id property="userid" column="userid"/>-->
-<!--        <result property="username" column="username"/>-->
-<!--        <result property="pw" column="pw"/>-->
-<!--        <result property="phone_number" column="phone_number"/>-->
-<!--        <result property="email" column="email"/>-->
-<!--        <result property="zipcode" column="zipcode"/>-->
-<!--        <result property="street_address" column="street_address"/>-->
-<!--        <result property="detail_address" column="detail_address"/>-->
-<!--    </resultMap>-->
+
+<!--    User 회원가입 PART-->
+    <insert id="joinUser" parameterType="org.example.ramian_pj.dto.UserJoinDTO">
+        INSERT INTO client_member
+        (username, userid, pw, phone_number, phone_verified, email, zipcode, street_address, detail_address,
+         agree_email, agree_tel, agree_post, agree_sms)
+        VALUES
+            (#{mname}, #{mid}, #{mpw}, #{mtel}, #{phoneVerified}, #{memail}, #{mzipcode}, #{mstreetaddr}, #{mdetailaddr},
+             #{agreeEmail}, #{agreeTel}, #{agreePost}, #{agreeSms})
+    </insert>
+
+
 
 </mapper>
