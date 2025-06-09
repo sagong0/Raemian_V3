@@ -49,7 +49,6 @@ public class AdminController {
 
         AdminMemberDTO admin = adminService.login(adminLoginDTO);
         if(admin == null){
-            log.info("틀렷어요 !!!!");
             model.addAttribute("loginFail", "아이디 또는 패스워드를 확인해주세요.");
             return "admin/index";
         }

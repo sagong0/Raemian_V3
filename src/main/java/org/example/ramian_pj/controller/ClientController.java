@@ -3,18 +3,24 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.UserJoinDTO;
+import org.example.ramian_pj.dto.UserLoginDTO;
 import org.example.ramian_pj.service.UserService;
 import org.example.ramian_pj.util.DummyCodeStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -44,10 +50,18 @@ public class ClientController {
     }
 
     @PostMapping("/join")
-    public String joinAgreeFormSubmit(@Valid UserJoinDTO userJoinDTO){
-        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    public String joinAgreeFormSubmit(@Valid UserJoinDTO userJoinDTO, Model model){
         log.info("userJoinDto = {}", userJoinDTO);
-        return "abc";
+
+        int result = userService.joinUser(userJoinDTO);
+        log.info("result = {}", result);
+
+        if(result <= 0){
+            model.addAttribute("error", "회원가입 실패하였습니다. 잠시 후 다시 시도해주세요." );
+        }
+
+        // 성공 로직
+        return "redirect:/login";
     }
 
 
@@ -55,8 +69,37 @@ public class ClientController {
     @PostMapping("/id_check")
     @ResponseBody
     public String idCheck(@RequestBody String mid) {
-        return userService.findUserById(mid) ? "can_use" : "no_use";
+        return userService.findUserById(mid.trim()) == null ? "can_use" : "no_use";
     }
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "client/login";
+    }
+
+    @PostMapping("/login")
+    public String loginRequest(@Valid UserLoginDTO userLoginDTO,
+                               BindingResult bindingResult,
+                               Model model){
+        log.info("test");
+        if(bindingResult.hasErrors()){
+            // TODO : ERROR MESSAGE
+            List<String> errMessages = bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            model.addAttribute("loginFail", errMessages);
+            return "client/login";
+        }
+
+//        userService.login(userLoginDTO);
+        // TODO 상위 로그인에서 나온 user가 null or NOT NULL 로직
+
+        return null;
+    }
+
+
 
     /**
      * Sub Page 추가

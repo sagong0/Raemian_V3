@@ -30,7 +30,7 @@ document.getElementById("checkIdBtn")
                     return response.text();
                 })
                 .then(resp => {
-                    if (resp === "can_use") {
+                    if (resp.trim() === "can_use") {
                         alert("사용 가능한 아이디입니다.");
                         joinForm.mid.readOnly = "readOnly";
                         idCheck = true;
@@ -51,7 +51,7 @@ document.getElementById("checkIdBtn")
  * 휴대전화 인증번호 발송 PART
  */
 const phonePattern = /^\d{3}\d{3,4}\d{4}$/;
-var inPhoneRegaxCheck = false;
+var isPhoneRegexCheck = false;
 
 // 사용자 전화번호 수정 --> inPhoneRegaxCheck 다시 false 처리
 
@@ -70,15 +70,15 @@ document.getElementById("sendSmsBtn")
         if (phoneNumber === "") {
             alert("휴대번호를 입력해주세요.");
             joinForm.mtel.focus();
-            inPhoneRegaxCheck = false;
+            isPhoneRegexCheck = false;
             return;
         } else if (!phonePattern.test(phoneNumber)) {
             alert("올바른 휴대번호를 입력해주세요.");
             joinForm.mtel.focus();
-            inPhoneRegaxCheck = false;
+            isPhoneRegexCheck = false;
             return;
         } else {
-            inPhoneRegaxCheck = true;
+            isPhoneRegexCheck = true;
             requestCode(phoneNumber);
         }
     });
@@ -180,7 +180,7 @@ document.getElementById("joinBtn").addEventListener("click", function () {
     }
 
     // 휴대폰 번호 숫자 체크
-    if (!inPhoneRegaxCheck) {
+    if (!isPhoneRegexCheck) {
         alert("휴대폰 번호는 숫자만 입력해야 합니다.");
         return;
     }

@@ -147,7 +147,7 @@
     <!-- 카피라이터 시작 -->
     <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
     <script src="${pageContext.request.contextPath}/static/js/kakao_api.js?v=<%=System.currentTimeMillis()%>"></script>
-    <script src="${pageContext.request.contextPath}/static/js/client_joinForm.js?v=<%=System.currentTimeMillis()%>"></script>
+    <script src="${pageContext.request.contextPath}/static/js/client/client_joinForm.js?v=<%=System.currentTimeMillis()%>"></script>5
     <%-- DAUM 도로명 주소 API   --%>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- 카피라이터 종료 -->
