@@ -83,6 +83,7 @@ public class ClientController {
                                BindingResult bindingResult,
                                Model model){
         log.info("test");
+        log.info("userLoginDTO = {}", userLoginDTO);
         if(bindingResult.hasErrors()){
             // TODO : ERROR MESSAGE
             List<String> errMessages = bindingResult.getAllErrors()
