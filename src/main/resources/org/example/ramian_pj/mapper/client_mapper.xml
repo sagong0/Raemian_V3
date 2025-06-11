@@ -30,7 +30,11 @@
             email,
             zipcode,
             street_address,
-            detail_address
+            detail_address,
+            agree_email,
+            agree_tel,
+            agree_post,
+            agree_sms
         FROM client_member
         WHERE
             userid = #{mid};

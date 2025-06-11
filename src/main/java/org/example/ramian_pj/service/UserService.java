@@ -3,9 +3,12 @@ package org.example.ramian_pj.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.UserJoinDTO;
+import org.example.ramian_pj.dto.UserLoginDTO;
 import org.example.ramian_pj.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.validation.Valid;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +24,21 @@ public class UserService {
     public int joinUser(UserJoinDTO userJoinDTO) {
         userJoinDTO.setMpw(passwordEncoder.encode(userJoinDTO.getMpw()));
         return userRepository.joinUser(userJoinDTO);
+    }
+
+    public UserJoinDTO userLogin(UserLoginDTO userLoginDTO) {
+        UserJoinDTO findUser = userRepository.findUserById(userLoginDTO.getAid());
+
+        if(findUser == null){
+            return null;
+        }
+
+        // 비밀번호 틀린 경우
+        if(!passwordEncoder.matches(userLoginDTO.getApw(), findUser.getMpw())){
+            return null;
+        }
+
+        // 아디 비번 맞을 경우
+        return findUser;
     }
 }

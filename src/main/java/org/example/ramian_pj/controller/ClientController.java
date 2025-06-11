@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -81,11 +82,10 @@ public class ClientController {
     @PostMapping("/login")
     public String loginRequest(@Valid UserLoginDTO userLoginDTO,
                                BindingResult bindingResult,
-                               Model model){
-        log.info("test");
+                               Model model,
+                               HttpSession session){
         log.info("userLoginDTO = {}", userLoginDTO);
         if(bindingResult.hasErrors()){
-            // TODO : ERROR MESSAGE
             List<String> errMessages = bindingResult.getAllErrors()
                     .stream()
                     .map(ObjectError::getDefaultMessage)
@@ -94,9 +94,15 @@ public class ClientController {
             return "client/login";
         }
 
-//        userService.login(userLoginDTO);
-        // TODO 상위 로그인에서 나온 user가 null or NOT NULL 로직
-
+        UserJoinDTO loggedUser = userService.userLogin(userLoginDTO);
+        log.info("loggedUser = {}", loggedUser);
+        // TODO 상위 로그인에서 나온 user 가 null or NOT NULL 로직
+//        if(user == null){
+//            model.addAttribute("loginFail", "일치하는 회원정보가 없습니다.");
+//            return "client/login";
+//        }
+//        // 로그인 성공
+//        session.setAttribute("user", user);
         return null;
     }
 
