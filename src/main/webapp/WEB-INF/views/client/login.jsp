@@ -82,9 +82,7 @@
         <!-- 카피라이터 시작 -->
         <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
         <!-- 카피라이터 종료 -->
-<%--        <c:if test="${not empty msg}">--%>
-<%--            <script>alert("${msg}");</script>--%>
-<%--        </c:if>--%>
+
 
 
     </div>

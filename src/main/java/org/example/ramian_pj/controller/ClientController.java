@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -84,7 +85,7 @@ public class ClientController {
                                BindingResult bindingResult,
                                Model model,
                                HttpSession session){
-        log.info("userLoginDTO = {}", userLoginDTO);
+
         if(bindingResult.hasErrors()){
             List<String> errMessages = bindingResult.getAllErrors()
                     .stream()
@@ -96,14 +97,21 @@ public class ClientController {
 
         UserJoinDTO loggedUser = userService.userLogin(userLoginDTO);
         log.info("loggedUser = {}", loggedUser);
+
         // TODO 상위 로그인에서 나온 user 가 null or NOT NULL 로직
-//        if(user == null){
-//            model.addAttribute("loginFail", "일치하는 회원정보가 없습니다.");
-//            return "client/login";
-//        }
-//        // 로그인 성공
-//        session.setAttribute("user", user);
-        return null;
+        if(loggedUser == null){
+            model.addAttribute("loginFail", "일치하는 회원정보가 없습니다.");
+            return "client/login";
+        }
+        // 로그인 성공
+        session.setAttribute("user", loggedUser);
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
     }
 
 

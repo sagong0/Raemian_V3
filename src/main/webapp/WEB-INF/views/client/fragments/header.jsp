@@ -6,7 +6,7 @@
 		<div class="top_menu">
 	        <ul class="top_menu_list">
 	        <c:choose>
-			    <c:when test="${empty sessionScope.mainMember}">
+			    <c:when test="${empty sessionScope.user}">
 			        <!-- 세션에 로그인 정보가 없는 경우 -->
 			        <li><a href="/login">로그인</a></li>
 			        <li><a href="/agree">회원가입</a></li>
@@ -15,9 +15,9 @@
 			    </c:when>
 			    <c:otherwise>
 			        <!-- 세션에 로그인 정보가 있는 경우 -->
-			       <c:set var="member" value="${sessionScope.mainMember}" />
-			        <li><a href="#">${member.mname}님 환영합니다.
-			        <a href="/raemian/client/logOut">[로그아웃]</a>
+			       <c:set var="user" value="${sessionScope.user}" />
+			        <li><a href="#">${user.mname}님 환영합니다.
+			        <a href="/logout">[로그아웃]</a>
 			        </a></li>
 			        <li><a href="/raemian/faqs/">FAQ</a></li>
 			        <li><a href="/raemian/notices/">공지사항</a></li>
