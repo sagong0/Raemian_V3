@@ -5,6 +5,8 @@ import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.mapper.ClientMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -20,5 +22,10 @@ public class UserRepoImpl implements UserRepository {
     @Override
     public int joinUser(UserJoinDTO userJoinDTO) {
         return clientMapper.joinUser(userJoinDTO);
+    }
+
+    @Override
+    public List<UserJoinDTO> getAllUsers() {
+        return clientMapper.getAllUsers();
     }
 }
