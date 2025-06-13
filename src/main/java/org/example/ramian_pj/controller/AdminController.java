@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.AdminJoinDTO;
 import org.example.ramian_pj.dto.AdminLoginDTO;
 import org.example.ramian_pj.dto.AdminMemberDTO;
+import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.service.AdminService;
+import org.example.ramian_pj.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ public class AdminController {
     private final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     private final AdminService adminService;
+    private final UserService userService;
 
     @GetMapping({"", "/"})
     public String loginPage() {
@@ -52,11 +55,26 @@ public class AdminController {
             model.addAttribute("loginFail", "아이디 또는 패스워드를 확인해주세요.");
             return "admin/index";
         }
+
+
         // 로그인 성공 (Session SAVE)
         session.setAttribute("admin", admin);
 
         // redirect 부분 TODO
         return "redirect:/admin/dashboard";
+    }
+
+    @GetMapping("/joinSuccess")
+    public String joinFormSuccess() {
+        return "admin/joinSuccess";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+
+        List<UserJoinDTO> allUsers = userService.getAllUsers();
+        model.addAttribute("Users", allUsers);
+        return "admin/admin_main";
     }
 
     // 로그아웃 PART
@@ -100,14 +118,5 @@ public class AdminController {
         return "redirect:/admin/joinSuccess";
     }
 
-    @GetMapping("/joinSuccess")
-    public String joinFormSuccess() {
-        return "admin/joinSuccess";
-    }
 
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        log.info("대쉬 보드 진입 ");
-        return "admin/admin_main";
-    }
 }

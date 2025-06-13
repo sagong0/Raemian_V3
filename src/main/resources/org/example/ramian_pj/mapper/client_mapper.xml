@@ -36,6 +36,26 @@
             userid = #{mid};
     </select>
 
+<!--    모든 회원 조회 -->
+    <select id="getAllUsers" resultMap="userJoinResultMap">
+        SELECT
+            id,
+            userid,
+            username,
+            pw,
+            phone_number,
+            phone_verified,
+            email,
+            zipcode,
+            street_address,
+            detail_address,
+            agree_email,
+            agree_tel,
+            agree_post,
+            agree_sms
+        FROM client_member;
+    </select>
+
 
 <!--    User 회원가입 PART-->
     <insert id="joinUser" parameterType="org.example.ramian_pj.dto.UserJoinDTO">

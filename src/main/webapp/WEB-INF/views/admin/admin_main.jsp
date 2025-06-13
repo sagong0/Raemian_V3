@@ -36,21 +36,17 @@
                                 <li>주소</li>
                             </ol>
 
-
-                            <%--해당 부분 Client 회원 정보로 바꿀 것 TODO--%>
-                            <ol class="bgcancel">
-                                <li><%=adminMember.getUserid()%>
-                                </li>
-                                <li><%=adminMember.getName()%>
-                                </li>
-                                <li><%=adminMember.getPhone()%>
-                                </li>
-                                <li><%=adminMember.getEmail()%>
-                                </li>
-                                <li style="text-align: left;">주소</li>
-                            </ol>
-
-
+                            <c:if test="${not empty Users}">
+                                <c:forEach var="user" items="${Users}" varStatus="loop">
+                                    <ol class="bgcancel">
+                                        <li>${user.mid}</li>
+                                        <li>${user.mname}</li>
+                                        <li>${user.mtel }</li>
+                                        <li>${user.memail }</li>
+                                        <li style="text-align: left;">${user.mstreetaddr}</li>
+                                    </ol>
+                                </c:forEach>
+                            </c:if>
                         </li>
                     </ul>
                 </div>
