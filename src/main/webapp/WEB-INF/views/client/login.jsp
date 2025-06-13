@@ -61,30 +61,28 @@
                         <li><button type="submit" id="loginBtn" class="login_btn1">로그인</button></li>
                         <li><button type="button" id="joinBtn" class="login_btn2">회원가입</button></li>
                         <li style="cursor: pointer;">아이디 찾기 / 비밀번호 찾기</li>
+                        <!-- 로그인 validation 실패 메세지 출력 PART -->
+                        <c:if test="${not empty loginFail}">
+                            <c:forEach var="err" items="${loginFail}">
+                                <div style="color:red; text-align:center; font-size:14px;">
+                                        ${err}<br/>
+                                </div>
+                            </c:forEach>
+                        </c:if>
                     </ol>
                 </span>
             </li>
         </ul>
         </span>
                 </fieldset>
-                <!-- 로그인 validation 실패 메세지 출력 PART -->
-                <c:if test="${not empty loginFail}">
-                    <c:forEach var="err" items="${loginFail}">
-                        <div style="color:red; text-align:center; font-size:14px;">
-                                ${err}<br/>
-                        </div>
-                    </c:forEach>
-                </c:if>
-            </form>
 
+            </form>
             <!-- 로그인 화면 종료 -->
         </div>
         <!-- 카피라이터 시작 -->
         <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
         <!-- 카피라이터 종료 -->
-<%--        <c:if test="${not empty msg}">--%>
-<%--            <script>alert("${msg}");</script>--%>
-<%--        </c:if>--%>
+
 
 
     </div>
