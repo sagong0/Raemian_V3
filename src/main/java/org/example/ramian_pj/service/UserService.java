@@ -2,6 +2,8 @@ package org.example.ramian_pj.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.domain.SearchType;
+import org.example.ramian_pj.domain.SortOption;
 import org.example.ramian_pj.dto.SearchConditionDTO;
 import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.dto.UserLoginDTO;
@@ -51,6 +53,15 @@ public class UserService {
     }
 
     public void getPagedUsers(SearchConditionDTO searchConditionDTO) {
-        searchConditionDTO.getSearchType();
+        // 검색 조건 화이트 리스트 검증
+        if(!SearchType.values().contains(searchConditionDTO.getSearchType())){
+            // 기본 검색 기준 -> userID
+            searchConditionDTO.setSearchType("userid");
+        }
+        // 정렬 기준 화이트 리스트 검증
+        if(!SortOption.values().contains(searchConditionDTO.getSortBy())){
+            // 기본 정렬 값 - created_at
+            searchConditionDTO.setSortBy("created_at");
+        }
     }
 }
