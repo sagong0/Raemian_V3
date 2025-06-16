@@ -118,5 +118,8 @@ public class AdminController {
         return "redirect:/admin/joinSuccess";
     }
 
-
+    @GetMapping("/userList")
+    public String userList(){
+        return "/admin/user_list";
+    }
 }
