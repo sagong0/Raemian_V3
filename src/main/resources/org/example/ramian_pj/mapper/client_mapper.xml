@@ -72,5 +72,39 @@
     </insert>
 
 
+    <!--  회원 관리 페이지 동적 쿼리 (검색 옵션)  -->
+    <select id="getUserBySearchOption" resultMap="userJoinResultMap">
+        SELECT
+            id,
+            userid,
+            username,
+            pw,
+            phone_number,
+            phone_verified,
+            email,
+            zipcode,
+            street_address,
+            detail_address,
+            agree_email,
+            agree_tel,
+            agree_post,
+            agree_sms
+        FROM client_member
+        <where>
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.searchType != null">
+                ${searchConditionDTO.searchType} LIKE CONCAT('%',#{searchConditionDTO.keyword}, '%')
+            </if>
+        </where>
+        ORDER BY ${searchConditionDTO.sortBy} ${searchConditionDTO.order}
+        LIMIT #{searchConditionDTO.pageSize} OFFSET #{offset}
+    </select>
 
+    <select id="countSearchUsers" resultType="int">
+        SELECT COUNT(*) FROM client_member
+        <where>
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyworad != '' and searchConditionDTO.searchType != null">
+                ${searchConditionDTO} LIKE CONCAT('%',#{searchConditionDTO.keyword},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

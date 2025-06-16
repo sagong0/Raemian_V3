@@ -1,6 +1,7 @@
 package org.example.ramian_pj.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.dto.SearchConditionDTO;
 import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.mapper.ClientMapper;
 import org.springframework.stereotype.Repository;
@@ -27,5 +28,15 @@ public class UserRepoImpl implements UserRepository {
     @Override
     public List<UserJoinDTO> getAllUsers() {
         return clientMapper.getAllUsers();
+    }
+
+    @Override
+    public List<UserJoinDTO> getUsersBySearch(SearchConditionDTO searchConditionDTO, int offset) {
+        return clientMapper.getUserBySearchOption(searchConditionDTO, offset);
+    }
+
+    @Override
+    public int countSearchUsers(SearchConditionDTO searchConditionDTO) {
+        return clientMapper.countSearchUsers(searchConditionDTO);
     }
 }
