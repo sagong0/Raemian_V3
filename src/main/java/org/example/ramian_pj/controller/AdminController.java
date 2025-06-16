@@ -1,10 +1,7 @@
 package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.ramian_pj.dto.AdminJoinDTO;
-import org.example.ramian_pj.dto.AdminLoginDTO;
-import org.example.ramian_pj.dto.AdminMemberDTO;
-import org.example.ramian_pj.dto.UserJoinDTO;
+import org.example.ramian_pj.dto.*;
 import org.example.ramian_pj.service.AdminService;
 import org.example.ramian_pj.service.UserService;
 import org.slf4j.Logger;
@@ -111,7 +108,6 @@ public class AdminController {
     @PostMapping("/join")
     public String joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            log.info("회원가입 validation 실패!");
             return "admin/joinForm";
         }
         adminService.saveAdmin(adminJoinDTO);
@@ -119,7 +115,8 @@ public class AdminController {
     }
 
     @GetMapping("/userList")
-    public String userList(){
+    public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO){
+        userService.getPagedUsers(searchConditionDTO);
         return "/admin/user_list";
     }
 }

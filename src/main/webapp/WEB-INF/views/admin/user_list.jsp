@@ -28,9 +28,9 @@
                         <li>회원 검색</li>
                         <li>
                             <select id="searchType" name="searchType" class="search_select">
-                                <option value="아이디">아이디</option>
-                                <option value="이름">이름</option>
-                                <option value="연락처">연락처</option>
+                                <option value="userid">아이디</option>
+                                <option value="username">이름</option>
+                                <option value="user_tell">연락처</option>
                             </select>
                             <input type="text" id="searchVal" class="search_input">
                             <input type="button" id="searchBtn" value="검색" class="datebtn">

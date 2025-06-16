@@ -2,6 +2,7 @@ package org.example.ramian_pj.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.dto.SearchConditionDTO;
 import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.dto.UserLoginDTO;
 import org.example.ramian_pj.repository.UserRepository;
@@ -47,5 +48,9 @@ public class UserService {
 
         // 아디 비번 맞을 경우
         return findUser;
+    }
+
+    public void getPagedUsers(SearchConditionDTO searchConditionDTO) {
+        searchConditionDTO.getSearchType();
     }
 }
