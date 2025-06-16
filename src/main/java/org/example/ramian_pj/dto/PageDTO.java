@@ -20,6 +20,13 @@ public class PageDTO<T> {
     // 페이지당 항목 수
     private int pageSize;
 
+    public PageDTO(List<T> list, int totalCount, int currentPage, int pageSize){
+        this.list = list;
+        this.totalCount = totalCount;
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+    }
+
 
     // 전체 페이지 수
     public int getTotalPages(){
