@@ -2,9 +2,16 @@ package org.example.ramian_pj.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.domain.SearchType;
+import org.example.ramian_pj.domain.SortOption;
+import org.example.ramian_pj.dto.PageDTO;
+import org.example.ramian_pj.dto.SearchConditionDTO;
 import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.dto.UserLoginDTO;
 import org.example.ramian_pj.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +21,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
+    private final Logger log = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -47,5 +56,32 @@ public class UserService {
 
         // 아디 비번 맞을 경우
         return findUser;
+    }
+
+    public PageDTO getPagedUsers(SearchConditionDTO searchConditionDTO) {
+        // 검색 조건 화이트 리스트 검증
+        if(!SearchType.values().contains(searchConditionDTO.getSearchType())){
+            // 기본 검색 기준 -> userID
+            searchConditionDTO.setSearchType("userid");
+        }
+        // 정렬 기준 화이트 리스트 검증
+        if(!SortOption.values().contains(searchConditionDTO.getSortBy())){
+            // 기본 정렬 값 - created_at
+            searchConditionDTO.setSortBy("created_at");
+        }
+
+        // 내림차순 및 오름차순 검증
+        if(!"desc".contains(searchConditionDTO.getOrder())){
+            searchConditionDTO.setOrder("asc");
+        }
+
+        int offset = (searchConditionDTO.getPage() - 1) * searchConditionDTO.getPageSize();
+        List<UserJoinDTO> searchedUsers = userRepository.getUsersBySearch(searchConditionDTO, offset);
+        int totalCount = userRepository.countSearchUsers(searchConditionDTO);
+
+        log.info("searchedUsers = {}", searchedUsers);
+        log.info("totalCount = {}", totalCount);
+
+        return new PageDTO(searchedUsers, totalCount, searchConditionDTO.getPage(), searchConditionDTO.getPageSize());
     }
 }
