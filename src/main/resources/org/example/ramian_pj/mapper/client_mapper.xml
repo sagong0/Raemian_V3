@@ -102,8 +102,8 @@
     <select id="countSearchUsers" resultType="int">
         SELECT COUNT(*) FROM client_member
         <where>
-            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyworad != '' and searchConditionDTO.searchType != null">
-                ${searchConditionDTO} LIKE CONCAT('%',#{searchConditionDTO.keyword},'%')
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyword != '' and searchConditionDTO.searchType != null">
+                ${searchConditionDTO.searchType} LIKE CONCAT('%',#{searchConditionDTO.keyword},'%')
             </if>
         </where>
     </select>

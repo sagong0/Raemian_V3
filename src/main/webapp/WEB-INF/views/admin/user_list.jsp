@@ -27,13 +27,15 @@
                     <ol >
                         <li>회원 검색</li>
                         <li>
-                            <select id="searchType" name="searchType" class="search_select">
-                                <option value="userid">아이디</option>
-                                <option value="username">이름</option>
-                                <option value="user_tell">연락처</option>
-                            </select>
-                            <input type="text" id="searchVal" class="search_input">
-                            <input type="button" id="searchBtn" value="검색" class="datebtn">
+                            <form method="get" action="${pageContext.request.contextPath}/admin/userList">
+                                <select id="searchType" name="searchType" class="search_select">
+                                    <option value="userid">아이디</option>
+                                    <option value="username">이름</option>
+                                    <option value="user_tell">연락처</option>
+                                </select>
+                                <input type="text" name="keyword" class="search_input">
+                                <input type="submit" id="searchBtn" value="검색" class="datebtn">
+                            </form>
                         </li>
                         <li></li>
                         <li></li>
@@ -99,7 +101,7 @@
                                     <!-- 다음 버튼 -->
                                     <c:if test="${pageInfo.currentPage * pageInfo.pageSize < pageInfo.totalCount}">
                                         <li>
-                                            <a href="javascript:memberPagination(${pageInfo.currentPage + 1},
+                                            <a href="javascript:memberPagination('${pageInfo.currentPage + 1}',
                         '${searchConDTO.searchType}', '${searchConDTO.keyword}')">→</a>
                                         </li>
                                     </c:if>
