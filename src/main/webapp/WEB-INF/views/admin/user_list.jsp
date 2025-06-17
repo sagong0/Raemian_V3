@@ -29,11 +29,11 @@
                         <li>
                             <form method="get" action="${pageContext.request.contextPath}/admin/userList">
                                 <select id="searchType" name="searchType" class="search_select">
-                                    <option value="userid">아이디</option>
-                                    <option value="username">이름</option>
-                                    <option value="user_tell">연락처</option>
+                                    <option value="userid" ${searchConDTO.searchType == 'userid' ? 'selected' : ''} >아이디</option>
+                                    <option value="username" ${searchConDTO.searchType == 'username' ? 'selected' : ''}>이름</option>
+                                    <option value="phone_number" ${searchConDTO.searchType == 'phone_number' ? 'selected' : ''}>연락처</option>
                                 </select>
-                                <input type="text" name="keyword" class="search_input">
+                                <input type="text" name="keyword" class="search_input" value="${searchConDTO.keyword}">
                                 <input type="submit" id="searchBtn" value="검색" class="datebtn">
                             </form>
                         </li>
@@ -60,8 +60,8 @@
                         <c:forEach var="user" items="${pageInfo.list}" varStatus="loop">
                             <ul>
                                 <li>${loop.index+1}</li>
-                                <li>${user.mname}</li>
                                 <li>${user.mid}</li>
+                                <li>${user.mname}</li>
                                 <li>${user.mtel}</li>
                                 <li>${user.memail}</li>
                                 <li style="justify-content: flex-start;">${user.mstreetaddr}</li>
@@ -120,6 +120,6 @@
     <script>alert("${msg}");</script>
 </c:if>
 
-<script src="${pageContext.request.contextPath}/static/js/member_main.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/static/js/user_list.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
