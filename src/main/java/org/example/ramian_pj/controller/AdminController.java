@@ -118,6 +118,7 @@ public class AdminController {
     public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model){
         PageDTO pageInfo = userService.getPagedUsers(searchConditionDTO);
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("searchConDTO", searchConditionDTO);
         return "/admin/user_list";
     }
 }

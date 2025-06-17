@@ -82,18 +82,27 @@
 
 
                     <aside>
-                        <c:if test="${not empty members}">
+                        <c:if test="${not empty pageInfo}">
                             <div class="page_number">
                                 <ul>
-                                    <c:set var="aarea" value="${param.aarea}" />
-                                    <!-- Page번호 시작 -->
-                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">
-                                        <li style="color:white;"onclick="memberPagination(${pNo},'${not empty searchDto ? searchDto.searchType : ''}','${not empty searchDto ? searchDto.searchVal : ''}');"
-                                            <c:if test='${param.currentPage eq pNo }'>active</c:if>>
-                                                ${pNo}
+                                    <!-- 이전 버튼 -->
+                                    <c:if test="${pageInfo.currentPage > 1}">
+                                        <li>
+                                            <a href="javascript:memberPagination('${pageInfo.currentPage - 1}',
+                        '${searchConDTO.searchType}', '${searchDto.keyword}')">←</a>
                                         </li>
-                                    </c:forEach>
-                                    <!-- Page번호 끝 -->
+                                    </c:if>
+
+                                    <!-- 현재 페이지 -->
+                                    <li class="active">${pageInfo.currentPage}</li>
+
+                                    <!-- 다음 버튼 -->
+                                    <c:if test="${pageInfo.currentPage * pageInfo.pageSize < pageInfo.totalCount}">
+                                        <li>
+                                            <a href="javascript:memberPagination(${pageInfo.currentPage + 1},
+                        '${searchConDTO.searchType}', '${searchConDTO.keyword}')">→</a>
+                                        </li>
+                                    </c:if>
                                 </ul>
                             </div>
                         </c:if>
