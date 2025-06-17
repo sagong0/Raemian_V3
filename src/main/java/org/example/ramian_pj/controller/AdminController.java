@@ -115,8 +115,9 @@ public class AdminController {
     }
 
     @GetMapping("/userList")
-    public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO){
-        userService.getPagedUsers(searchConditionDTO);
+    public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model){
+        PageDTO pageInfo = userService.getPagedUsers(searchConditionDTO);
+        model.addAttribute("pageInfo", pageInfo);
         return "/admin/user_list";
     }
 }

@@ -16,7 +16,7 @@
     </script>
 </head>
 <body>
-<%@include file="./fragments/header.jsp"%>
+<%@include file="/WEB-INF/views/admin/fragments/header.jsp" %>
 <!-- 회원관리 시작 -->
 <main class="page_main">
     <section class="page_section">
@@ -54,27 +54,27 @@
                         <li>삭제</li>
                     </ul>
 
-                    <c:if test="${not empty members}">
-                        <c:forEach var="member" items="${members}" varStatus="loop">
+                    <c:if test="${not empty pageInfo.list}">
+                        <c:forEach var="user" items="${pageInfo.list}" varStatus="loop">
                             <ul>
                                 <li>${loop.index+1}</li>
-                                <li>${member.mid }</li>
-                                <li>${member.mname}</li>
-                                <li>${member.mtel }</li>
-                                <li>${member.memail}</li>
-                                <li style="justify-content: flex-start;">${member.mstreetaddr}</li>
-                                <li>${member.ckemail}</li>
-                                <li>${member.cktel}</li>
-                                <li>${member.ckaddr}</li>
-                                <li>${member.cksms }</li>
+                                <li>${user.mname}</li>
+                                <li>${user.mid}</li>
+                                <li>${user.mtel}</li>
+                                <li>${user.memail}</li>
+                                <li style="justify-content: flex-start;">${user.mstreetaddr}</li>
+                                <li>${user.agreeEmail}</li>
+                                <li>${user.agreeTel}</li>
+                                <li>${user.agreePost}</li>
+                                <li>${user.agreeSms}</li>
                                 <li>
-                                    <input type="button" onclick="del_member(${member.midx})" value="삭제" class="delbtn">
+                                    <input type="button" onclick="del_member()" value="삭제" class="delbtn">
                                 </li>
                             </ul>
                         </c:forEach>
                     </c:if>
 
-                    <c:if test="${empty members}">
+                    <c:if test="${empty pageInfo}">
                         <ul class="nodatas">
                             <li>등록된 회원이 없습니다.</li>
                         </ul>
@@ -104,11 +104,11 @@
     </section>
 </main>
 <!-- 회원관리 끝 -->
-<%@include file="./fragments/footer.jsp"%>
+<%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
 <c:if test="${not empty msg}">
     <script>alert("${msg}");</script>
 </c:if>
 
-<script src="../js/member_main.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/static/js/member_main.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
