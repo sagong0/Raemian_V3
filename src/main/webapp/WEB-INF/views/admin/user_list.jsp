@@ -89,20 +89,24 @@
                                 <ul>
                                     <!-- 이전 버튼 -->
                                     <c:if test="${pageInfo.currentPage > 1}">
-                                        <li>
-                                            <a href="javascript:memberPagination('${pageInfo.currentPage - 1}',
-                        '${searchConDTO.searchType}', '${searchDto.keyword}')">←</a>
+                                        <li onclick="memberPagination('${pageInfo.currentPage - 1}',
+                                                '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                            <a>←</a>
                                         </li>
                                     </c:if>
 
                                     <!-- 현재 페이지 -->
-                                    <li class="active">${pageInfo.currentPage}</li>
+                                    <li class="active" onclick="memberPagination('${pageInfo.currentPage}',
+                                            '${empty searchConDTO.searchType ? '' : searchConDTO.searchType}',
+                                            '${empty searchConDTO.keyword ? '' : searchConDTO.keyword }')">
+                                        <a>${pageInfo.currentPage}</a>
+                                    </li>
 
                                     <!-- 다음 버튼 -->
                                     <c:if test="${pageInfo.currentPage * pageInfo.pageSize < pageInfo.totalCount}">
-                                        <li>
-                                            <a href="javascript:memberPagination('${pageInfo.currentPage + 1}',
-                        '${searchConDTO.searchType}', '${searchConDTO.keyword}')">→</a>
+                                        <li onclick="memberPagination('${pageInfo.currentPage + 1}',
+                                                '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                            <a>→</a>
                                         </li>
                                     </c:if>
                                 </ul>
