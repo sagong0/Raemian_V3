@@ -11,7 +11,6 @@ import org.example.ramian_pj.dto.UserLoginDTO;
 import org.example.ramian_pj.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -83,5 +82,9 @@ public class UserService {
         log.info("totalCount = {}", totalCount);
 
         return new PageDTO(searchedUsers, totalCount, searchConditionDTO.getPage(), searchConditionDTO.getPageSize());
+    }
+
+    public void toggleDeleteStatus(String mid) {
+        userRepository.toggleDeleteStatus(mid);
     }
 }

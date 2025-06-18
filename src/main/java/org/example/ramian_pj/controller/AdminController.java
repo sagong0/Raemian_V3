@@ -122,4 +122,12 @@ public class AdminController {
         model.addAttribute("searchConDTO", searchConditionDTO);
         return "/admin/user_list";
     }
+
+    @PostMapping("/userList/delete")
+    @ResponseBody
+    public String userListDel(@RequestParam String mid){
+        userService.toggleDeleteStatus(mid);
+        return "OK";
+    }
+
 }

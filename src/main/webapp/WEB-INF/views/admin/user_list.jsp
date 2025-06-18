@@ -70,7 +70,7 @@
                                 <li>${user.agreePost}</li>
                                 <li>${user.agreeSms}</li>
                                 <li>
-                                    <input type="button" onclick="del_member()" value="삭제" class="delbtn">
+                                    <input type="button" onclick="del_member('${user.mid}')" value="삭제" id="delBtn" class="delbtn">
                                 </li>
                             </ul>
                         </c:forEach>
@@ -119,6 +119,10 @@
 <c:if test="${not empty msg}">
     <script>alert("${msg}");</script>
 </c:if>
+
+<script>
+    const contextPath = '${pageContext.request.contextPath}';
+</script>
 
 <script src="${pageContext.request.contextPath}/static/js/user_list.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>

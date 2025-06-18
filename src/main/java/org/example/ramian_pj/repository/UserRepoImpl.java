@@ -39,4 +39,9 @@ public class UserRepoImpl implements UserRepository {
     public int countSearchUsers(SearchConditionDTO searchConditionDTO) {
         return clientMapper.countSearchUsers(searchConditionDTO);
     }
+
+    @Override
+    public void toggleDeleteStatus(String mid) {
+        clientMapper.toggleDeleteStatus(mid);
+    }
 }
