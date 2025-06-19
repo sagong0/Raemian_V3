@@ -130,4 +130,18 @@ public class AdminController {
         return "OK";
     }
 
+    /**
+     * 공지사항
+     */
+    @GetMapping("/notice")
+    public String noticeMain(){
+        return "/admin/notice_main";
+    }
+
+    @GetMapping("/notice/write")
+    public String noticeWriteForm(){
+
+        return "/admin/notice_write";
+    }
+
 }

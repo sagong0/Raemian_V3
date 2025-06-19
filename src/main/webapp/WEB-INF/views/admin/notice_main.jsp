@@ -57,7 +57,7 @@
                                 <li>${notice.nwriter}</li>
                                 <li>${notice.nindate}</li>
                                 <li>
-                                    <input type="button" onclick="notice_delete(${notice.nidx});" value="삭제" class="delbtn">
+                                    <input type="button" onclick="notice_delete(${notice.nidx});" value="삭제"  class="delbtn">
                                 </li>
                             </ul>
                         </c:forEach>
@@ -69,20 +69,20 @@
                         </ul>
                     </c:if>
                     <span class="notice_btns">
-       <input type="button" value="글쓰기" onclick="noticeWriteForm();" class="meno_btn2"></span>
+       <input type="button" value="글쓰기" id="writeBtn" class="meno_btn2"></span>
                     <aside>
                         <c:if test="${not empty notices}">
                             <div class="page_number">
                                 <ul>
                                     <c:set var="searchWord" value="${param.searchWord}" />
                                     <!-- Page번호 시작 -->
-                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">
-                                        <li style="color:white;"
-                                            onclick="noticePagination(${pNo},'${not empty searchWord ? searchWord : ''}');"
-                                            class="<c:if test='${param.currentPage eq pNo}'>active</c:if>">
-                                                ${pNo}
-                                        </li>
-                                    </c:forEach>
+<%--                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">--%>
+<%--                                        <li style="color:white;"--%>
+<%--                                            onclick="noticePagination(${pNo},'${not empty searchWord ? searchWord : ''}');"--%>
+<%--                                            class="<c:if test='${param.currentPage eq pNo}'>active</c:if>">--%>
+<%--                                                ${pNo}--%>
+<%--                                        </li>--%>
+<%--                                    </c:forEach>--%>
                                     <!-- Page번호 끝 -->
                                 </ul>
                             </div>
@@ -95,11 +95,9 @@
 </main>
 <!-- 공지사항 관리 끝 -->
 <%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
-<c:if test="${not empty successMsg}">
-    <script>
-        alert("${successMsg}");
-    </script>
-</c:if>
-<script src="${pageContext.request.contextPath}/static/js/notice_main.js?v=<%=System.currentTimeMillis()%>"></script>
+<script>
+    const ctx = "${pageContext.request.contextPath}";
+</script>
+<script src="${pageContext.request.contextPath}/static/js/notice.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
