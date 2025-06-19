@@ -31,7 +31,7 @@
                             <li><input type="text" name="ntitle" class="notice_in in1"></li>
                             <li>글쓴이</li>
                             <li>
-                                <input type="text" name="nwriter" class="notice_in in2" value="" readonly>
+                                <input type="text" name="nwriter" class="notice_in in2" value="${sessionScope.admin.name}" readonly>
                             </li>
                             <li style="height:520px;">내용</li>
                             <li style="height:520px; padding-top: 10px;">
@@ -55,7 +55,7 @@
 <!-- 공지사항 등록 끝 -->
 <%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
 
-<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace("editor1");
 </script>
