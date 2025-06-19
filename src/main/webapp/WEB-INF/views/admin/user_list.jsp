@@ -16,7 +16,7 @@
     </script>
 </head>
 <body>
-<%@include file="./fragments/header.jsp"%>
+<%@include file="/WEB-INF/views/admin/fragments/header.jsp" %>
 <!-- 회원관리 시작 -->
 <main class="page_main">
     <section class="page_section">
@@ -27,13 +27,15 @@
                     <ol >
                         <li>회원 검색</li>
                         <li>
-                            <select id="searchType" name="searchType" class="search_select">
-                                <option value="userid">아이디</option>
-                                <option value="username">이름</option>
-                                <option value="user_tell">연락처</option>
-                            </select>
-                            <input type="text" id="searchVal" class="search_input">
-                            <input type="button" id="searchBtn" value="검색" class="datebtn">
+                            <form method="get" action="${pageContext.request.contextPath}/admin/userList">
+                                <select id="searchType" name="searchType" class="search_select">
+                                    <option value="userid" ${searchConDTO.searchType == 'userid' ? 'selected' : ''} >아이디</option>
+                                    <option value="username" ${searchConDTO.searchType == 'username' ? 'selected' : ''}>이름</option>
+                                    <option value="phone_number" ${searchConDTO.searchType == 'phone_number' ? 'selected' : ''}>연락처</option>
+                                </select>
+                                <input type="text" name="keyword" class="search_input" value="${searchConDTO.keyword}">
+                                <input type="submit" id="searchBtn" value="검색" class="datebtn">
+                            </form>
                         </li>
                         <li></li>
                         <li></li>
@@ -54,27 +56,27 @@
                         <li>삭제</li>
                     </ul>
 
-                    <c:if test="${not empty members}">
-                        <c:forEach var="member" items="${members}" varStatus="loop">
+                    <c:if test="${not empty pageInfo.list}">
+                        <c:forEach var="user" items="${pageInfo.list}" varStatus="loop">
                             <ul>
                                 <li>${loop.index+1}</li>
-                                <li>${member.mid }</li>
-                                <li>${member.mname}</li>
-                                <li>${member.mtel }</li>
-                                <li>${member.memail}</li>
-                                <li style="justify-content: flex-start;">${member.mstreetaddr}</li>
-                                <li>${member.ckemail}</li>
-                                <li>${member.cktel}</li>
-                                <li>${member.ckaddr}</li>
-                                <li>${member.cksms }</li>
+                                <li>${user.mid}</li>
+                                <li>${user.mname}</li>
+                                <li>${user.mtel}</li>
+                                <li>${user.memail}</li>
+                                <li style="justify-content: flex-start;">${user.mstreetaddr}</li>
+                                <li>${user.agreeEmail}</li>
+                                <li>${user.agreeTel}</li>
+                                <li>${user.agreePost}</li>
+                                <li>${user.agreeSms}</li>
                                 <li>
-                                    <input type="button" onclick="del_member(${member.midx})" value="삭제" class="delbtn">
+                                    <input type="button" onclick="del_member('${user.mid}')" value="삭제" id="delBtn" class="delbtn">
                                 </li>
                             </ul>
                         </c:forEach>
                     </c:if>
 
-                    <c:if test="${empty members}">
+                    <c:if test="${empty pageInfo}">
                         <ul class="nodatas">
                             <li>등록된 회원이 없습니다.</li>
                         </ul>
@@ -82,18 +84,31 @@
 
 
                     <aside>
-                        <c:if test="${not empty members}">
+                        <c:if test="${not empty pageInfo}">
                             <div class="page_number">
                                 <ul>
-                                    <c:set var="aarea" value="${param.aarea}" />
-                                    <!-- Page번호 시작 -->
-                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">
-                                        <li style="color:white;"onclick="memberPagination(${pNo},'${not empty searchDto ? searchDto.searchType : ''}','${not empty searchDto ? searchDto.searchVal : ''}');"
-                                            <c:if test='${param.currentPage eq pNo }'>active</c:if>>
-                                                ${pNo}
+                                    <!-- 이전 버튼 -->
+                                    <c:if test="${pageInfo.currentPage > 1}">
+                                        <li onclick="memberPagination('${pageInfo.currentPage - 1}',
+                                                '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                            <a>←</a>
                                         </li>
-                                    </c:forEach>
-                                    <!-- Page번호 끝 -->
+                                    </c:if>
+
+                                    <!-- 현재 페이지 -->
+                                    <li class="active" onclick="memberPagination('${pageInfo.currentPage}',
+                                            '${empty searchConDTO.searchType ? '' : searchConDTO.searchType}',
+                                            '${empty searchConDTO.keyword ? '' : searchConDTO.keyword }')">
+                                        <a>${pageInfo.currentPage}</a>
+                                    </li>
+
+                                    <!-- 다음 버튼 -->
+                                    <c:if test="${pageInfo.currentPage * pageInfo.pageSize < pageInfo.totalCount}">
+                                        <li onclick="memberPagination('${pageInfo.currentPage + 1}',
+                                                '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                            <a>→</a>
+                                        </li>
+                                    </c:if>
                                 </ul>
                             </div>
                         </c:if>
@@ -104,11 +119,15 @@
     </section>
 </main>
 <!-- 회원관리 끝 -->
-<%@include file="./fragments/footer.jsp"%>
+<%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
 <c:if test="${not empty msg}">
     <script>alert("${msg}");</script>
 </c:if>
 
-<script src="../js/member_main.js?v=<%=System.currentTimeMillis()%>"></script>
+<script>
+    const contextPath = '${pageContext.request.contextPath}';
+</script>
+
+<script src="${pageContext.request.contextPath}/static/js/user_list.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

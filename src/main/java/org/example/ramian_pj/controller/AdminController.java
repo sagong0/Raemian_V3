@@ -115,8 +115,19 @@ public class AdminController {
     }
 
     @GetMapping("/userList")
-    public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO){
-        userService.getPagedUsers(searchConditionDTO);
+    public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model){
+        log.info("searchConditionDTO = {}", searchConditionDTO);
+        PageDTO pageInfo = userService.getPagedUsers(searchConditionDTO);
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("searchConDTO", searchConditionDTO);
         return "/admin/user_list";
     }
+
+    @PostMapping("/userList/delete")
+    @ResponseBody
+    public String userListDel(@RequestParam String mid){
+        userService.toggleDeleteStatus(mid);
+        return "OK";
+    }
+
 }

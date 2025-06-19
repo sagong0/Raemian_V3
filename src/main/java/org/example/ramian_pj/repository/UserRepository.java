@@ -15,4 +15,6 @@ public interface UserRepository {
     List<UserJoinDTO> getUsersBySearch(SearchConditionDTO searchConditionDTO, int offset);
 
     int countSearchUsers(SearchConditionDTO searchConditionDTO);
+
+    void toggleDeleteStatus(String mid);
 }

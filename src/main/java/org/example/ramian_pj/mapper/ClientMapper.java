@@ -16,4 +16,6 @@ public interface ClientMapper {
     List<UserJoinDTO> getUserBySearchOption(@Param("searchConditionDTO") SearchConditionDTO searchConditionDTO, @Param("offset") int offset);
 
     int countSearchUsers(@Param("searchConditionDTO") SearchConditionDTO searchConditionDTO);
+
+    void toggleDeleteStatus(String mid);
 }

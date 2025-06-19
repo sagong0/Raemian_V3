@@ -37,7 +37,9 @@
             agree_sms
         FROM client_member
         WHERE
-            userid = #{mid};
+            userid = #{mid}
+        AND
+            is_deleted = 'N';
     </select>
 
 <!--    모든 회원 조회 -->
@@ -57,7 +59,9 @@
             agree_tel,
             agree_post,
             agree_sms
-        FROM client_member;
+        FROM client_member
+            WHERE
+            is_deleted = 'N';;
     </select>
 
 
@@ -91,8 +95,9 @@
             agree_sms
         FROM client_member
         <where>
+            is_deleted = 'N'
             <if test="searchConditionDTO.keyword != null and searchConditionDTO.searchType != null">
-                ${searchConditionDTO.searchType} LIKE CONCAT('%',#{searchConditionDTO.keyword}, '%')
+                AND ${searchConditionDTO.searchType} LIKE CONCAT('%',#{searchConditionDTO.keyword}, '%')
             </if>
         </where>
         ORDER BY ${searchConditionDTO.sortBy} ${searchConditionDTO.order}
@@ -102,9 +107,21 @@
     <select id="countSearchUsers" resultType="int">
         SELECT COUNT(*) FROM client_member
         <where>
-            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyworad != '' and searchConditionDTO.searchType != null">
-                ${searchConditionDTO} LIKE CONCAT('%',#{searchConditionDTO.keyword},'%')
+            is_deleted = 'N'
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyword != '' and searchConditionDTO.searchType != null">
+                AND ${searchConditionDTO.searchType} LIKE CONCAT('%',#{searchConditionDTO.keyword},'%')
             </if>
         </where>
     </select>
+
+
+    <update id="toggleDeleteStatus" parameterType="String">
+        UPDATE client_member
+        SET is_deleted = CASE
+            WHEN is_deleted = 'Y' THEN 'N'
+        ELSE 'Y'
+        END
+        WHERE userid = #{mid}
+    </update>
+
 </mapper>
