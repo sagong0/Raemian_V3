@@ -43,7 +43,7 @@
                             </li>
                         </ol>
                         <span class="notice_btns">
-	       <input type="button" value="글등록" id="writeBtn" class="meno_btn2">
+	       <input type="button" value="글등록" id="saveBtn" class="meno_btn2">
 	       </span>
                     </section>
                 </div>
@@ -60,6 +60,6 @@
     CKEDITOR.replace("editor1");
 </script>
 
-<script src="${pageContext.request.contextPath}/static/js/notice.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/static/js/notice_write.js?v=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
