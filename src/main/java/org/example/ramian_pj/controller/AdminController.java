@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -128,6 +129,32 @@ public class AdminController {
     public String userListDel(@RequestParam String mid){
         userService.toggleDeleteStatus(mid);
         return "OK";
+    }
+
+    /**
+     * 공지사항
+     */
+    @GetMapping("/notice")
+    public String noticeMain(){
+        return "/admin/notice_main";
+    }
+
+    @GetMapping("/notice/write")
+    public String noticeWriteForm(){
+
+        return "/admin/notice_write";
+    }
+
+    @PostMapping("/notice/write")
+    public String noticeWrite(@ModelAttribute NoticeDTO noticeDTO){
+        log.info("noticeDTO = {}", noticeDTO);
+
+        MultipartFile nfile = noticeDTO.getNfile();
+        if(nfile != null && !nfile.isEmpty()){
+            log.info("file_noticeDTO = {}", nfile.getOriginalFilename());
+            log.info("Size = {}", nfile.getSize());
+        }
+        return "";
     }
 
 }
