@@ -1,7 +1,7 @@
-<%@ page import="org.example.ramian_pj.domain.AdminMember" %>
 <%@ page import="org.example.ramian_pj.dto.AdminMemberDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     AdminMemberDTO adminMember = (AdminMemberDTO) session.getAttribute("admin");
 %>
@@ -16,7 +16,14 @@
             <li class="topmenu2"><a href="">FAQ</a></li>
             <li class="topmenu2"><a href="">예약현황</a></li>
             <li class="topmenu2"><a href="">관리자현황</a></li>
+            <c:choose>
+                <c:when test="${not empty adminMember}">
             <li class="topmenu3"><%=adminMember.getName()%>님 환영합니다<a href="${pageContext.request.contextPath}/admin/logout">[로그아웃]</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
     <div class="menuline"></div>

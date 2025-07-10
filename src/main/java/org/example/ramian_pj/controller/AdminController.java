@@ -49,7 +49,7 @@ public class AdminController {
         }
 
         AdminMemberDTO admin = adminService.login(adminLoginDTO);
-        if(admin == null){
+        if (admin == null) {
             model.addAttribute("loginFail", "아이디 또는 패스워드를 확인해주세요.");
             return "admin/index";
         }
@@ -108,7 +108,7 @@ public class AdminController {
     // 회원가입 요청
     @PostMapping("/join")
     public String joinForm(@Valid AdminJoinDTO adminJoinDTO, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "admin/joinForm";
         }
         adminService.saveAdmin(adminJoinDTO);
@@ -116,7 +116,7 @@ public class AdminController {
     }
 
     @GetMapping("/userList")
-    public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model){
+    public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
         log.info("searchConditionDTO = {}", searchConditionDTO);
         PageDTO pageInfo = userService.getPagedUsers(searchConditionDTO);
         model.addAttribute("pageInfo", pageInfo);
@@ -126,7 +126,7 @@ public class AdminController {
 
     @PostMapping("/userList/delete")
     @ResponseBody
-    public String userListDel(@RequestParam String mid){
+    public String userListDel(@RequestParam String mid) {
         userService.toggleDeleteStatus(mid);
         return "OK";
     }
@@ -135,25 +135,32 @@ public class AdminController {
      * 공지사항
      */
     @GetMapping("/notice")
-    public String noticeMain(){
+    public String noticeMain() {
         return "/admin/notice_main";
     }
 
     @GetMapping("/notice/write")
-    public String noticeWriteForm(){
+    public String noticeWriteForm() {
 
         return "/admin/notice_write";
     }
 
     @PostMapping("/notice/write")
-    public String noticeWrite(@ModelAttribute NoticeDTO noticeDTO){
-        log.info("noticeDTO = {}", noticeDTO);
+    public String noticeWrite(
+            @ModelAttribute NoticeDTO noticeDTO
+    ) {
+        log.info("제목: {}", noticeDTO.getNtitle());
+        log.info("작성자: {}", noticeDTO.getNwriter());
+        log.info("내용: {}", noticeDTO.getNcontent());
 
-        MultipartFile nfile = noticeDTO.getNfile();
-        if(nfile != null && !nfile.isEmpty()){
-            log.info("file_noticeDTO = {}", nfile.getOriginalFilename());
-            log.info("Size = {}", nfile.getSize());
+        if (noticeDTO.getNfile() != null && noticeDTO.getNfile().isEmpty()) {
+            log.info("첨부파일: {}", noticeDTO.getNfile().getOriginalFilename());
+            // 파일 저장 로직 수행
         }
+
+        // DB 저장 처리 ( 파일 첨부 없는 상황 )
+        log.info("파일 첨부없네 저장하자 ~ ");
+//        adminService.saveNotice(noticeDTO);
         return "";
     }
 

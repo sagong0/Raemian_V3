@@ -58,6 +58,7 @@
 <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace("editor1");
+    const contextPath = '${pageContext.request.contextPath}';
 </script>
 
 <script src="${pageContext.request.contextPath}/static/js/notice_write.js?v=<%=System.currentTimeMillis()%>"></script>
