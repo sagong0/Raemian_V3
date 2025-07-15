@@ -23,7 +23,8 @@ public class NoticeService {
         log.info("resultSign = {}", resultSign);
     }
 
-    public void saveNoticeFile(NoticeFileDTO fileDTO) {
+    public void saveNoticeFile(NoticeFileDTO noticeFileDTO) {
         log.info("saveNoticeFile 진입 !!!!!!!!!");
+        noticeRepository.saveNoticeFile(noticeFileDTO);
     }
 }

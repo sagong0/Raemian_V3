@@ -3,8 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.example.ramian_pj.mapper.NoticeMapper">
-    <insert id="saveNotice">
+    <insert id="saveNotice" parameterType="org.example.ramian_pj.dto.NoticeDTO" useGeneratedKeys="true"
+            keyProperty="noticeId">
         INSERT INTO notice (ntitle, nwriter, ncontent)
         VALUES (#{ntitle}, #{nwriter}, #{ncontent})
+    </insert>
+
+    <insert id="saveNoticeFile" parameterType="org.example.ramian_pj.dto.NoticeFileDTO">
+        INSERT INTO notice_file (
+            notice_id,
+            file_name,
+            file_path,
+            file_size,
+            content_type
+        )
+        VALUES (
+                   #{noticeId},
+                   #{fileName},
+                   #{filePath},
+                   #{fileSize},
+                   #{contentType}
+               )
     </insert>
 </mapper>

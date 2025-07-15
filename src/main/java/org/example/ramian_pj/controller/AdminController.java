@@ -164,6 +164,8 @@ public class AdminController {
             // 1) 공지사항 먼저 일단 저장 -> notice_id 생성위해 ( 외래키 )
             log.info("noticeDTO = ", noticeDTO);
             noticeService.saveNotice(noticeDTO);
+            log.info("생성된 noticeId = {}", noticeDTO.getNoticeId()); // 여기가 0이면 문제!
+
 
             // 2) 파일이 존재 할 경우만 처리
             if(file != null && !file.isEmpty()){
