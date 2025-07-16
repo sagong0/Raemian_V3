@@ -140,7 +140,9 @@ public class AdminController {
      * 공지사항
      */
     @GetMapping("/notice")
-    public String noticeMain() {
+    public String noticeMain(Model model) {
+        List<NoticeDTO> notices = noticeService.getAllNotices();
+        model.addAttribute("notices", notices);
         return "/admin/notice_main";
     }
 

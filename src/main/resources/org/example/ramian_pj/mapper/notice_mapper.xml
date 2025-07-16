@@ -25,4 +25,44 @@
                    #{contentType}
                )
     </insert>
+
+
+
+    <!--  File첨부 여부 위해 Notice 와 NoticeFile 테이블 LEFT JOIN  -->
+    <resultMap id="noticeResultMap" type="org.example.ramian_pj.dto.NoticeDTO">
+        <id property="noticeId" column="notice_id"/>
+        <result property="ntitle" column="ntitle"/>
+        <result property="nwriter" column="nwriter"/>
+        <result property="ncontent" column="ncontent"/>
+        <result property="ncount" column="ncount"/>
+        <result property="regDate" column="reg_date"/>
+
+        <association property="fileInfo" javaType="org.example.ramian_pj.dto.NoticeFileDTO">
+            <result property="fileId" column="file_id"/>
+            <result property="fileName" column="file_name"/>
+            <result property="filePath" column="file_path"/>
+            <result property="contentType" column="content_type"/>
+        </association>
+    </resultMap>
+
+
+    <select id="getAllNotices" resultMap="noticeResultMap">
+        select
+            n.notice_id,
+            n.ntitle,
+            n.nwriter,
+            n.ncontent,
+            n.ncount,
+            n.reg_date,
+            f.file_id,
+            f.file_name,
+            f.file_path,
+            f.content_type
+        FROM notice n
+        LEFT JOIN
+        notice_file f
+        on n.notice_id = f.notice_id
+        ORDER BY n.notice_id DESC;
+    </select>
+
 </mapper>

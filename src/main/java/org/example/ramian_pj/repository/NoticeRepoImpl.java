@@ -6,6 +6,9 @@ import org.example.ramian_pj.dto.NoticeFileDTO;
 import org.example.ramian_pj.mapper.NoticeMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
+import java.util.List;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -21,6 +24,11 @@ public class NoticeRepoImpl implements NoticeRepository{
     @Override
     public int saveNoticeFile(NoticeFileDTO noticeFileDTO) {
         return noticeMapper.saveNoticeFile(noticeFileDTO);
+    }
+
+    @Override
+    public List<NoticeDTO> getAllNotices() {
+        return noticeMapper.getAllNotices();
     }
 
 }

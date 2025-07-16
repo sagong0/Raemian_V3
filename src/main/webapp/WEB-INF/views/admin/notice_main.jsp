@@ -51,13 +51,18 @@
                             <ul>
                                 <li>${loop.index+1}</li>
                                 <li style="text-align: left; justify-content: flex-start;"
-                                    onclick="notice_detail(${notice.nidx});">${notice.ntitle}</li>
-                                <li>${not empty notice.nfile ? 'O' : 'X'}</li>
-                                <li>${notice.ncount}</li>
-                                <li>${notice.nwriter}</li>
-                                <li>${notice.nindate}</li>
+                                    onclick="">${notice.ntitle}</li>
                                 <li>
-                                    <input type="button" onclick="notice_delete(${notice.nidx});" value="삭제"  class="delbtn">
+                                    <c:choose>
+                                        <c:when test="${not empty notice.fileInfo}">O</c:when>
+                                        <c:otherwise>X</c:otherwise>
+                                    </c:choose>
+                                </li>
+                                <li>${notice.nwriter}</li>
+                                <li>${notice.ncount}</li>
+                                <li>${notice.regDate}</li>
+                                <li>
+                                    <input type="button" onclick="" value="삭제"  class="delbtn">
                                 </li>
                             </ul>
                         </c:forEach>

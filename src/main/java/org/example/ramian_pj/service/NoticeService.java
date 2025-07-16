@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class NoticeService {
@@ -26,5 +28,9 @@ public class NoticeService {
     public void saveNoticeFile(NoticeFileDTO noticeFileDTO) {
         log.info("saveNoticeFile 진입 !!!!!!!!!");
         noticeRepository.saveNoticeFile(noticeFileDTO);
+    }
+
+    public List<NoticeDTO> getAllNotices() {
+        return noticeRepository.getAllNotices();
     }
 }
