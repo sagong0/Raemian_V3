@@ -13,3 +13,10 @@ function searchNotice(){
 }
 
 
+/**
+ * PageNation
+ */
+function noticePagination(currentPage, searchType, keyword) {
+    const url = `${ctx}/admin/notice?page=${currentPage}&searchType=${encodeURIComponent(searchType)}&keyword=${encodeURIComponent(keyword)}`;
+    window.location.href = url;
+}

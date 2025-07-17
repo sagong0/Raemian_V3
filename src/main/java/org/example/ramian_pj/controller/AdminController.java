@@ -143,7 +143,9 @@ public class AdminController {
     public String noticeMain(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
         PageDTO noticePageInfo = noticeService.getPagedNotices(searchConditionDTO);
 
-        model.addAttribute("notices", noticePageInfo);
+        model.addAttribute("noticePageInfo", noticePageInfo);
+        model.addAttribute("searchConDTO", searchConditionDTO);
+
         return "/admin/notice_main";
     }
 
@@ -155,11 +157,10 @@ public class AdminController {
 
     @PostMapping("/notice/write")
     public String noticeWrite(
-            @ModelAttribute NoticeDTO noticeDTO
+            @ModelAttribute NoticeDTO noticeDTO,
+            Model model
     ) {
-
         MultipartFile file = noticeDTO.getNfile();
-
         // 파일 저장위치 TODO -> CDN 경로 수정 필요
         String uploadDir = "D:/temp/";
 

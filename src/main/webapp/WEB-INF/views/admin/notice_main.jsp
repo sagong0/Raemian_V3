@@ -46,8 +46,8 @@
                         <li>삭제</li>
                     </ul>
 
-                    <c:if test="${not empty notices}">
-                        <c:forEach var="notice" items="${notices.list}" varStatus="loop">
+                    <c:if test="${not empty noticePageInfo}">
+                        <c:forEach var="notice" items="${noticePageInfo.list}" varStatus="loop">
                             <ul>
                                 <li>${loop.index+1}</li>
                                 <li style="text-align: left; justify-content: flex-start;"
@@ -68,7 +68,7 @@
                         </c:forEach>
                     </c:if>
 
-                    <c:if test="${empty notices}">
+                    <c:if test="${empty noticePageInfo}">
                         <ul class="nodatas">
                             <li>등록된 공지사항이 없습니다.</li>
                         </ul>
@@ -76,11 +76,30 @@
                     <span class="notice_btns">
        <input type="button" value="글쓰기" id="writeBtn" class="meno_btn2"></span>
                     <aside>
-                        <c:if test="${not empty notices}">
+                        <c:if test="${not empty noticePageInfo}">
                             <div class="page_number">
                                 <ul>
                                     <%--   이전버튼--%>
+                                        <c:if test="${noticePageInfo.currentPage > 1}">
+                                            <li onclick="noticePagination('${noticePageInfo.currentPage - 1}',
+                                                    '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                                <a>←</a>
+                                            </li>
+                                        </c:if>
+                                        <!-- 현재 페이지 -->
+                                        <li class="active" onclick="noticePagination('${noticePageInfo.currentPage}',
+                                                '${empty searchConDTO.searchType ? '' : searchConDTO.searchType}',
+                                                '${empty searchConDTO.keyword ? '' : searchConDTO.keyword }')">
+                                            <a>${noticePageInfo.currentPage}</a>
+                                        </li>
 
+                                        <!-- 다음 버튼 -->
+                                        <c:if test="${noticePageInfo.currentPage * noticePageInfo.pageSize < noticePageInfo.totalCount}">
+                                            <li onclick="noticePagination('${noticePageInfo.currentPage + 1}',
+                                                    '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                                <a>→</a>
+                                            </li>
+                                        </c:if>
                                 </ul>
                             </div>
                         </c:if>
