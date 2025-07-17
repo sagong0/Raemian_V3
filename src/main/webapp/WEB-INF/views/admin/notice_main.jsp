@@ -28,8 +28,8 @@
                     <ol>
                         <li>공지사항 검색</li>
                         <li>
-                            <input type="text" id="searchWord" class="search_input">
-                            <input type="button" value="검색" onclick="searchByTitle();" class="datebtn">
+                            <input type="text" name="keyword" id="keyword" class="search_input">
+                            <input type="button" value="검색"  id="searchBtn" class="datebtn" onclick="searchNotice()">
                         </li>
                         <li></li>
                         <li></li>
@@ -47,7 +47,7 @@
                     </ul>
 
                     <c:if test="${not empty notices}">
-                        <c:forEach var="notice" items="${notices}" varStatus="loop">
+                        <c:forEach var="notice" items="${notices.list}" varStatus="loop">
                             <ul>
                                 <li>${loop.index+1}</li>
                                 <li style="text-align: left; justify-content: flex-start;"
@@ -79,16 +79,8 @@
                         <c:if test="${not empty notices}">
                             <div class="page_number">
                                 <ul>
-                                    <c:set var="searchWord" value="${param.searchWord}" />
-                                    <!-- Page번호 시작 -->
-<%--                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">--%>
-<%--                                        <li style="color:white;"--%>
-<%--                                            onclick="noticePagination(${pNo},'${not empty searchWord ? searchWord : ''}');"--%>
-<%--                                            class="<c:if test='${param.currentPage eq pNo}'>active</c:if>">--%>
-<%--                                                ${pNo}--%>
-<%--                                        </li>--%>
-<%--                                    </c:forEach>--%>
-                                    <!-- Page번호 끝 -->
+                                    <%--   이전버튼--%>
+
                                 </ul>
                             </div>
                         </c:if>

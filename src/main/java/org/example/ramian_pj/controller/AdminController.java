@@ -140,9 +140,10 @@ public class AdminController {
      * 공지사항
      */
     @GetMapping("/notice")
-    public String noticeMain(Model model) {
-        List<NoticeDTO> notices = noticeService.getAllNotices();
-        model.addAttribute("notices", notices);
+    public String noticeMain(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
+        PageDTO noticePageInfo = noticeService.getPagedNotices(searchConditionDTO);
+
+        model.addAttribute("notices", noticePageInfo);
         return "/admin/notice_main";
     }
 
@@ -164,7 +165,6 @@ public class AdminController {
 
         try{
             // 1) 공지사항 먼저 일단 저장 -> notice_id 생성위해 ( 외래키 )
-            log.info("noticeDTO = ", noticeDTO);
             noticeService.saveNotice(noticeDTO);
             log.info("생성된 noticeId = {}", noticeDTO.getNoticeId()); // 여기가 0이면 문제!
 
@@ -194,11 +194,11 @@ public class AdminController {
         }
         catch (IOException e){
             e.printStackTrace();
-            return "redirect:/admin/notice/write?error=true";
+            return "redirect:/notice/write?error=true";
         }
 
 
-        return "redirect:/admin/notice";
+        return "redirect:/notice";
     }
 
 }

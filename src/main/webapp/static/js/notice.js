@@ -4,3 +4,12 @@ document.getElementById("writeBtn").addEventListener("click", ()=>{
 });
 
 
+
+function searchNotice(){
+    const keyword = document.getElementById('keyword').value.trim();
+
+    const url = ctx + "/admin/notice?keyword=" + encodeURIComponent(keyword);
+    window.location.href = url;
+}
+
+

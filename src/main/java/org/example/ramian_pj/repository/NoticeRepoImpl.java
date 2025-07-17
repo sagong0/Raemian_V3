@@ -3,6 +3,7 @@ package org.example.ramian_pj.repository;
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.NoticeDTO;
 import org.example.ramian_pj.dto.NoticeFileDTO;
+import org.example.ramian_pj.dto.SearchConditionDTO;
 import org.example.ramian_pj.mapper.NoticeMapper;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +30,16 @@ public class NoticeRepoImpl implements NoticeRepository{
     @Override
     public List<NoticeDTO> getAllNotices() {
         return noticeMapper.getAllNotices();
+    }
+
+    @Override
+    public List<NoticeDTO> getNoticesBySearch(SearchConditionDTO searchConditionDTO, int offset) {
+        return noticeMapper.getNoticesBySearchOption(searchConditionDTO,offset);
+    }
+
+    @Override
+    public int countSearchNotices(SearchConditionDTO searchConditionDTO) {
+        return noticeMapper.countSearchNotices(searchConditionDTO);
     }
 
 }

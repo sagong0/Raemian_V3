@@ -2,8 +2,12 @@ package org.example.ramian_pj.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.domain.SearchType;
+import org.example.ramian_pj.domain.SortOption;
 import org.example.ramian_pj.dto.NoticeDTO;
 import org.example.ramian_pj.dto.NoticeFileDTO;
+import org.example.ramian_pj.dto.PageDTO;
+import org.example.ramian_pj.dto.SearchConditionDTO;
 import org.example.ramian_pj.repository.NoticeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,17 +24,34 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
     public void saveNotice(NoticeDTO noticeDTO) {
-        int resultSign = noticeRepository.saveNotice(noticeDTO);
-
-        log.info("resultSign = {}", resultSign);
+        noticeRepository.saveNotice(noticeDTO);
     }
 
     public void saveNoticeFile(NoticeFileDTO noticeFileDTO) {
-        log.info("saveNoticeFile 진입 !!!!!!!!!");
+
         noticeRepository.saveNoticeFile(noticeFileDTO);
     }
 
-    public List<NoticeDTO> getAllNotices() {
-        return noticeRepository.getAllNotices();
+//    public List<NoticeDTO> getAllNotices() {
+//        return noticeRepository.getAllNotices();
+//    }
+
+    public PageDTO getPagedNotices(SearchConditionDTO searchConditionDTO){
+
+        if (searchConditionDTO.getSearchType() == null || searchConditionDTO.getSearchType().isEmpty()) {
+            searchConditionDTO.setSearchType("ntitle");
+        }
+
+        if(!SortOption.noticeValues().contains(searchConditionDTO.getSortBy())){
+            searchConditionDTO.setSortBy("notice_id");
+        }
+
+        int offset = (searchConditionDTO.getPage() - 1) * searchConditionDTO.getPageSize();
+        List<NoticeDTO> notices = noticeRepository.getNoticesBySearch(searchConditionDTO, offset);
+        log.info("here notice is = {}", notices);
+        int totalCount = noticeRepository.countSearchNotices(searchConditionDTO);
+
+        return new PageDTO(notices, totalCount, searchConditionDTO.getPage(), searchConditionDTO.getPageSize());
     }
+
 }

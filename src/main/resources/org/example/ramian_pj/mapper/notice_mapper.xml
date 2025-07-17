@@ -65,4 +65,38 @@
         ORDER BY n.notice_id DESC;
     </select>
 
+    <select id="getNoticesBySearchOption" resultMap="noticeResultMap">
+        SELECT
+        n.notice_id,
+        n.ntitle,
+        n.nwriter,
+        n.ncontent,
+        n.ncount,
+        n.reg_date,
+        f.file_id,
+        f.file_name,
+        f.file_path,
+        f.content_type
+        FROM notice n
+        LEFT JOIN notice_file f ON n.notice_id = f.notice_id
+        <where>
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyword != ''">
+                AND n.ntitle LIKE CONCAT('%', #{searchConditionDTO.keyword}, '%')
+            </if>
+        </where>
+        ORDER BY n.notice_id DESC
+        LIMIT #{searchConditionDTO.pageSize} OFFSET #{offset}
+    </select>
+
+    <select id="countSearchNotices" resultType="int">
+        SELECT COUNT(*)
+        FROM notice
+        <where>
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyword != ''">
+                    AND ntitle LIKE CONCAT('%', #{searchConditionDTO.keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+
 </mapper>
