@@ -8,10 +8,10 @@
 	        <c:choose>
 			    <c:when test="${empty sessionScope.user}">
 			        <!-- 세션에 로그인 정보가 없는 경우 -->
-			        <li><a href="/login">로그인</a></li>
-			        <li><a href="/agree">회원가입</a></li>
-			        <li><a href="/raemian/faqs/">FAQ</a></li>
-			        <li><a href="/raemian/notices/">공지사항</a></li>
+			        <li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+			        <li><a href="${pageContext.request.contextPath}/agree">회원가입</a></li>
+			        <li><a href="${pageContext.request.contextPath}/">FAQ</a></li>
+			        <li><a href="${pageContext.request.contextPath}/notices/">공지사항</a></li>
 			    </c:when>
 			    <c:otherwise>
 			        <!-- 세션에 로그인 정보가 있는 경우 -->
@@ -20,7 +20,7 @@
 			        <a href="/logout">[로그아웃]</a>
 			        </a></li>
 			        <li><a href="/raemian/faqs/">FAQ</a></li>
-			        <li><a href="/raemian/notices/">공지사항</a></li>
+			        <li><a href="${pageContext.request.contextPath}/notices/">공지사항</a></li>
 			    </c:otherwise>
 			</c:choose>
 		    </ul>
@@ -31,9 +31,9 @@
                 <li>
                     <a href=""><span>사업정보</span></a>
                     <ul>
-                        <li><a href="/sub01">지구안내</a></li>
-                        <li><a href="/sub02">입지안내</a></li>
-                        <li><a href="/sub03">지역조감도</a></li>
+                        <li><a href="${pageContext.request.contextPath}/sub01">지구안내</a></li>
+                        <li><a href="${pageContext.request.contextPath}/sub02">입지안내</a></li>
+                        <li><a href="${pageContext.request.contextPath}/sub03">지역조감도</a></li>
                     </ul>
                 </li>
                 <li>
