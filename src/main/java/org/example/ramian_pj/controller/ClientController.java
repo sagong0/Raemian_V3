@@ -175,4 +175,9 @@ public class ClientController {
         responseMap.put("message", "인증 성공!");
         return ResponseEntity.ok(responseMap);
     }
+
+    @GetMapping("/notices")
+    public String noticeBoard(){
+        return "client/notice";
+    }
 }
