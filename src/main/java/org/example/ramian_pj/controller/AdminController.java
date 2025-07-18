@@ -140,7 +140,12 @@ public class AdminController {
      * 공지사항
      */
     @GetMapping("/notice")
-    public String noticeMain() {
+    public String noticeMain(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
+        PageDTO noticePageInfo = noticeService.getPagedNotices(searchConditionDTO);
+
+        model.addAttribute("noticePageInfo", noticePageInfo);
+        model.addAttribute("searchConDTO", searchConditionDTO);
+
         return "/admin/notice_main";
     }
 
@@ -152,18 +157,18 @@ public class AdminController {
 
     @PostMapping("/notice/write")
     public String noticeWrite(
-            @ModelAttribute NoticeDTO noticeDTO
+            @ModelAttribute NoticeDTO noticeDTO,
+            Model model
     ) {
-
         MultipartFile file = noticeDTO.getNfile();
-
         // 파일 저장위치 TODO -> CDN 경로 수정 필요
         String uploadDir = "D:/temp/";
 
         try{
             // 1) 공지사항 먼저 일단 저장 -> notice_id 생성위해 ( 외래키 )
-            log.info("noticeDTO = ", noticeDTO);
             noticeService.saveNotice(noticeDTO);
+            log.info("생성된 noticeId = {}", noticeDTO.getNoticeId()); // 여기가 0이면 문제!
+
 
             // 2) 파일이 존재 할 경우만 처리
             if(file != null && !file.isEmpty()){
@@ -190,11 +195,23 @@ public class AdminController {
         }
         catch (IOException e){
             e.printStackTrace();
-            return "redirect:/admin/notice/write?error=true";
+            return "redirect:/notice/write?error=true";
         }
 
 
-        return "redirect:/admin/notice";
+        return "redirect:/notice";
     }
 
+
+    @PostMapping("/notice/delete")
+    @ResponseBody
+    public String noticeDel(@RequestParam String nid) {
+        int resultSign = noticeService.deleteNotice(nid);
+        log.info("resultSign = {}", resultSign);
+        if(resultSign <= 0){
+            return "NO_OK";
+        }
+
+        return "OK";
+    }
 }

@@ -12,7 +12,7 @@ public class SearchConditionDTO {
 
     private String sortBy = "userid";
 
-    private String order = "asc";
+    private String order = "desc";
     
     private int page = 1;
     

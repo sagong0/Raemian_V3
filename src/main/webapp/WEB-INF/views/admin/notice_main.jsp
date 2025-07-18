@@ -28,8 +28,8 @@
                     <ol>
                         <li>공지사항 검색</li>
                         <li>
-                            <input type="text" id="searchWord" class="search_input">
-                            <input type="button" value="검색" onclick="searchByTitle();" class="datebtn">
+                            <input type="text" name="keyword" id="keyword" class="search_input">
+                            <input type="button" value="검색"  id="searchBtn" class="datebtn" onclick="searchNotice()">
                         </li>
                         <li></li>
                         <li></li>
@@ -46,24 +46,29 @@
                         <li>삭제</li>
                     </ul>
 
-                    <c:if test="${not empty notices}">
-                        <c:forEach var="notice" items="${notices}" varStatus="loop">
+                    <c:if test="${not empty noticePageInfo}">
+                        <c:forEach var="notice" items="${noticePageInfo.list}" varStatus="loop">
                             <ul>
                                 <li>${loop.index+1}</li>
                                 <li style="text-align: left; justify-content: flex-start;"
-                                    onclick="notice_detail(${notice.nidx});">${notice.ntitle}</li>
-                                <li>${not empty notice.nfile ? 'O' : 'X'}</li>
-                                <li>${notice.ncount}</li>
-                                <li>${notice.nwriter}</li>
-                                <li>${notice.nindate}</li>
+                                    onclick="">${notice.ntitle}</li>
                                 <li>
-                                    <input type="button" onclick="notice_delete(${notice.nidx});" value="삭제"  class="delbtn">
+                                    <c:choose>
+                                        <c:when test="${not empty notice.fileInfo}">O</c:when>
+                                        <c:otherwise>X</c:otherwise>
+                                    </c:choose>
+                                </li>
+                                <li>${notice.nwriter}</li>
+                                <li>${notice.ncount}</li>
+                                <li>${notice.regDate}</li>
+                                <li>
+                                    <input type="button" onclick="del_notice(${notice.noticeId});" value="삭제"  class="delbtn">
                                 </li>
                             </ul>
                         </c:forEach>
                     </c:if>
 
-                    <c:if test="${empty notices}">
+                    <c:if test="${empty noticePageInfo}">
                         <ul class="nodatas">
                             <li>등록된 공지사항이 없습니다.</li>
                         </ul>
@@ -71,19 +76,30 @@
                     <span class="notice_btns">
        <input type="button" value="글쓰기" id="writeBtn" class="meno_btn2"></span>
                     <aside>
-                        <c:if test="${not empty notices}">
+                        <c:if test="${not empty noticePageInfo}">
                             <div class="page_number">
                                 <ul>
-                                    <c:set var="searchWord" value="${param.searchWord}" />
-                                    <!-- Page번호 시작 -->
-<%--                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">--%>
-<%--                                        <li style="color:white;"--%>
-<%--                                            onclick="noticePagination(${pNo},'${not empty searchWord ? searchWord : ''}');"--%>
-<%--                                            class="<c:if test='${param.currentPage eq pNo}'>active</c:if>">--%>
-<%--                                                ${pNo}--%>
-<%--                                        </li>--%>
-<%--                                    </c:forEach>--%>
-                                    <!-- Page번호 끝 -->
+                                    <%--   이전버튼--%>
+                                        <c:if test="${noticePageInfo.currentPage > 1}">
+                                            <li onclick="noticePagination('${noticePageInfo.currentPage - 1}',
+                                                    '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                                <a>←</a>
+                                            </li>
+                                        </c:if>
+                                        <!-- 현재 페이지 -->
+                                        <li class="active" onclick="noticePagination('${noticePageInfo.currentPage}',
+                                                '${empty searchConDTO.searchType ? '' : searchConDTO.searchType}',
+                                                '${empty searchConDTO.keyword ? '' : searchConDTO.keyword }')">
+                                            <a>${noticePageInfo.currentPage}</a>
+                                        </li>
+
+                                        <!-- 다음 버튼 -->
+                                        <c:if test="${noticePageInfo.currentPage * noticePageInfo.pageSize < noticePageInfo.totalCount}">
+                                            <li onclick="noticePagination('${noticePageInfo.currentPage + 1}',
+                                                    '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                                <a>→</a>
+                                            </li>
+                                        </c:if>
                                 </ul>
                             </div>
                         </c:if>

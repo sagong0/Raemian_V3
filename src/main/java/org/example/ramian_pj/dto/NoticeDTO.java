@@ -14,6 +14,9 @@ public class NoticeDTO {
     private String ncontent;
     private Date regDate;
 
+    // 조회수 카운트
+    private int ncount;
+
     // 업로드용
     private MultipartFile nfile;
 

@@ -3,8 +3,107 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.example.ramian_pj.mapper.NoticeMapper">
-    <insert id="saveNotice">
+    <insert id="saveNotice" parameterType="org.example.ramian_pj.dto.NoticeDTO" useGeneratedKeys="true"
+            keyProperty="noticeId">
         INSERT INTO notice (ntitle, nwriter, ncontent)
         VALUES (#{ntitle}, #{nwriter}, #{ncontent})
     </insert>
+
+    <insert id="saveNoticeFile" parameterType="org.example.ramian_pj.dto.NoticeFileDTO">
+        INSERT INTO notice_file (
+            notice_id,
+            file_name,
+            file_path,
+            file_size,
+            content_type
+        )
+        VALUES (
+                   #{noticeId},
+                   #{fileName},
+                   #{filePath},
+                   #{fileSize},
+                   #{contentType}
+               )
+    </insert>
+
+
+
+    <!--  File첨부 여부 위해 Notice 와 NoticeFile 테이블 LEFT JOIN  -->
+    <resultMap id="noticeResultMap" type="org.example.ramian_pj.dto.NoticeDTO">
+        <id property="noticeId" column="notice_id"/>
+        <result property="ntitle" column="ntitle"/>
+        <result property="nwriter" column="nwriter"/>
+        <result property="ncontent" column="ncontent"/>
+        <result property="ncount" column="ncount"/>
+        <result property="regDate" column="reg_date"/>
+
+        <association property="fileInfo" javaType="org.example.ramian_pj.dto.NoticeFileDTO">
+            <result property="fileId" column="file_id"/>
+            <result property="fileName" column="file_name"/>
+            <result property="filePath" column="file_path"/>
+            <result property="contentType" column="content_type"/>
+        </association>
+    </resultMap>
+
+
+    <select id="getAllNotices" resultMap="noticeResultMap">
+        select
+            n.notice_id,
+            n.ntitle,
+            n.nwriter,
+            n.ncontent,
+            n.ncount,
+            n.reg_date,
+            f.file_id,
+            f.file_name,
+            f.file_path,
+            f.content_type
+        FROM notice n
+        LEFT JOIN
+        notice_file f
+        on n.notice_id = f.notice_id
+        ORDER BY n.notice_id DESC;
+    </select>
+
+    <select id="getNoticesBySearchOption" resultMap="noticeResultMap">
+        SELECT
+        n.notice_id,
+        n.ntitle,
+        n.nwriter,
+        n.ncontent,
+        n.ncount,
+        n.reg_date,
+        f.file_id,
+        f.file_name,
+        f.file_path,
+        f.content_type
+        FROM notice n
+        LEFT JOIN notice_file f ON n.notice_id = f.notice_id
+        <where>
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyword != ''">
+                AND n.ntitle LIKE CONCAT('%', #{searchConditionDTO.keyword}, '%')
+            </if>
+        </where>
+        ORDER BY n.notice_id DESC
+        LIMIT #{searchConditionDTO.pageSize} OFFSET #{offset}
+    </select>
+
+    <select id="countSearchNotices" resultType="int">
+        SELECT COUNT(*)
+        FROM notice
+        <where>
+            <if test="searchConditionDTO.keyword != null and searchConditionDTO.keyword != ''">
+                    AND ntitle LIKE CONCAT('%', #{searchConditionDTO.keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteNotice">
+        DELETE
+        FROM notice
+        WHERE
+            notice_id = #{nid}
+    </delete>
+
+
 </mapper>

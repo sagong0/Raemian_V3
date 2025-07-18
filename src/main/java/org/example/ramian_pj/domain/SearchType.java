@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface SearchType {
+
+
+    // member 전용
     String USERNAME = "username";
     String USERID = "userid";
     String USER_TELL = "phone_number";
