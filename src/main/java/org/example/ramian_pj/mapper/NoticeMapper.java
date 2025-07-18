@@ -17,4 +17,6 @@ public interface NoticeMapper {
     List<NoticeDTO> getNoticesBySearchOption(@Param("searchConditionDTO") SearchConditionDTO searchConditionDTO, @Param("offset") int offset);
 
     int countSearchNotices(@Param("searchConditionDTO") SearchConditionDTO searchConditionDTO);
+
+    int deleteNotice(String nid);
 }

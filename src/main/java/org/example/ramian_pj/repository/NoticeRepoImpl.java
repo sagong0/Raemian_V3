@@ -42,4 +42,9 @@ public class NoticeRepoImpl implements NoticeRepository{
         return noticeMapper.countSearchNotices(searchConditionDTO);
     }
 
+    @Override
+    public int deleteNotice(String nid) {
+        return noticeMapper.deleteNotice(nid);
+    }
+
 }

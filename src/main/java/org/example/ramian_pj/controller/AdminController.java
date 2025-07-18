@@ -202,4 +202,14 @@ public class AdminController {
         return "redirect:/notice";
     }
 
+
+    @PostMapping("/notice/delete")
+    @ResponseBody
+    public String noticeDel(@RequestParam String nid) {
+        int resultSign = noticeService.deleteNotice(nid);
+
+        log.info("resultSign = {}", resultSign);
+
+        return "OK";
+    }
 }

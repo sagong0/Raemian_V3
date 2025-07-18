@@ -54,4 +54,8 @@ public class NoticeService {
         return new PageDTO(notices, totalCount, searchConditionDTO.getPage(), searchConditionDTO.getPageSize());
     }
 
+    public int deleteNotice(String nid){
+        return noticeRepository.deleteNotice(nid);
+    }
+
 }

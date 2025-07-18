@@ -98,5 +98,12 @@
         </where>
     </select>
 
+    <delete id="deleteNotice">
+        DELETE
+        FROM notice
+        WHERE
+            notice_id = #{nid}
+    </delete>
+
 
 </mapper>

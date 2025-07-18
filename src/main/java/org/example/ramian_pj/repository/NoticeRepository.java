@@ -17,4 +17,6 @@ public interface NoticeRepository {
     List<NoticeDTO> getNoticesBySearch(SearchConditionDTO searchConditionDTO, int offset);
 
     int countSearchNotices(SearchConditionDTO searchConditionDTO);
+
+    int deleteNotice(String nid);
 }
