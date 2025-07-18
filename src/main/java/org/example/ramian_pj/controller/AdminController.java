@@ -207,8 +207,10 @@ public class AdminController {
     @ResponseBody
     public String noticeDel(@RequestParam String nid) {
         int resultSign = noticeService.deleteNotice(nid);
-
         log.info("resultSign = {}", resultSign);
+        if(resultSign <= 0){
+            return "NO_OK";
+        }
 
         return "OK";
     }
