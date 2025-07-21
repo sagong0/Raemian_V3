@@ -66,7 +66,7 @@
         <c:forEach var="notice" items="${notices.list}" varStatus="loop">
           <ul>
             <li>${loop.index+1}</li>
-            <li style="text-align: left;">${notice.ntitle}</li>
+            <li style="text-align: left;" onclick="noticeDetail()">${notice.ntitle}</li>
             <li>${notice.ncount}</li>
             <li>${notice.nwriter}</li>
             <li>${notice.regDate}</li>
