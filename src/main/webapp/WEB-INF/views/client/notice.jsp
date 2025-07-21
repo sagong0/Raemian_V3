@@ -63,30 +63,48 @@
           <li>등록일</li>
         </ul>
 
-        <c:forEach var="notice" items="${notices}" varStatus="loop">
+        <c:forEach var="notice" items="${notices.list}" varStatus="loop">
           <ul>
             <li>${loop.index+1}</li>
             <li style="text-align: left;">${notice.ntitle}</li>
             <li>${notice.ncount}</li>
             <li>${notice.nwriter}</li>
-            <li>${notice.nindate}</li>
+            <li>${notice.regDate}</li>
           </ul>
         </c:forEach>
 
-        <span class="pages">
-          <ul style="display:flex; justify-content: center">
-            <c:set var="searchWord" value="${param.searchWord}" />
-            <!-- Page번호 시작 -->
-			<c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">
-				<li style="color:white;"
-                    onclick="noticePagination(${pNo},'${not empty searchWord ? searchWord : ''}');"
-                    class="<c:if test='${param.currentPage eq pNo}'>active</c:if>">
-                    ${pNo}
+        <c:if test="${not empty notices}">
+          <span class="pages">
+            <ul style="display:flex; justify-content: center">
+              <!-- Page번호 시작 -->
+              <%-- 이전 버튼 --%>
+              <c:if test="${notices.currentPage > 1}">
+                <li style="color: white"
+                    onclick="pageFn('${notices.currentPage - 1}',
+                        '${searchConDTO.searchType}', '${searchConDTO.keyword}')">
+                                                <a>←</a>
+                  </li>
+              </c:if>
+
+              <%--  현재 페이지--%>
+              <li class="active" style="color:white;"
+                  onclick="pageFn('${notices.currentPage}',
+                          '${empty searchConDTO.searchType ? '' : searchConDTO.searchType}'),
+                          ${empty searchConDTO.keyword ? '' : searchConDTO.keyword}">
+                <a style="color: white">${notices.currentPage}</a>
+              </li>
+
+              <!-- 다음버튼 -->
+              <c:if test="${notices.currentPage * notices.pageSize < notices.totalCount}">
+                <li onclick="pageFn('${notices.currentPage + 1}',
+                        '${searchConDTO.searchType}', '${searchConDTO.keyword}')"
+                style="color: white">
+                                                <a>→</a>
                 </li>
-            </c:forEach>
-            <!-- Page번호 끝 -->
-          </ul>
-        </span>
+              </c:if>
+            </ul>
+          </span>
+        </c:if>
 
         <span class="search_css">
         <input type="text" id="searchWord" class="search_in" placeholder="검색할 제목을 입력하세요">
@@ -97,9 +115,12 @@
       <!-- 서브 화면 종료 -->
     </div>
     <!-- 카피라이터 시작 -->
-    <%@include file="/WEB-INF/views/client/fragments/footer.jsp" %>
+    <%@include file="/WEB-INF/views/client/fragments/footer.jsp"%>
     <!-- 카피라이터 종료 -->
-
+    <script>
+      const ctx = '${pageContext.request.contextPath}';
+    </script>
+    <script src="${pageContext.request.contextPath}/static/js/client/client_notice.js?v=<%=System.currentTimeMillis()%>"></script>
   </div>
 </div>
 </body>
