@@ -93,7 +93,6 @@
                           ${empty searchConDTO.keyword ? '' : searchConDTO.keyword}">
                 <a style="color: white">${notices.currentPage}</a>
               </li>
-
               <!-- 다음버튼 -->
               <c:if test="${notices.currentPage * notices.pageSize < notices.totalCount}">
                 <li onclick="pageFn('${notices.currentPage + 1}',
@@ -108,7 +107,7 @@
 
         <span class="search_css">
         <input type="text" id="searchWord" class="search_in" placeholder="검색할 제목을 입력하세요">
-        <input type="submit" onclick="" value="검색" class="search_btn">
+        <input type="submit" onclick="searchFn()" value="검색" class="search_btn">
         </span>
       </fieldset>
 
