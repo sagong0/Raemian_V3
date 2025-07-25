@@ -200,7 +200,7 @@ public class ClientController {
      */
     @GetMapping("/reserve")
     public String clientReserveForm(){
-        return "";
+        return "client/reserve_in";
     }
 
 
