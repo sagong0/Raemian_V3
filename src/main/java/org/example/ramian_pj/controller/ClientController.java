@@ -193,4 +193,17 @@ public class ClientController {
 
         return "client/notice";
     }
+
+
+    /**
+     * 예약
+     */
+    @GetMapping("/reserve")
+    public String clientReserveForm(){
+        return "";
+    }
+
+
+
+
 }
