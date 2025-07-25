@@ -71,11 +71,11 @@
         <ol class="mbinfos">
         <li><em class="ck_font">■</em> 아이디</li>
         <li>
-        <input type="text" name="rid" value="${sessionScope.mainMember.mid}" class="mbinput1" readonly>
+        <input type="text" name="rid" value="${sessionScope.user.mid}" class="mbinput1" readonly>
         </li>
         <li><em class="ck_font">■</em> 고객명</li>
         <li>
-        <input type="text" name="rname" value="${sessionScope.mainMember.mname}" class="mbinput2" readonly>
+        <input type="text" name="rname" value="${sessionScope.user.mname}" class="mbinput2" readonly>
         </li>
         <li><em class="ck_font">■</em> 예약일자</li>
         <li>
@@ -96,7 +96,7 @@
         </li>
         <li><em class="ck_font">■</em> 휴대전화번호</li>
         <li>
-        <input type="text" name="rtel" value="${sessionScope.mainMember.mtel}" class="mbinput2" readonly>
+        <input type="text" name="rtel" value="${sessionScope.user.mtel}" class="mbinput2" readonly>
         </li>
         <li><em class="ck_font">■</em> 인원수</li>
         <li>
@@ -119,7 +119,7 @@
 
         <%@ include file="/WEB-INF/views/client/fragments/footer.jsp"%>
 
-        <script src="/raemian/js/reserve/client_reserve_in.js?v=<%=System.currentTimeMillis()%>"></script>
+        <script src="${pageContext.request.contextPath}/static/js/client/client_reserve_in.js?v=<%=System.currentTimeMillis()%>"></script>
         </div>
     </div>
 </body>
