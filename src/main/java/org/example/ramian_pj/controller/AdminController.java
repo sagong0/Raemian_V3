@@ -149,6 +149,19 @@ public class AdminController {
         return "/admin/notice_main";
     }
 
+    /**
+     * 공지사항
+     * 상세 페이지
+     */
+    @GetMapping("/notice/{nidx}")
+    public String noticeDetail(Long nidx){
+        log.info("nidx = {}", nidx);
+        return "/admin/notice_detail";
+    }
+
+
+
+
     @GetMapping("/notice/write")
     public String noticeWriteForm() {
 

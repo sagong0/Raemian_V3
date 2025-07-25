@@ -42,3 +42,12 @@ function del_notice(nid){
             });
     }
 }
+
+/**
+ * 상세 페이지
+ * @param nidx
+ */
+function noticeDetail(nidx){
+    const url = `${ctx}/admin/notice/` + nidx;
+    window.location.href = url;
+}

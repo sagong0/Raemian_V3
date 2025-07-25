@@ -2,8 +2,11 @@ package org.example.ramian_pj.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.dto.PageDTO;
+import org.example.ramian_pj.dto.SearchConditionDTO;
 import org.example.ramian_pj.dto.UserJoinDTO;
 import org.example.ramian_pj.dto.UserLoginDTO;
+import org.example.ramian_pj.service.NoticeService;
 import org.example.ramian_pj.service.UserService;
 import org.example.ramian_pj.util.DummyCodeStorage;
 import org.slf4j.Logger;
@@ -32,6 +35,7 @@ public class ClientController {
     private final Logger log = LoggerFactory.getLogger(ClientController.class);
 
     private final UserService userService;
+    private final NoticeService noticeService;
 
     @GetMapping("")
     public String index() {
@@ -155,7 +159,10 @@ public class ClientController {
     }
 
     @PostMapping("/checkDummyCode")
-    public ResponseEntity<Map<String,String >> checkDummyCode(@RequestParam String phoneNumber, @RequestParam String inputCode){
+    public ResponseEntity<Map<String,String >> checkDummyCode(
+            @RequestParam String phoneNumber,
+            @RequestParam String inputCode){
+
         log.info("phoneNumber : {}, inputCode : {}", phoneNumber, inputCode);
         HashMap<String, String> responseMap = new HashMap<>();
 
@@ -175,4 +182,28 @@ public class ClientController {
         responseMap.put("message", "인증 성공!");
         return ResponseEntity.ok(responseMap);
     }
+
+    @GetMapping("/notices")
+    public String noticeBoard(@ModelAttribute SearchConditionDTO searchConditionDTO,
+                              Model model){
+        PageDTO pagedNotices = noticeService.getPagedNotices(searchConditionDTO);
+
+        model.addAttribute("notices", pagedNotices);
+        model.addAttribute("searchConDTO", searchConditionDTO);
+
+        return "client/notice";
+    }
+
+
+    /**
+     * 예약
+     */
+    @GetMapping("/reserve")
+    public String clientReserveForm(){
+        return "";
+    }
+
+
+
+
 }

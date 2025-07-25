@@ -51,7 +51,7 @@
                             <ul>
                                 <li>${loop.index+1}</li>
                                 <li style="text-align: left; justify-content: flex-start;"
-                                    onclick="">${notice.ntitle}</li>
+                                    onclick="noticeDetail(${notice.noticeId})">${notice.ntitle}</li>
                                 <li>
                                     <c:choose>
                                         <c:when test="${not empty notice.fileInfo}">O</c:when>
