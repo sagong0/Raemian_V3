@@ -119,6 +119,9 @@
 
         <%@ include file="/WEB-INF/views/client/fragments/footer.jsp"%>
 
+        <script>
+            const ctx = "${pageContext.request.contextPath}";
+        </script>
         <script src="${pageContext.request.contextPath}/static/js/client/client_reserve_in.js?v=<%=System.currentTimeMillis()%>"></script>
         </div>
     </div>

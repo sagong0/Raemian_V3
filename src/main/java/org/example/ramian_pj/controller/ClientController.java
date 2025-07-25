@@ -199,10 +199,14 @@ public class ClientController {
      * 예약
      */
     @GetMapping("/reserve")
-    public String clientReserveForm(){
+    public String clientReserve(){
         return "client/reserve_in";
     }
 
+    @PostMapping("/reserve")
+    public String clientReserveForm(){
+        return "";
+    }
 
 
 
