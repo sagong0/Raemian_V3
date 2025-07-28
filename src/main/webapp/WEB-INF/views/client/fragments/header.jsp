@@ -67,9 +67,9 @@
                 <li>
                     <a href=""><span>사전방문예약</span></a>
                     <ul>
-                        <li><a href="/raemian/client/reserve">사전방문예약</a></li>
-                        <li><a href="/raemian/client/reserve/modify">사전방문예약확인</a></li>
-                        <li><a href="/raemian/client/reserve/cancel">사전방문예약취소</a></li>
+                        <li><a href="${pageContext.request.contextPath}/reserve">사전방문예약</a></li>
+                        <li><a href="${pageContext.request.contextPath}/reserve/modify">사전방문예약확인</a></li>
+                        <li><a href="${pageContext.request.contextPath}/reserve/cancel">사전방문예약취소</a></li>
                     </ul>
                 </li>
             </nav>
