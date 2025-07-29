@@ -15,7 +15,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         UserJoinDTO user = (UserJoinDTO) session.getAttribute("user");
 
         if(user == null){
-            response.sendRedirect(request.getContextPath() + "/");
+            session.setAttribute("msg","로그인 후 이용 가능한 서비스입니다.");
+            response.sendRedirect(request.getContextPath() + "/login");
             return false;
         }
 
