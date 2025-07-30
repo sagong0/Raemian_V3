@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserJoinDTO {
+    private int id;
     private String mname;
     private String mid;
     private String mpw;

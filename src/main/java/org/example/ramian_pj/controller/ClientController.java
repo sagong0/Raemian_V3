@@ -2,11 +2,9 @@ package org.example.ramian_pj.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.ramian_pj.dto.PageDTO;
-import org.example.ramian_pj.dto.SearchConditionDTO;
-import org.example.ramian_pj.dto.UserJoinDTO;
-import org.example.ramian_pj.dto.UserLoginDTO;
+import org.example.ramian_pj.dto.*;
 import org.example.ramian_pj.service.NoticeService;
+import org.example.ramian_pj.service.ReserveService;
 import org.example.ramian_pj.service.UserService;
 import org.example.ramian_pj.util.DummyCodeStorage;
 import org.slf4j.Logger;
@@ -36,6 +34,7 @@ public class ClientController {
 
     private final UserService userService;
     private final NoticeService noticeService;
+    private final ReserveService reserveService;
 
     @GetMapping("")
     public String index() {
@@ -100,7 +99,6 @@ public class ClientController {
         }
 
         UserJoinDTO loggedUser = userService.userLogin(userLoginDTO);
-        log.info("loggedUser = {}", loggedUser);
 
         // TODO 상위 로그인에서 나온 user 가 null or NOT NULL 로직
         if(loggedUser == null){
@@ -203,11 +201,26 @@ public class ClientController {
         return "client/reserve_in";
     }
 
+    @ResponseBody
     @PostMapping("/reserve")
-    public String clientReserveForm(){
-        return "";
+    public String clientReserveForm(
+            @ModelAttribute ReserveDTO reserveDTO,
+            HttpSession session){
+
+        UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
+        if(loginUser == null){
+            return "no_user";
+        }
+
+        log.info("loginUser.getId() = {}", loginUser.getId());
+        reserveDTO.setMemberId(loginUser.getId());
+
+
+        // 예약 등록 (service로 위임 가능)
+        int result = reserveService.saveReserve(reserveDTO);
+
+
+        return result > 0 ? "success" : "fail";
     }
-
-
 
 }

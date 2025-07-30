@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ReserveDTO {
-    private int id;
+    // client_member.id 외래키 관계
     private int memberId;
     // 예약 일자
     private String rdate;
