@@ -216,11 +216,16 @@ public class ClientController {
         reserveDTO.setMemberId(loginUser.getId());
 
 
-        // 예약 등록 (service로 위임 가능)
+        // 예약 등록
         int result = reserveService.saveReserve(reserveDTO);
 
 
         return result > 0 ? "success" : "fail";
+    }
+
+    @GetMapping("/reserve/modify")
+    public String clientReserveModifyForm(){
+        return "client/reserve_modify";
     }
 
 }
