@@ -11,5 +11,9 @@ public class ReserveDTO {
     // 예약 시간
     private String rtime;
     // 예약 인원
-    private int rCount;
+    private int rcount;
+
+
+    // 수정 횟수
+    private int modify_count;
 }

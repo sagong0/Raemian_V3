@@ -21,4 +21,18 @@
                  )
     </insert>
 
+    <select id="getReserveByMemberId" resultType="org.example.ramian_pj.dto.ReserveDTO">
+        SELECT
+            member_id,
+            reserve_date AS rdate,
+            reserve_time AS rtime,
+            rcount,
+            modify_count
+        FROM reserve
+        WHERE
+            member_id=#{memberId}
+        ORDER BY reserve_date DESC
+        LIMIT 1;
+    </select>
+
 </mapper>

@@ -17,6 +17,6 @@ public class ReserveService {
 
     public ReserveDTO getReservationByMemberId(int memberId) {
 
-        return null;
+        return reserveRepository.getReserveByMemberId(memberId);
     }
 }

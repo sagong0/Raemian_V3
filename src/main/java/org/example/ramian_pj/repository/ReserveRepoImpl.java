@@ -16,4 +16,9 @@ public class ReserveRepoImpl implements ReserveRepository{
 
         return reserveMapper.saveReserve(reserveDTO);
     }
+
+    @Override
+    public ReserveDTO getReserveByMemberId(int memberId) {
+        return reserveMapper.getReserveByMemberId(memberId);
+    }
 }

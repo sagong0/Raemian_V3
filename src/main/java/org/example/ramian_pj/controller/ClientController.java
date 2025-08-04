@@ -232,6 +232,7 @@ public class ClientController {
         }
 
         ReserveDTO reserve = reserveService.getReservationByMemberId(loginUser.getId());
+        log.info("reserve = {}", reserve);
         model.addAttribute("reserve", reserve);
 
         return "client/reserve_modify";

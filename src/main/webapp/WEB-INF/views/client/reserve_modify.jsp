@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,20 +9,29 @@
     <meta property="og:title" content="인천검단 레미안">
     <title>인천검단 레미안</title>
     <!-- css -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/normalize.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/slick.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/swiper.min.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/bootstrap.min.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/cal-style.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/common.css?v=<%=System.currentTimeMillis()%>">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/client/sweetalert.min.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/normalize.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/slick.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/swiper.min.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/bootstrap.min.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/cal-style.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/common.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/css/client/sweetalert.min.css?v=<%=System.currentTimeMillis()%>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js?v=<%=System.currentTimeMillis()%>"></script>
     <script src="${pageContext.request.contextPath}/raemian/client/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/top.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/top.css?v=<%=System.currentTimeMillis()%>">
 
     <!-- 추가된 css -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/new_member.css?v=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/client/new_member.css?v=<%=System.currentTimeMillis()%>">
     <!-- 추가된 css -->
 </head>
 
@@ -30,7 +39,7 @@
 <!-- wrap -->
 <div id="wrap">
     <!-- header 로고 & 대메뉴,소메뉴 -->
-    <%@ include file="/WEB-INF/views/client/fragments/header.jsp"%>
+    <%@ include file="/WEB-INF/views/client/fragments/header.jsp" %>
     <!-- header 로고 & 대메뉴,소메뉴 끝 -->
 
 
@@ -75,45 +84,45 @@
         <li>
         <select class="mbinput1" name="rtime">
 		    <option value="">시간선택</option>
-		    <option value="09:00" <c:if test="${reserve.rtime eq '09:00'}">selected</c:if>>09:00</option>
-		    <option value="10:00" <c:if test="${reserve.rtime eq '10:00'}">selected</c:if>>10:00</option>
-		    <option value="11:00" <c:if test="${reserve.rtime eq '11:00'}">selected</c:if>>11:00</option>
-		    <option value="14:00" <c:if test="${reserve.rtime eq '14:00'}">selected</c:if>>14:00</option>
-		    <option value="15:00" <c:if test="${reserve.rtime eq '15:00'}">selected</c:if>>15:00</option>
-		    <option value="16:00" <c:if test="${reserve.rtime eq '16:00'}">selected</c:if>>16:00</option>
-		    <option value="17:00" <c:if test="${reserve.rtime eq '17:00'}">selected</c:if>>17:00</option>
+		    <option value="09:00" <c:if test="${reserve.rtime eq '09:00:00'}">selected</c:if>>09:00</option>
+		    <option value="10:00" <c:if test="${reserve.rtime eq '10:00:00'}">selected</c:if>>10:00</option>
+		    <option value="11:00" <c:if test="${reserve.rtime eq '11:00:00'}">selected</c:if>>11:00</option>
+		    <option value="14:00" <c:if test="${reserve.rtime eq '14:00:00'}">selected</c:if>>14:00</option>
+		    <option value="15:00" <c:if test="${reserve.rtime eq '15:00:00'}">selected</c:if>>15:00</option>
+		    <option value="16:00" <c:if test="${reserve.rtime eq '16:00:00'}">selected</c:if>>16:00</option>
+		    <option value="17:00" <c:if test="${reserve.rtime eq '17:00:00'}">selected</c:if>>17:00</option>
 		</select>
         </li>
         <li><em class="ck_font">■</em> 휴대전화번호</li>
         <li>
-        <input type="text" name="rtel" value="${sessionScope.mainMember.mtel}" class="mbinput2" readonly>
+        <input type="text" name="rtel" value="${sessionScope.user.mtel}" class="mbinput2" readonly>
         </li>
 
-        <c:set var="rcount" value="${empty reserve ? '' : reserve.rcount}" />
+        <c:set var="rCount" value="${reserve.rcount}"/>
 		<li><em class="ck_font">■</em> 인원수</li>
 		<li>
 		    <label class="ck_label">
-		        <input type="radio" name="rcount" value="1" class="ck_label" <c:if test="${rcount eq '1'}">checked</c:if>> 1명
+		        <input type="radio" name="rCount" value="1" class="ck_label" <c:if test="${rCount eq 1}">checked</c:if>> 1명
 		    </label>
 		    <label class="ck_label">
-		        <input type="radio" name="rcount" value="2" class="ck_label" <c:if test="${rcount eq '2'}">checked</c:if>> 2명
+		        <input type="radio" name="rCount" value="2" class="ck_label" <c:if test="${rCount eq 2}">checked</c:if>> 2명
 		    </label>
 		</li>
 
         </ol>
         </span>
                     <span class="span_buttons">
-        <c:if test="${reserve.rCount < 1}">
+        <c:if test="${reserve.modify_count < 1}">
             <button type="button" id="modifyBtn" class="next_btn1_1">예약수정</button>
         </c:if>
         </span>
                 </fieldset>
             </form>
 
-            </div>
-
-        <%@ include file="/WEB-INF/views/client/fragments/footer.jsp"%>
         </div>
+
+        <%@ include file="/WEB-INF/views/client/fragments/footer.jsp" %>
     </div>
+</div>
 </body>
 </html>
