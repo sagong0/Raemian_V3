@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.ramian_pj.mapper.ReserveMapper">
+    <insert id="saveReserve" parameterType="org.example.ramian_pj.dto.ReserveDTO" >
+        INSERT INTO reserve (
+            member_id,
+            reserve_date,
+            reserve_time,
+            rcount,
+            created_at,
+            updated_at
+        ) VALUES (
+                     #{memberId},
+                     #{rdate},
+                     #{rtime},
+                     #{rCount},
+                     NOW(),
+                     NOW()
+                 )
+    </insert>
+
+    <select id="getReserveByMemberId" resultType="org.example.ramian_pj.dto.ReserveDTO">
+        SELECT
+            member_id,
+            reserve_date AS rdate,
+            reserve_time AS rtime,
+            rcount,
+            modify_count
+        FROM reserve
+        WHERE
+            member_id=#{memberId}
+        ORDER BY reserve_date DESC
+        LIMIT 1;
+    </select>
+
+</mapper>

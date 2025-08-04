@@ -12,9 +12,9 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
     }
 
     // 2. 인원수 체크 여부
-    const rcount = form.querySelector('input[name="rcount"]:checked');
+    const rCount = form.querySelector('input[name="rCount"]:checked');
 
-    if (!rcount) {
+    if (!rCount) {
         alert('인원 수를 선택해주세요.');
         return;
     }
@@ -34,14 +34,29 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
     }
 
     // 4. 예약일자 오늘 이전일 경우 반려
-    const selectedDate = new Date(rdate);
     const today = new Date();
-    today.setDate(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
 
-    if(selectedDate < today){
-        alert("오늘 이전 날짜로는 예약이 불가능합니다.");
-        return;
+    const selectedDate = new Date(rdate);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate.getTime() === today.getTime()) {
+        // rtime이 "14:00" 형태라고 가정
+        const now = new Date();
+        const [hh, mm] = rtime.split(':');
+        const reserveDateTime = new Date();
+        reserveDateTime.setHours(Number(hh), Number(mm), 0, 0);
+        if (reserveDateTime <= now) {
+            alert('현재 시간 이후의 예약시간만 선택할 수 있습니다.');
+            return;
+        }
     }
+
+    // 오늘 날짜 -> 현재 이전 시간 X
+    if(selectedDate.getTime() === today.getTime()){
+        const now = new Date();
+    }
+
 
     // 모든 검증 통과
     // 5. Form 데이터 전송 (AJAX)
@@ -58,8 +73,15 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
             throw new Error('예약 요청 실패');
         })
         .then(result => {
-            alert('예약이 완료되었습니다.');
-            window.location.href = `${ctx}/`; // 메인 페이지로 이동
+            if(result === "success"){
+                alert('예약이 완료되었습니다.');
+                window.location.href = `${ctx}/`; // 메인 페이지로 이동
+            }
+            else {
+                console.log(result);
+                alert("예약 실패...");
+            }
+
         })
         .catch(error => {
             console.error(error);

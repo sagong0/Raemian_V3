@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class UserJoinDTO {
+    // client_member - ID
+    private int id;
     private String mname;
     private String mid;
     private String mpw;
