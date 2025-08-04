@@ -14,4 +14,9 @@ public class ReserveService {
     public int saveReserve(ReserveDTO reserveDTO) {
         return reserveRepository.saveReserve(reserveDTO);
     }
+
+    public ReserveDTO getReservationByMemberId(int memberId) {
+
+        return null;
+    }
 }

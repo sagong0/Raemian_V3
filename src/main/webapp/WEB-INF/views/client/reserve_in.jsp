@@ -101,10 +101,10 @@
         <li><em class="ck_font">■</em> 인원수</li>
         <li>
         <label class="ck_label">
-        <input type="radio" checked="checked" value="1" name="rcount" class="ck_label"> 1명
+        <input type="radio" checked="checked" value="1" name="rCount" class="ck_label"> 1명
         </label>
         <label class="ck_label">
-        <input type="radio" name="rcount" value="2" class="ck_label"> 2명
+        <input type="radio" name="rCount" value="2" class="ck_label"> 2명
         </label>
         </li>
         </ol>

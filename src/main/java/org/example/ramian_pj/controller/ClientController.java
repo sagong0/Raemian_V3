@@ -219,13 +219,21 @@ public class ClientController {
         // 예약 등록
         int result = reserveService.saveReserve(reserveDTO);
 
-
         return result > 0 ? "success" : "fail";
     }
 
     @GetMapping("/reserve/modify")
-    public String clientReserveModifyForm(){
+    public String clientReserveModifyForm(HttpSession session, Model model){
+        UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
+
+        // 세션 NULL -> Login Page Redirect
+        if(loginUser == null){
+            return "redirect:/login";
+        }
+
+        ReserveDTO reserve = reserveService.getReservationByMemberId(loginUser.getId());
+        model.addAttribute("reserve", reserve);
+
         return "client/reserve_modify";
     }
-
 }

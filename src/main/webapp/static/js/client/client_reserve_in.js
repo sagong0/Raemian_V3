@@ -12,9 +12,9 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
     }
 
     // 2. 인원수 체크 여부
-    const rcount = form.querySelector('input[name="rcount"]:checked');
+    const rCount = form.querySelector('input[name="rCount"]:checked');
 
-    if (!rcount) {
+    if (!rCount) {
         alert('인원 수를 선택해주세요.');
         return;
     }

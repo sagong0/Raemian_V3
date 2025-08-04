@@ -103,7 +103,7 @@
         </ol>
         </span>
                     <span class="span_buttons">
-        <c:if test="${reserve.rchance eq 1}">
+        <c:if test="${reserve.rCount < 1}">
             <button type="button" id="modifyBtn" class="next_btn1_1">예약수정</button>
         </c:if>
         </span>
