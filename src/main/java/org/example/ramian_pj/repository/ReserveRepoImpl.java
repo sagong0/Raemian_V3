@@ -21,4 +21,9 @@ public class ReserveRepoImpl implements ReserveRepository{
     public ReserveDTO getReserveByMemberId(int memberId) {
         return reserveMapper.getReserveByMemberId(memberId);
     }
+
+    @Override
+    public int countReserveByMemberId(int memberId) {
+        return reserveMapper.countReserveByMemberId(memberId);
+    }
 }

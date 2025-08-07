@@ -73,9 +73,16 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
             throw new Error('예약 요청 실패');
         })
         .then(result => {
+            console.log("************");
+            console.log(result);
+            console.log("************");
             if(result === "success"){
                 alert('예약이 완료되었습니다.');
                 window.location.href = `${ctx}/`; // 메인 페이지로 이동
+            }
+            else if(result === "exist"){
+                alert("이미 예약된 회원입니다.");
+                window.location.href = `${ctx}/`;
             }
             else {
                 console.log(result);
