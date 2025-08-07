@@ -3,6 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.example.ramian_pj.mapper.ReserveMapper">
+
+    <select id="countReserveByMemberId" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM reserve
+        WHERE member_id = #{memberId}
+          AND status = 'ACTIVE'
+    </select>
+
+
     <insert id="saveReserve" parameterType="org.example.ramian_pj.dto.ReserveDTO" >
         INSERT INTO reserve (
             member_id,
@@ -31,6 +40,8 @@
         FROM reserve
         WHERE
             member_id=#{memberId}
+        AND
+            status = 'ACTIVE'
         ORDER BY reserve_date DESC
         LIMIT 1;
     </select>

@@ -6,4 +6,6 @@ public interface ReserveRepository {
     int saveReserve(ReserveDTO reserveDTO);
 
     ReserveDTO getReserveByMemberId(int memberId);
+
+    int countReserveByMemberId(int memberId);
 }

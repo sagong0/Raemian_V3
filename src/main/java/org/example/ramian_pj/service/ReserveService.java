@@ -19,4 +19,9 @@ public class ReserveService {
 
         return reserveRepository.getReserveByMemberId(memberId);
     }
+
+    public boolean hasActiveReserve(int memberId) {
+
+        return reserveRepository.countReserveByMemberId(memberId) > 0;
+    }
 }

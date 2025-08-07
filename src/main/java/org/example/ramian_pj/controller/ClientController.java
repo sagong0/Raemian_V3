@@ -211,11 +211,17 @@ public class ClientController {
         if(loginUser == null){
             return "no_user";
         }
-
-        log.info("loginUser.getId() = {}", loginUser.getId());
         reserveDTO.setMemberId(loginUser.getId());
 
 
+        // 예약 여부 체크 (해당 member_id의 status - ACTIVE 갯수  --> 1 이상이면 이미 예약한거)
+        boolean reserveStatus = reserveService.hasActiveReserve(reserveDTO.getMemberId());
+        // 이미 예약 여부 O  (STATUS - ACTIVE) 상태
+        if (reserveStatus) {
+            return "exist";
+        }
+
+        // reservation => null : 처음 예약
         // 예약 등록
         int result = reserveService.saveReserve(reserveDTO);
 
