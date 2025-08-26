@@ -24,7 +24,7 @@
                      #{memberId},
                      #{rdate},
                      #{rtime},
-                     #{rCount},
+                     #{rcount},
                      NOW(),
                      NOW()
                  )
