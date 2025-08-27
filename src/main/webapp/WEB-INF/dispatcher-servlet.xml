@@ -30,7 +30,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!-- 🔽 여기에 추가 -->
+
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/reserve/**"/>

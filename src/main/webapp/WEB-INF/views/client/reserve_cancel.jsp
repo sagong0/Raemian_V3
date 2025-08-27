@@ -112,9 +112,7 @@
         </ol>
         </span>
         <span class="span_buttons">
-        <c:if test="${reserve.modify_count < 1}">
-            <button type="button" id="modifyBtn" class="next_btn1_1">예약수정</button>
-        </c:if>
+            <button type="button" id="canacelBtn" class="next_btn1_1">예약취소</button>
         </span>
                 </fieldset>
             </form>

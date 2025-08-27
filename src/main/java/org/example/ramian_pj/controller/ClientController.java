@@ -230,7 +230,9 @@ public class ClientController {
     }
 
     @GetMapping("/reserve/modify")
-    public String clientReserveModifyForm(HttpSession session, Model model){
+    public String clientReserveModifyForm(HttpSession session,
+                                          Model model,
+                                          RedirectAttributes redirectAttributes){
         UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
 
         // 세션 NULL -> Login Page Redirect
@@ -238,10 +240,29 @@ public class ClientController {
             return "redirect:/login";
         }
 
+        // 예약 조회
         ReserveDTO reserve = reserveService.getReservationByMemberId(loginUser.getId());
         log.info("reserve = {}", reserve);
-        model.addAttribute("reserve", reserve);
 
+        // 예약 없으면 -> 예약 페이지 redirect
+        if(reserve == null){
+            redirectAttributes.addFlashAttribute("msg","예약 후 사용 가능한 기능입니다." );
+            return "redirect:/reserve";
+        }
+
+        // 예약 횟수 1회 제한
+        if(reserve.getModify_count() >= 1){
+            redirectAttributes.addFlashAttribute("msg", "예약 수정은 1회만 가능합니다.\n 예약 취소 후 다시 예약해주세요.");
+            return "redirect:/reserve/cancel";
+        }
+
+        model.addAttribute("reserve", reserve);
         return "client/reserve_modify";
+    }
+
+    @GetMapping("/reserve/cancel")
+    public String reserveCancelForm(Model model,
+                                    RedirectAttributes redirectAttributes){
+        return "client/reserve_cancel";
     }
 }
