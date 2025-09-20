@@ -1,4 +1,6 @@
-document.getElementById("reserveBtn").addEventListener("click", () => {
+document.getElementById("reserveBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+
     const form = document.getElementById("reserveForm");
 
     // 세션 값 확인
@@ -12,9 +14,9 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
     }
 
     // 2. 인원수 체크 여부
-    const rCount = form.querySelector('input[name="rCount"]:checked');
+    const rcount = form.querySelector('input[name="rcount"]:checked');
 
-    if (!rCount) {
+    if (!rcount) {
         alert('인원 수를 선택해주세요.');
         return;
     }
@@ -33,29 +35,31 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
         return;
     }
 
-    // 4. 예약일자 오늘 이전일 경우 반려
+    // 1) UTC 사용 금지 - 로컬 타임존
+    const [yy, mm, dd] = rdate.split("-").map(Number);
+    const selectedDate = new Date(yy, mm - 1, dd);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const selectedDate = new Date(rdate);
-    selectedDate.setHours(0, 0, 0, 0);
+    // 2) 과거ㅏ 날짜 차단
+    if(selectedDate < today){
+        alert("오늘 이전 날짜는 예약 불가능합니다.");
+        return;
+    }
 
-    if (selectedDate.getTime() === today.getTime()) {
-        // rtime이 "14:00" 형태라고 가정
+    // 3) 같은 날 ? -> 현재 시간 이후만 허용
+    if(selectedDate.getTime() === today.getTime()){
+        const [hh,mi] = rtime.split(":").map(Number);
         const now = new Date();
-        const [hh, mm] = rtime.split(':');
         const reserveDateTime = new Date();
-        reserveDateTime.setHours(Number(hh), Number(mm), 0, 0);
-        if (reserveDateTime <= now) {
-            alert('현재 시간 이후의 예약시간만 선택할 수 있습니다.');
+        reserveDateTime.setHours(hh, mi, 0, 0);
+
+        if(reserveDateTime <= now){
+            alert("미래의 시간을 선택 해주세요.");
             return;
         }
     }
 
-    // 오늘 날짜 -> 현재 이전 시간 X
-    if(selectedDate.getTime() === today.getTime()){
-        const now = new Date();
-    }
 
 
     // 모든 검증 통과
@@ -92,3 +96,15 @@ document.getElementById("reserveBtn").addEventListener("click", () => {
             alert('예약에 실패했습니다. 다시 시도해주세요.');
         });
 });
+
+
+
+
+
+
+
+
+
+
+
+
