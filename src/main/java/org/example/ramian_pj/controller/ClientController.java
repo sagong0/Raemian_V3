@@ -262,7 +262,37 @@ public class ClientController {
 
     @GetMapping("/reserve/cancel")
     public String reserveCancelForm(Model model,
+                                    HttpSession session,
                                     RedirectAttributes redirectAttributes){
+        UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
+
+        // 세션 NULL -> Login Page Redirect
+        if(loginUser == null){
+            return "redirect:/login";
+        }
+
+        // 예약 조회
+        ReserveDTO reserve = reserveService.getReservationByMemberId(loginUser.getId());
+
+        model.addAttribute("reserve", reserve);
+
         return "client/reserve_cancel";
     }
+
+
+    @PostMapping("/reserve/cancel")
+    public String reserveCancelForm(
+            @ModelAttribute ReserveDTO reserveDTO,
+            HttpSession session){
+
+        UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
+        // 로그인 후 사용 가능
+        if(loginUser == null){
+            return "redirect:/login";
+        }
+        log.info("reserveDTO = {}", reserveDTO);
+
+        return "";
+    }
+
 }

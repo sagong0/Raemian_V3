@@ -63,7 +63,7 @@
                     <li style="color: red;">※ 예약수정은 1회 변경 가능 합니다.</li>
                 </ul>
             </label>
-            <form id="modifyForm">
+            <form id="cancelForm" method="post" action="${pageContext.request.contextPath}/reserve/reserve/cancel">
                 <fieldset class="mbship_box">
                     <h3>예약확인
                         <span style="display: inline-block; font-size: 12px; vertical-align: 5px; float: right;">■ 표시는 필수 입력 항목입니다.</span>
@@ -114,7 +114,7 @@
         </ol>
         </span>
         <span class="span_buttons">
-            <button type="button" id="canacelBtn" class="next_btn1_1">예약취소</button>
+            <button type="button" id="cancelBtn" class="next_btn1_1">예약취소</button>
         </span>
                 </fieldset>
             </form>
@@ -131,5 +131,5 @@
         alert("${fn:escapeXml(msg)}")
     </script>
 </c:if>
-<script src="${pageContext.request.contextPath}/static/js/client/client_reserve_modify.js?v=<%=System.currentTimeMillis()%>"></script>
+<script src="${pageContext.request.contextPath}/static/js/client/client_reserve_cancel.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
