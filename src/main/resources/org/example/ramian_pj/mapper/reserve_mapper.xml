@@ -12,6 +12,25 @@
     </select>
 
 
+<!--    <insert id="saveReserve" parameterType="org.example.ramian_pj.dto.ReserveDTO" >-->
+<!--        INSERT INTO reserve (-->
+<!--            member_id,-->
+<!--            reserve_date,-->
+<!--            reserve_time,-->
+<!--            rcount,-->
+<!--            created_at,-->
+<!--            updated_at-->
+<!--        ) VALUES (-->
+<!--                     #{memberId},-->
+<!--                     #{rdate},-->
+<!--                     #{rtime},-->
+<!--                     #{rcount},-->
+<!--                     NOW(),-->
+<!--                     NOW()-->
+<!--                 )-->
+<!--    </insert>-->
+
+
     <insert id="saveReserve" parameterType="org.example.ramian_pj.dto.ReserveDTO" >
         INSERT INTO reserve (
             member_id,
@@ -20,15 +39,23 @@
             rcount,
             created_at,
             updated_at
-        ) VALUES (
-                     #{memberId},
-                     #{rdate},
-                     #{rtime},
-                     #{rcount},
-                     NOW(),
-                     NOW()
-                 )
+        )
+        SELECT #{memberId},
+               #{rdate},
+               #{rtime},
+               #{rcount},
+               'ACTIVE',
+               NOW(),
+               NOW()
+        WHERE
+        TIMESTAMP(#{rdate}, #{rtime}) >= NOW();
     </insert>
+
+
+
+
+
+
 
     <select id="getReserveByMemberId" resultType="org.example.ramian_pj.dto.ReserveDTO">
         SELECT
