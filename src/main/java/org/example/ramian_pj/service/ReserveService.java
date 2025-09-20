@@ -24,4 +24,10 @@ public class ReserveService {
 
         return reserveRepository.countReserveByMemberId(memberId) > 0;
     }
+
+
+    // 취소 부분
+    public int cancelReserveByMemberId(int memberId) {
+        return reserveRepository.cancelReserveByMemberId(memberId);
+    }
 }

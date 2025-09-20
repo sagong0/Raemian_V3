@@ -8,4 +8,6 @@ public interface ReserveRepository {
     ReserveDTO getReserveByMemberId(int memberId);
 
     int countReserveByMemberId(int memberId);
+
+    int cancelReserveByMemberId(int memberId);
 }

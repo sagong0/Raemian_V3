@@ -273,7 +273,6 @@ public class ClientController {
 
         // 예약 조회
         ReserveDTO reserve = reserveService.getReservationByMemberId(loginUser.getId());
-
         model.addAttribute("reserve", reserve);
 
         return "client/reserve_cancel";
@@ -283,6 +282,7 @@ public class ClientController {
     @PostMapping("/reserve/cancel")
     public String reserveCancelForm(
             @ModelAttribute ReserveDTO reserveDTO,
+            RedirectAttributes rd,
             HttpSession session){
 
         UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
@@ -290,9 +290,18 @@ public class ClientController {
         if(loginUser == null){
             return "redirect:/login";
         }
-        log.info("reserveDTO = {}", reserveDTO);
 
-        return "";
+
+        int affected = reserveService.cancelReserveByMemberId(loginUser.getId());
+        log.info("**********");
+        log.info("affected = {}", affected);
+        log.info("**********");
+        if (affected == 0) {
+            rd.addFlashAttribute("msg", "취소할 활성 예약이 없습니다.");
+        } else {
+            rd.addFlashAttribute("msg", "예약이 취소되었습니다.");
+        }
+        return "redirect:/";
     }
 
 }

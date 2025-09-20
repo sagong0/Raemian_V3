@@ -26,4 +26,9 @@ public class ReserveRepoImpl implements ReserveRepository{
     public int countReserveByMemberId(int memberId) {
         return reserveMapper.countReserveByMemberId(memberId);
     }
+
+    @Override
+    public int cancelReserveByMemberId(int memberId) {
+        return reserveMapper.cancelReserveByMemberId(memberId);
+    }
 }

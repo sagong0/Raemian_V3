@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,7 +28,11 @@
     <!-- 추가된 css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/new_member.css?v=<%=System.currentTimeMillis()%>">
     <!-- 추가된 css -->
+    <c:if test="${not empty msg}">
+        <script>alert("${fn:escapeXml(msg)}");</script>
+    </c:if>
 </head>
+
 
 <body>
 <!-- wrap -->
@@ -122,6 +129,8 @@
         <script>
             const ctx = "${pageContext.request.contextPath}";
         </script>
+
+
         <script src="${pageContext.request.contextPath}/static/js/client/client_reserve_in.js?v=<%=System.currentTimeMillis()%>"></script>
         </div>
     </div>

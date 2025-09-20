@@ -37,6 +37,7 @@
             reserve_date,
             reserve_time,
             rcount,
+            status,
             created_at,
             updated_at
         )
@@ -50,6 +51,7 @@
         WHERE
         TIMESTAMP(#{rdate}, #{rtime}) >= NOW();
     </insert>
+
 
 
 
@@ -72,5 +74,14 @@
         ORDER BY reserve_date DESC
         LIMIT 1;
     </select>
+
+<!--    예약 취소  -->
+    <delete id="deleteReserveByMemberId" parameterType="int">
+        DELETE FROM reserve
+        WHERE member_id = #{memberId}
+          AND status = 'ACTIVE'
+    </delete>
+
+
 
 </mapper>
