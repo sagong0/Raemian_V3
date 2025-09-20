@@ -278,4 +278,21 @@ public class ClientController {
 
         return "client/reserve_cancel";
     }
+
+
+    @PostMapping("/reserve/cancel")
+    public String reserveCancelForm(
+            @ModelAttribute ReserveDTO reserveDTO,
+            HttpSession session){
+
+        UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
+        // 로그인 후 사용 가능
+        if(loginUser == null){
+            return "redirect:/login";
+        }
+        log.info("reserveDTO = {}", reserveDTO);
+
+        return "";
+    }
+
 }
