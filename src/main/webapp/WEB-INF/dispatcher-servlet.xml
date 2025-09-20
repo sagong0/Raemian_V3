@@ -32,9 +32,20 @@
 
 
     <mvc:interceptors>
+        <!-- 로그인 체크 -->
         <mvc:interceptor>
             <mvc:mapping path="/reserve/**"/>
             <bean class="org.example.ramian_pj.conf.LoginCheckInterceptor"/>
         </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/reserve/cancel"/>
+            <mvc:mapping path="/reserve/modify"/>
+            <bean class="org.example.ramian_pj.conf.ReserveCheckInterceptor">
+                <constructor-arg ref="reserveService"/>
+            </bean>
+
+        </mvc:interceptor>
+
     </mvc:interceptors>
 </beans>
