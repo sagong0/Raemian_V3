@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!-- header -->
 	<header id="hd">
@@ -80,5 +82,11 @@
 <c:if test="${not empty sessionScope.msg}">
     <script>alert("${sessionScope.msg}");</script>
     <c:remove var="msg" scope="session"/>
+</c:if>
+
+<c:if test="${not empty msg}">
+    <script>
+        alert("${fn:escapeXml(msg)}");
+    </script>
 </c:if>
 

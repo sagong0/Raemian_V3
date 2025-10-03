@@ -10,4 +10,6 @@ public interface ReserveRepository {
     int countReserveByMemberId(int memberId);
 
     int cancelReserveByMemberId(int memberId);
+
+    int modifyReserveByMemberId(ReserveDTO reserveDTO);
 }

@@ -30,4 +30,8 @@ public class ReserveService {
     public int cancelReserveByMemberId(int memberId) {
         return reserveRepository.cancelReserveByMemberId(memberId);
     }
+
+    public int modifyReserve(ReserveDTO reserveDTO) {
+        return reserveRepository.modifyReserveByMemberId(reserveDTO);
+    }
 }

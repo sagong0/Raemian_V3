@@ -129,10 +129,5 @@
 </div>
 </body>
 
-<c:if test="${not empty msg}">
-    <script>
-        alert("${fn:escapeXml(msg)}")
-    </script>
-</c:if>
 <script src="${pageContext.request.contextPath}/static/js/client/client_reserve_cancel.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

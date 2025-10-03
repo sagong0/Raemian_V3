@@ -15,5 +15,5 @@ public class ReserveDTO {
 
 
     // 수정 횟수
-    private int modify_count;
+    private int modifyCount;
 }

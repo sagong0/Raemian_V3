@@ -56,16 +56,34 @@
 
 
 
+<!--    예약 수정 PART -->
+    <update id="modifyReserveByMemberId" parameterType="org.example.ramian_pj.dto.ReserveDTO">
+        UPDATE reserve
+        SET
+            reserve_date = #{rdate},
+            reserve_time = #{rtime},
+            rcount       = #{rcount},
+            modify_count = 1,
+            updated_at   = NOW()
+        WHERE
+            member_id = #{memberId}
+          AND status = 'ACTIVE'
+          AND modify_count = 0
+          AND TIMESTAMP(#{rdate}, #{rtime}) >= NOW()
+    </update>
 
 
 
-    <select id="getReserveByMemberId" resultType="org.example.ramian_pj.dto.ReserveDTO">
+
+
+
+    <select id="getReserveByMemberId">
         SELECT
             member_id,
             reserve_date AS rdate,
             reserve_time AS rtime,
             rcount,
-            modify_count
+            modify_count AS modifyCount
         FROM reserve
         WHERE
             member_id=#{memberId}
