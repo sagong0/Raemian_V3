@@ -31,4 +31,9 @@ public class ReserveRepoImpl implements ReserveRepository{
     public int cancelReserveByMemberId(int memberId) {
         return reserveMapper.cancelReserveByMemberId(memberId);
     }
+
+    @Override
+    public int modifyReserveByMemberId(ReserveDTO reserveDTO) {
+        return reserveMapper.modifyReserveByMemberId(reserveDTO);
+    }
 }

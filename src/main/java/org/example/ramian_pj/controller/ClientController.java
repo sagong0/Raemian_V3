@@ -206,7 +206,6 @@ public class ClientController {
     public String clientReserveForm(
             @ModelAttribute ReserveDTO reserveDTO,
             HttpSession session){
-        log.info("test test test");
 
         UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
         if(loginUser == null){
@@ -250,20 +249,44 @@ public class ClientController {
             return "redirect:/reserve";
         }
 
-        // 예약 횟수 1회 제한
-        if(reserve.getModify_count() >= 1){
-            redirectAttributes.addFlashAttribute("msg", "예약 수정은 1회만 가능합니다.\n 예약 취소 후 다시 예약해주세요.");
-            return "redirect:/reserve/cancel";
-        }
-
         model.addAttribute("reserve", reserve);
         return "client/reserve_modify";
     }
 
+    @PostMapping("/reserve/modify")
+    public String reserveModifyForm(
+            @ModelAttribute ReserveDTO reserveDTO,
+            HttpSession session,
+            RedirectAttributes rd){
+
+        log.info("test test test");
+        log.info("reserveDTO = {}", reserveDTO);
+
+        UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
+        // 로그인 후 사용 가능
+        if(loginUser == null){
+            return "redirect:/login";
+        }
+
+
+        reserveDTO.setMemberId(loginUser.getId());
+        int updated = reserveService.modifyReserve(reserveDTO);
+        if (updated == 0) {
+            rd.addFlashAttribute("msg", "다시 시도해 주세요.");
+            return "redirect:/reserve/modify";
+        } else {
+            rd.addFlashAttribute("msg", "수정이 완료되었습니다.");
+            return "redirect:/";
+        }
+    }
+
+
+    /**
+     * 취소 페이지
+     */
     @GetMapping("/reserve/cancel")
     public String reserveCancelForm(Model model,
-                                    HttpSession session,
-                                    RedirectAttributes redirectAttributes){
+                                    HttpSession session){
         UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
 
         // 세션 NULL -> Login Page Redirect
@@ -293,9 +316,6 @@ public class ClientController {
 
 
         int affected = reserveService.cancelReserveByMemberId(loginUser.getId());
-        log.info("**********");
-        log.info("affected = {}", affected);
-        log.info("**********");
         if (affected == 0) {
             rd.addFlashAttribute("msg", "취소할 활성 예약이 없습니다.");
         } else {

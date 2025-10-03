@@ -28,9 +28,7 @@
     <!-- 추가된 css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/client/new_member.css?v=<%=System.currentTimeMillis()%>">
     <!-- 추가된 css -->
-    <c:if test="${not empty msg}">
-        <script>alert("${fn:escapeXml(msg)}");</script>
-    </c:if>
+
 </head>
 
 

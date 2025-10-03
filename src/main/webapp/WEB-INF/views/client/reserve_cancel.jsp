@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -126,10 +129,5 @@
 </div>
 </body>
 
-<c:if test="${not empty msg}">
-    <script>
-        alert("${fn:escapeXml(msg)}")
-    </script>
-</c:if>
 <script src="${pageContext.request.contextPath}/static/js/client/client_reserve_cancel.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>

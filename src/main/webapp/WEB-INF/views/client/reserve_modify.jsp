@@ -63,7 +63,7 @@
                     <li style="color: red;">※ 예약수정은 1회 변경 가능 합니다.</li>
                 </ul>
             </label>
-            <form id="modifyForm">
+            <form id="modifyForm" action="${pageContext.request.contextPath}/reserve/modify" method="POST">
                 <fieldset class="mbship_box">
                     <h3>예약확인
                         <span style="display: inline-block; font-size: 12px; vertical-align: 5px; float: right;">■ 표시는 필수 입력 항목입니다.</span>
@@ -104,17 +104,17 @@
 		<li><em class="ck_font">■</em> 인원수</li>
 		<li>
 		    <label class="ck_label">
-		        <input type="radio" name="rCount" value="1" class="ck_label" <c:if test="${rCount eq 1}">checked</c:if>> 1명
+		        <input type="radio" name="rcount" value="1" class="ck_label" <c:if test="${rCount eq 1}">checked</c:if>> 1명
 		    </label>
 		    <label class="ck_label">
-		        <input type="radio" name="rCount" value="2" class="ck_label" <c:if test="${rCount eq 2}">checked</c:if>> 2명
+		        <input type="radio" name="rcount" value="2" class="ck_label" <c:if test="${rCount eq 2}">checked</c:if>> 2명
 		    </label>
 		</li>
 
         </ol>
         </span>
         <span class="span_buttons">
-        <c:if test="${reserve.modify_count < 1}">
+        <c:if test="${reserve.modifyCount < 1}">
             <button type="button" id="modifyBtn" class="next_btn1_1">예약수정</button>
         </c:if>
         </span>
@@ -128,10 +128,5 @@
 </div>
 </body>
 
-<c:if test="${not empty msg}">
-    <script>
-        alert("${fn:escapeXml(msg)}")
-    </script>
-</c:if>
 <script src="${pageContext.request.contextPath}/static/js/client/client_reserve_modify.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
