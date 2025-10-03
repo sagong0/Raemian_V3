@@ -76,7 +76,7 @@
     </select>
 
 <!--    예약 취소  -->
-    <delete id="deleteReserveByMemberId" parameterType="int">
+    <delete id="cancelReserveByMemberId" parameterType="int">
         DELETE FROM reserve
         WHERE member_id = #{memberId}
           AND status = 'ACTIVE'

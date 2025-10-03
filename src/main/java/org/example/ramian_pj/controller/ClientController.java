@@ -260,6 +260,10 @@ public class ClientController {
         return "client/reserve_modify";
     }
 
+
+    /**
+     * 취소 페이지
+     */
     @GetMapping("/reserve/cancel")
     public String reserveCancelForm(Model model,
                                     HttpSession session,
