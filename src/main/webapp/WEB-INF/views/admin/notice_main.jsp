@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -60,7 +61,7 @@
                                 </li>
                                 <li>${notice.ncount}</li>
                                 <li>${notice.nwriter}</li>
-                                <li>${notice.regDate}</li>
+                                <li><fmt:formatDate value="${notice.regDate}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
                                 <li>
                                     <input type="button" onclick="del_notice(${notice.noticeId});" value="삭제"  class="delbtn">
                                 </li>
