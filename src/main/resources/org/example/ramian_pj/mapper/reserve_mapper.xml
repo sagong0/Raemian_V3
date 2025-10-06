@@ -102,4 +102,35 @@
 
 
 
+
+<!--    For Admin-->
+    <resultMap id="adminReserveMap" type="org.example.ramian_pj.dto.AdminReserveDTO">
+        <result column="userid"        property="userId"/>
+        <result column="name"          property="userName"/>
+        <result column="phone"         property="userTell"/>
+        <result column="member_id"     property="memberId"/>
+        <result column="reserve_date"  property="rdate"/>
+        <result column="reserve_time"  property="rtime"/>
+        <result column="rcount"        property="rcount"/>
+    </resultMap>
+
+    <select id="getAllReservesForAdmin" resultMap="adminReserveMap">
+        SELECT
+            m.userid,
+            m.name,
+            m.phone,
+            r.member_id,
+            r.reserve_date,
+            r.reserve_time,
+            r.rcount
+        FROM reserve r
+                 JOIN member m ON r.member_id = m.id
+        ORDER BY r.reserve_date DESC, r.reserve_time DESC
+    </select>
+
+
+
+
+
+
 </mapper>

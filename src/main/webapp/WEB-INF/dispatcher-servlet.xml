@@ -39,6 +39,25 @@
         </mvc:interceptor>
 
         <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+
+            <!-- 로그인/로그아웃/첫진입을 'admin' 기준으로 제외 -->
+            <mvc:exclude-mapping path="/admin"/>
+            <mvc:exclude-mapping path="/admin/"/>
+            <mvc:exclude-mapping path="/admin/logout"/>
+            <mvc:exclude-mapping path="/admin/logout/**"/>
+
+            <!-- (정적 리소스가 admin 하위면) -->
+            <mvc:exclude-mapping path="/admin/css/**"/>
+            <mvc:exclude-mapping path="/admin/js/**"/>
+            <mvc:exclude-mapping path="/admin/images/**"/>
+
+            <bean class="org.example.ramian_pj.conf.AdminLoginCheckInterceptor"/>
+        </mvc:interceptor>
+
+
+
+        <mvc:interceptor>
             <mvc:mapping path="/reserve/cancel"/>
             <mvc:mapping path="/reserve/modify"/>
             <bean class="org.example.ramian_pj.conf.ReserveCheckInterceptor">

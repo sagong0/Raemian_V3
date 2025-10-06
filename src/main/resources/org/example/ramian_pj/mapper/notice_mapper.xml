@@ -37,6 +37,8 @@
         <result property="ncount" column="ncount"/>
         <result property="regDate" column="reg_date"/>
 
+
+
         <association property="fileInfo" javaType="org.example.ramian_pj.dto.NoticeFileDTO">
             <result property="fileId" column="file_id"/>
             <result property="fileName" column="file_name"/>
@@ -58,12 +60,23 @@
             f.file_name,
             f.file_path,
             f.content_type
-        FROM notice n
+        FROM notice n``
         LEFT JOIN
         notice_file f
         on n.notice_id = f.notice_id
         ORDER BY n.notice_id DESC;
     </select>
+
+
+    <select id="getNoticeByIdx" parameterType="long" resultType="org.example.ramian_pj.dto.NoticeDTO">
+        SELECT notice_id, ntitle, ncontent, nwriter, reg_date
+        FROM notice
+        WHERE notice_id = #{nidx}
+    </select>
+
+
+
+
 
     <select id="getNoticesBySearchOption" resultMap="noticeResultMap">
         SELECT

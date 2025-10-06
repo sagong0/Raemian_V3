@@ -1,10 +1,6 @@
-<%@ page import="org.example.ramian_pj.dto.AdminMemberDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    AdminMemberDTO adminMember = (AdminMemberDTO) session.getAttribute("admin");
-%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <nav>
     <div class="menusize">
@@ -16,8 +12,26 @@
             <li class="topmenu2"><a href="">FAQ</a></li>
             <li class="topmenu2"><a href="">예약현황</a></li>
             <li class="topmenu2"><a href="">관리자현황</a></li>
-            <li class="topmenu3"><%=adminMember.getName()%>님 환영합니다<a href="${pageContext.request.contextPath}/admin/logout">[로그아웃]</a></li
+            <li class="topmenu3">
+                <c:choose>
+                    <c:when test="${not empty sessionScope.admin}">
+                        ${sessionScope.admin.name}님 환영합니다
+                        <a href="${pageContext.request.contextPath}/admin/logout">[로그아웃]</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/admin">[로그인]</a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
         </ul>
     </div>
     <div class="menuline"></div>
 </nav>
+
+<c:if test="${not empty msg}">
+    <script>
+        alert("${fn:escapeXml(msg)}");
+    </script>
+</c:if>
+
+

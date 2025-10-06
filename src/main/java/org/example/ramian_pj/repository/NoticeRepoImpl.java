@@ -47,4 +47,9 @@ public class NoticeRepoImpl implements NoticeRepository{
         return noticeMapper.deleteNotice(nid);
     }
 
+    @Override
+    public NoticeDTO getNoticeByIdx(Long nidx) {
+        return noticeMapper.getNoticeByIdx(nidx);
+    }
+
 }

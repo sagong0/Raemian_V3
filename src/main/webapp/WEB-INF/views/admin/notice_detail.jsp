@@ -24,6 +24,7 @@
             <div class="protitle">공지사항 확인</div>
             <div class="procho">
                 <section class="data_listsview">
+                    <c:if test="${not empty notice}">
                     <ol>
                         <li>공지제목</li>
                         <li class="text_in">${notice.ntitle}</li>
@@ -36,6 +37,12 @@
                         <li>첨부파일</li>
                         <li class="text_in" style="cursor: pointer;" onclick="redirectToUrl('${notice.nfile}')">${notice.nfile}</li>
                     </ol>
+                    </c:if>
+
+                    <c:if test="${empty notice}">
+                        <p>공지사항 정보를 불러올 수 없습니다.</p>
+                    </c:if>
+
                     <span class="notice_btns">
        <input type="button" value="목록" class="meno_btn2" onclick="to_noticeList();">
        </span>

@@ -2,17 +2,21 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.*;
+import org.example.ramian_pj.mapper.NoticeMapper;
 import org.example.ramian_pj.service.AdminService;
 import org.example.ramian_pj.service.NoticeService;
+import org.example.ramian_pj.service.ReserveService;
 import org.example.ramian_pj.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -32,6 +36,7 @@ public class AdminController {
     private final AdminService adminService;
     private final UserService userService;
     private final NoticeService noticeService;
+    private final ReserveService reserveService;
 
     @GetMapping({"", "/"})
     public String loginPage() {
@@ -76,7 +81,12 @@ public class AdminController {
     public String dashboard(Model model) {
 
         List<UserJoinDTO> allUsers = userService.getAllUsers();
+        List<AdminReserveDTO> reservesForAdmin = reserveService.getAllReservesForAdmin();
+        log.info("*>*******");
+        log.info("reservesForAdmin: {}", reservesForAdmin);
+
         model.addAttribute("Users", allUsers);
+        model.addAttribute("reserves", reservesForAdmin);
         return "admin/admin_main";
     }
 
@@ -154,8 +164,20 @@ public class AdminController {
      * 상세 페이지
      */
     @GetMapping("/notice/{nidx}")
-    public String noticeDetail(Long nidx){
-        log.info("nidx = {}", nidx);
+    public String noticeDetail(@PathVariable Long nidx,
+                               Model model) {
+
+        NoticeDTO notice = noticeService.getNoticeByIdx(nidx);
+        log.info("notice={}", notice);
+
+        // 2) 없을 경우 예외처리 (선택)
+        if (notice == null) {
+            model.addAttribute("msg", "존재하지 않는 공지입니다.");
+            return "redirect:/admin/notice";
+        }
+
+        model.addAttribute("notice", notice);
+
         return "/admin/notice_detail";
     }
 
@@ -168,10 +190,12 @@ public class AdminController {
         return "/admin/notice_write";
     }
 
+    @Transactional
     @PostMapping("/notice/write")
     public String noticeWrite(
             @ModelAttribute NoticeDTO noticeDTO,
-            Model model
+            Model model,
+            RedirectAttributes rd
     ) {
         MultipartFile file = noticeDTO.getNfile();
         // 파일 저장위치 TODO -> CDN 경로 수정 필요
@@ -180,7 +204,11 @@ public class AdminController {
         try{
             // 1) 공지사항 먼저 일단 저장 -> notice_id 생성위해 ( 외래키 )
             noticeService.saveNotice(noticeDTO);
-            log.info("생성된 noticeId = {}", noticeDTO.getNoticeId()); // 여기가 0이면 문제!
+//            log.info("생성된 noticeId = {}", noticeDTO.getNoticeId()); // 여기가 0이면 문제!
+            if (noticeDTO.getNoticeId() == null || noticeDTO.getNoticeId() == 0) {
+                rd.addFlashAttribute("error", "공지 저장에 실패했습니다.");
+                return "redirect:/notice";
+            }
 
 
             // 2) 파일이 존재 할 경우만 처리
@@ -204,16 +232,21 @@ public class AdminController {
 
                 // DB 저장
                 noticeService.saveNoticeFile(fileDTO);
+                rd.addFlashAttribute("success", "공지 등록이 완료되었습니다.");
+                return "redirect:/admin/notice";
             }
+
+            // 파일이 없어도 여기로 와서 성공 처리
+            rd.addFlashAttribute("success", "공지 등록이 완료되었습니다.");
+            return "redirect:/admin/notice";
         }
         catch (IOException e){
             e.printStackTrace();
-            return "redirect:/notice/write?error=true";
+            rd.addFlashAttribute("error", "처리 중 오류가 발생했습니다.");
+            return "redirect:/admin/notice/";
         }
-
-
-        return "redirect:/notice";
     }
+
 
 
     @PostMapping("/notice/delete")

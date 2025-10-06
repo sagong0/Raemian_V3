@@ -58,4 +58,10 @@ public class NoticeService {
         return noticeRepository.deleteNotice(nid);
     }
 
+
+
+    // Notice Detail
+    public NoticeDTO getNoticeByIdx(Long nidx) {
+        return noticeRepository.getNoticeByIdx(nidx);
+    }
 }
