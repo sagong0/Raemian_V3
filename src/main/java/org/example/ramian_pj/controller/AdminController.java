@@ -260,4 +260,21 @@ public class AdminController {
 
         return "OK";
     }
+
+
+
+
+    /**
+     * 관리자 현황 PART
+     */
+    @GetMapping("/member")
+    public String adminMember() {
+        return "admin/admin_mgm";
+    }
+
+
+
+
 }
+
+
