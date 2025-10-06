@@ -46,10 +46,11 @@
 
         </form>
     </div>
-
-
-
 </div>
 </body>
+
+<c:if test="${not empty msg}">
+    <script>alert('${msg}')</script>
+</c:if>
 <script src="${pageContext.request.contextPath}/static/js/page_result.js?v=<%=System.currentTimeMillis()%>"></script>
 </html>
