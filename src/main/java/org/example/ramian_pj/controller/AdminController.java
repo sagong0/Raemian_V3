@@ -2,8 +2,10 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.*;
+import org.example.ramian_pj.mapper.NoticeMapper;
 import org.example.ramian_pj.service.AdminService;
 import org.example.ramian_pj.service.NoticeService;
+import org.example.ramian_pj.service.ReserveService;
 import org.example.ramian_pj.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,7 @@ public class AdminController {
     private final AdminService adminService;
     private final UserService userService;
     private final NoticeService noticeService;
+    private final ReserveService reserveService;
 
     @GetMapping({"", "/"})
     public String loginPage() {
@@ -76,7 +79,12 @@ public class AdminController {
     public String dashboard(Model model) {
 
         List<UserJoinDTO> allUsers = userService.getAllUsers();
+        List<AdminReserveDTO> reservesForAdmin = reserveService.getAllReservesForAdmin();
+        log.info("*>*******");
+        log.info("reservesForAdmin: {}", reservesForAdmin);
+
         model.addAttribute("Users", allUsers);
+        model.addAttribute("reserves", reservesForAdmin);
         return "admin/admin_main";
     }
 

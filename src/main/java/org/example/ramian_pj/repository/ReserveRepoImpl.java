@@ -1,9 +1,12 @@
 package org.example.ramian_pj.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.example.ramian_pj.dto.AdminReserveDTO;
 import org.example.ramian_pj.dto.ReserveDTO;
 import org.example.ramian_pj.mapper.ReserveMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -35,5 +38,10 @@ public class ReserveRepoImpl implements ReserveRepository{
     @Override
     public int modifyReserveByMemberId(ReserveDTO reserveDTO) {
         return reserveMapper.modifyReserveByMemberId(reserveDTO);
+    }
+
+    @Override
+    public List<AdminReserveDTO> getAllReservesForAdmin() {
+        return reserveMapper.getAllReservesForAdmin();
     }
 }

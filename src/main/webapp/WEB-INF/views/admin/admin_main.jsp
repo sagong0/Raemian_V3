@@ -75,14 +75,17 @@
                             </ol>
 
 
-                            <ol class="bgcancel">
-                                <li>reserve.rid</li>
-                                <li>reserve.rname</li>
-                                <li>reserve.rtel</li>
-                                <li>reserve.rdate</li>
-                                <li>reserve.rtime</li>
-                                <li>reserve.rcount명</li>
-                            </ol>
+                            <c:forEach var="reserve" items="${reserves}">
+                                <ol class="bgcancel">
+                                    <li>${reserve.userId}</li>
+                                    <li>${reserve.userName}</li>
+                                    <li>${reserve.userTell}</li>
+                                    <li>${reserve.rdate}</li>
+                                    <li>${reserve.rtime}</li>
+                                    <li>${reserve.rcount}명</li>
+                                </ol>
+                            </c:forEach>
+
 
                         </li>
                     </ul>

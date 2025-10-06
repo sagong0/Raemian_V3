@@ -1,6 +1,9 @@
 package org.example.ramian_pj.mapper;
 
+import org.example.ramian_pj.dto.AdminReserveDTO;
 import org.example.ramian_pj.dto.ReserveDTO;
+
+import java.util.List;
 
 public interface ReserveMapper {
     int saveReserve(ReserveDTO reserveDTO);
@@ -12,4 +15,6 @@ public interface ReserveMapper {
     int cancelReserveByMemberId(int memberId);
 
     int modifyReserveByMemberId(ReserveDTO reserveDTO);
+
+    List<AdminReserveDTO> getAllReservesForAdmin();
 }
