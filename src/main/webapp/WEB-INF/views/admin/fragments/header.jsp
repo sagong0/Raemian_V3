@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <nav>
     <div class="menusize">
@@ -26,5 +27,11 @@
     </div>
     <div class="menuline"></div>
 </nav>
+
+<c:if test="${not empty msg}">
+    <script>
+        alert("${fn:escapeXml(msg)}");
+    </script>
+</c:if>
 
 

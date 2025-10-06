@@ -60,12 +60,23 @@
             f.file_name,
             f.file_path,
             f.content_type
-        FROM notice n
+        FROM notice n``
         LEFT JOIN
         notice_file f
         on n.notice_id = f.notice_id
         ORDER BY n.notice_id DESC;
     </select>
+
+
+    <select id="getNoticeByIdx" parameterType="long" resultType="org.example.ramian_pj.dto.NoticeDTO">
+        SELECT notice_id, ntitle, ncontent, nwriter, reg_date
+        FROM notice
+        WHERE notice_id = #{nidx}
+    </select>
+
+
+
+
 
     <select id="getNoticesBySearchOption" resultMap="noticeResultMap">
         SELECT

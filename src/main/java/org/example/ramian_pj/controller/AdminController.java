@@ -164,8 +164,20 @@ public class AdminController {
      * 상세 페이지
      */
     @GetMapping("/notice/{nidx}")
-    public String noticeDetail(Long nidx){
-        log.info("nidx = {}", nidx);
+    public String noticeDetail(@PathVariable Long nidx,
+                               Model model) {
+
+        NoticeDTO notice = noticeService.getNoticeByIdx(nidx);
+        log.info("notice={}", notice);
+
+        // 2) 없을 경우 예외처리 (선택)
+        if (notice == null) {
+            model.addAttribute("msg", "존재하지 않는 공지입니다.");
+            return "redirect:/admin/notice";
+        }
+
+        model.addAttribute("notice", notice);
+
         return "/admin/notice_detail";
     }
 
