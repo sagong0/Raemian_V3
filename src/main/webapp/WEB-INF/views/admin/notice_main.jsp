@@ -58,8 +58,8 @@
                                         <c:otherwise>X</c:otherwise>
                                     </c:choose>
                                 </li>
-                                <li>${notice.nwriter}</li>
                                 <li>${notice.ncount}</li>
+                                <li>${notice.nwriter}</li>
                                 <li>${notice.regDate}</li>
                                 <li>
                                     <input type="button" onclick="del_notice(${notice.noticeId});" value="삭제"  class="delbtn">
