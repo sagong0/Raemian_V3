@@ -35,11 +35,15 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
         });
 
         // FAIL
-        if (!response.ok) throw new Error("서버 오류");
+        // 2xx 또는 3xx(리다이렉트)도 성공으로 처리
+        if (!(response.ok || (response.status >= 300 && response.status < 400))) {
+            throw new Error("서버 오류");
+        }
+
 
         // SUCCESS
         alert("공지사항이 등록되었습니다.");
-        location.href = `${contextPath}/notice`; // 등록 후 목록 이동
+        location.href = `${contextPath}/admin/notice`; // 등록 후 목록 이동
     } catch (err) {
         console.error(err);
         alert("등록에 실패했습니다.");

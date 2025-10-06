@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 public class NoticeDTO {
-    private int noticeId;
+    private Integer noticeId;
     private String ntitle;
     private String nwriter;
     private String ncontent;

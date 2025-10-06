@@ -10,11 +10,13 @@ import org.example.ramian_pj.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -176,10 +178,12 @@ public class AdminController {
         return "/admin/notice_write";
     }
 
+    @Transactional
     @PostMapping("/notice/write")
     public String noticeWrite(
             @ModelAttribute NoticeDTO noticeDTO,
-            Model model
+            Model model,
+            RedirectAttributes rd
     ) {
         MultipartFile file = noticeDTO.getNfile();
         // 파일 저장위치 TODO -> CDN 경로 수정 필요
@@ -188,7 +192,11 @@ public class AdminController {
         try{
             // 1) 공지사항 먼저 일단 저장 -> notice_id 생성위해 ( 외래키 )
             noticeService.saveNotice(noticeDTO);
-            log.info("생성된 noticeId = {}", noticeDTO.getNoticeId()); // 여기가 0이면 문제!
+//            log.info("생성된 noticeId = {}", noticeDTO.getNoticeId()); // 여기가 0이면 문제!
+            if (noticeDTO.getNoticeId() == null || noticeDTO.getNoticeId() == 0) {
+                rd.addFlashAttribute("error", "공지 저장에 실패했습니다.");
+                return "redirect:/notice";
+            }
 
 
             // 2) 파일이 존재 할 경우만 처리
@@ -212,16 +220,21 @@ public class AdminController {
 
                 // DB 저장
                 noticeService.saveNoticeFile(fileDTO);
+                rd.addFlashAttribute("success", "공지 등록이 완료되었습니다.");
+                return "redirect:/admin/notice";
             }
+
+            // 파일이 없어도 여기로 와서 성공 처리
+            rd.addFlashAttribute("success", "공지 등록이 완료되었습니다.");
+            return "redirect:/admin/notice";
         }
         catch (IOException e){
             e.printStackTrace();
-            return "redirect:/notice/write?error=true";
+            rd.addFlashAttribute("error", "처리 중 오류가 발생했습니다.");
+            return "redirect:/admin/notice/";
         }
-
-
-        return "redirect:/notice";
     }
+
 
 
     @PostMapping("/notice/delete")

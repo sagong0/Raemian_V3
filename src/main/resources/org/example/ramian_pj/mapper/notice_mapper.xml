@@ -37,6 +37,8 @@
         <result property="ncount" column="ncount"/>
         <result property="regDate" column="reg_date"/>
 
+
+
         <association property="fileInfo" javaType="org.example.ramian_pj.dto.NoticeFileDTO">
             <result property="fileId" column="file_id"/>
             <result property="fileName" column="file_name"/>
