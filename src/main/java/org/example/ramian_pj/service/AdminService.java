@@ -17,7 +17,7 @@ public class AdminService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public List<AdminMemberDTO> test(){
+    public List<AdminMemberDTO> getAllAdmins(){
         return this.adminRepository.getAdmins();
     }
 

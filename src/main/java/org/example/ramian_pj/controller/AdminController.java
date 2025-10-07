@@ -2,7 +2,6 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.*;
-import org.example.ramian_pj.mapper.NoticeMapper;
 import org.example.ramian_pj.service.AdminService;
 import org.example.ramian_pj.service.NoticeService;
 import org.example.ramian_pj.service.ReserveService;
@@ -268,7 +267,11 @@ public class AdminController {
      * 관리자 현황 PART
      */
     @GetMapping("/member")
-    public String adminMember() {
+    public String adminMember(Model model) {
+        List<AdminMemberDTO> admins = adminService.getAllAdmins();
+        log.info("admins={}", admins);
+        model.addAttribute("admins", admins);
+
         return "admin/admin_mgm";
     }
 

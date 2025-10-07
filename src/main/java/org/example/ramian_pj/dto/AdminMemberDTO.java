@@ -10,8 +10,8 @@ public class AdminMemberDTO {
     // 부서
     private String sub_department;
     // 사용자 이름
-    private String name;
     // 사용자 id
+    private String name;
     private String userid;
     // 패스워드
     private String pw;
