@@ -8,7 +8,7 @@ public class AdminMemberDTO {
     // 소속
     private String department;
     // 부서
-    private String sub_department;
+    private String subDepartment;
     // 사용자 이름
     // 사용자 id
     private String name;
@@ -19,4 +19,7 @@ public class AdminMemberDTO {
     private String phone;
     // 직책
     private String position;
+
+    // 삭제 여부(활성화 여부)
+    private String deletedAt;
 }

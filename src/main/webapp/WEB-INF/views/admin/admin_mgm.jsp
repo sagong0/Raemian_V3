@@ -97,20 +97,20 @@
                                     <td class="listcenter" width=80>${admin.position}</td>
                                     <td class="listcenter" width=200>${admin.email}</td>
                                     <td class="listcenter" width=120>${admin.phone}</td>
-<%--                                    <td class="listcenter" width=120>--%>
-<%--                                        <select id="status${admin.id}" class="adlistsel3">--%>
-<%--                                            <c:choose>--%>
-<%--                                                <c:when test="${admin.ause eq 'N'}">--%>
-<%--                                                    <option>근무중</option>--%>
-<%--                                                    <option selected>퇴직중</option>--%>
-<%--                                                </c:when>--%>
-<%--                                                <c:otherwise>--%>
-<%--                                                    <option selected>근무중</option>--%>
-<%--                                                    <option>퇴직중</option>--%>
-<%--                                                </c:otherwise>--%>
-<%--                                            </c:choose>--%>
-<%--                                        </select></td>--%>
-<%--                                    <td class="listcenter" width=110>--%>
+                                    <td class="listcenter" width=120>
+                                        <select id="status${admin.id}" class="adlistsel3">
+                                            <c:choose>
+                                                <c:when test="${admin.deletedAt == null}">
+                                                    <option>근무중</option>
+                                                    <option selected>퇴직중</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option selected>근무중</option>
+                                                    <option>퇴직중</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </select></td>
+                                    <td class="listcenter" width=110>
                                         <button type="button" class="listclick" onclick="applyAdmin(${admin.id});">적용</button>
                                     </td>
                                 </tr>
