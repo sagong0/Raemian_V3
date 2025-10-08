@@ -49,4 +49,12 @@ public class AdminService {
 
         return findAdmin;
     }
+
+
+    /**
+     * 지역 Admin 출력
+     */
+    public List<AdminMemberDTO> getAdminsByArea(String aarea) {
+        return adminRepository.getAdminsByArea(aarea);
+    }
 }

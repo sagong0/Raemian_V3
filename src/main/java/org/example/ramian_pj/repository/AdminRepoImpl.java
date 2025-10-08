@@ -28,4 +28,9 @@ public class AdminRepoImpl implements AdminRepository{
     public int saveAdmin(AdminJoinDTO adminJoinDTO) {
         return adminMapper.saveAdmin(adminJoinDTO);
     }
+
+    @Override
+    public List<AdminMemberDTO> getAdminsByArea(String aarea) {
+        return adminMapper.getAdminsByArea(aarea);
+    }
 }

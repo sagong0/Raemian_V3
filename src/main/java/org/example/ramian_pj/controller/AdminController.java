@@ -267,9 +267,19 @@ public class AdminController {
      * 관리자 현황 PART
      */
     @GetMapping("/member")
-    public String adminMember(Model model) {
-        List<AdminMemberDTO> admins = adminService.getAllAdmins();
-        log.info("admins={}", admins);
+    public String adminMember(
+            @RequestParam(value = "aarea", required = false,defaultValue = "all") String aarea,
+            Model model) {
+
+        List<AdminMemberDTO> admins;
+
+        if("all".equals(aarea)){
+            admins = adminService.getAllAdmins();
+        }
+        else {
+            admins = adminService.getAdminsByArea(aarea);
+        }
+
         model.addAttribute("admins", admins);
 
         return "admin/admin_mgm";

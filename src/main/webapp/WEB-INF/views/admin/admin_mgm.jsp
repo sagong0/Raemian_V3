@@ -26,7 +26,7 @@
                     <ul>
                         <li class="prochoL procfont">소속</li>
                         <li class="prochoL">
-                            <select class="adlistcsel1" name="aarea" id="aarea">
+                            <select class="adlistcsel1" name="aarea" id="aarea" onchange="filterAdminsByArea()">
                                 <option value="all">전체</option>
                                 <option value="본사">본사</option>
                                 <option value="경기도">경기도</option>
@@ -101,12 +101,12 @@
                                         <select id="status${admin.id}" class="adlistsel3">
                                             <c:choose>
                                                 <c:when test="${admin.deletedAt == null}">
-                                                    <option>근무중</option>
-                                                    <option selected>퇴직중</option>
-                                                </c:when>
-                                                <c:otherwise>
                                                     <option selected>근무중</option>
                                                     <option>퇴직중</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option>근무중</option>
+                                                    <option selected>퇴직중</option>
                                                 </c:otherwise>
                                             </c:choose>
                                         </select></td>
@@ -151,6 +151,9 @@
     </section>
 </main>
 <%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
-
+<script>
+    const ctx = ${pageContext.request.contextPath};
+</script>
+<script src="${pageContext.request.contextPath}/static/js/admin_mgm.js?<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>
