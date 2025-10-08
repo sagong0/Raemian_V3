@@ -43,7 +43,11 @@
 
             <!-- 로그인/로그아웃/첫진입을 'admin' 기준으로 제외 -->
             <mvc:exclude-mapping path="/admin"/>
+            <mvc:exclude-mapping path="/admin/"/>
             <mvc:exclude-mapping path="/admin/join"/>
+            <mvc:exclude-mapping path="/admin/join/"/>
+            <mvc:exclude-mapping path="/admin/join/**"/>
+            <mvc:exclude-mapping path="/admin/joinSuccess"/>
             <mvc:exclude-mapping path="/admin/id_ck"/>
             <mvc:exclude-mapping path="/admin/logout"/>
             <mvc:exclude-mapping path="/admin/logout/**"/>
