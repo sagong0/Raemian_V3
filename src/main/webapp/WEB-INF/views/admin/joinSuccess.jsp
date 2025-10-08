@@ -7,6 +7,6 @@
 </head>
 <body>
 <h1>🎉 회원가입이 완료되었습니다!</h1>
-<p>로그인 페이지로 이동하려면 <a href="/admin/">여기를 클릭하세요.</a></p>
+<p>로그인 페이지로 이동하려면 <a href="${pageContext.request.contextPath}/admin/">여기를 클릭하세요.</a></p>
 </body>
 </html>
