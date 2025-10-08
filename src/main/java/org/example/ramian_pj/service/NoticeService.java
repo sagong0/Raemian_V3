@@ -48,7 +48,6 @@ public class NoticeService {
 
         int offset = (searchConditionDTO.getPage() - 1) * searchConditionDTO.getPageSize();
         List<NoticeDTO> notices = noticeRepository.getNoticesBySearch(searchConditionDTO, offset);
-        log.info("here notice is = {}", notices);
         int totalCount = noticeRepository.countSearchNotices(searchConditionDTO);
 
         return new PageDTO(notices, totalCount, searchConditionDTO.getPage(), searchConditionDTO.getPageSize());

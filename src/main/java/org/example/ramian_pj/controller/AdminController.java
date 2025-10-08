@@ -81,8 +81,7 @@ public class AdminController {
 
         List<UserJoinDTO> allUsers = userService.getAllUsers();
         List<AdminReserveDTO> reservesForAdmin = reserveService.getAllReservesForAdmin();
-        log.info("*>*******");
-        log.info("reservesForAdmin: {}", reservesForAdmin);
+
 
         model.addAttribute("Users", allUsers);
         model.addAttribute("reserves", reservesForAdmin);
@@ -131,7 +130,6 @@ public class AdminController {
 
     @GetMapping("/userList")
     public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
-        log.info("searchConditionDTO = {}", searchConditionDTO);
         PageDTO pageInfo = userService.getPagedUsers(searchConditionDTO);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("searchConDTO", searchConditionDTO);
@@ -252,7 +250,6 @@ public class AdminController {
     @ResponseBody
     public String noticeDel(@RequestParam String nid) {
         int resultSign = noticeService.deleteNotice(nid);
-        log.info("resultSign = {}", resultSign);
         if(resultSign <= 0){
             return "NO_OK";
         }

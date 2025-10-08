@@ -56,10 +56,8 @@ public class ClientController {
 
     @PostMapping("/join")
     public String joinAgreeFormSubmit(@Valid UserJoinDTO userJoinDTO, Model model){
-        log.info("userJoinDto = {}", userJoinDTO);
 
         int result = userService.joinUser(userJoinDTO);
-        log.info("result = {}", result);
 
         if(result <= 0){
             model.addAttribute("error", "회원가입 실패하였습니다. 잠시 후 다시 시도해주세요." );
@@ -241,7 +239,6 @@ public class ClientController {
 
         // 예약 조회
         ReserveDTO reserve = reserveService.getReservationByMemberId(loginUser.getId());
-        log.info("reserve = {}", reserve);
 
         // 예약 없으면 -> 예약 페이지 redirect
         if(reserve == null){
@@ -259,8 +256,6 @@ public class ClientController {
             HttpSession session,
             RedirectAttributes rd){
 
-        log.info("test test test");
-        log.info("reserveDTO = {}", reserveDTO);
 
         UserJoinDTO loginUser = (UserJoinDTO) session.getAttribute("user");
         // 로그인 후 사용 가능
