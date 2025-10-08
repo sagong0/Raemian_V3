@@ -281,6 +281,7 @@ public class AdminController {
         }
 
         model.addAttribute("admins", admins);
+        model.addAttribute("selectedArea", aarea);
 
         return "admin/admin_mgm";
     }

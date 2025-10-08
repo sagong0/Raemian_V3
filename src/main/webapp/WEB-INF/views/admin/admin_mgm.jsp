@@ -27,22 +27,22 @@
                         <li class="prochoL procfont">소속</li>
                         <li class="prochoL">
                             <select class="adlistcsel1" name="aarea" id="aarea" onchange="filterAdminsByArea()">
-                                <option value="all">전체</option>
-                                <option value="본사">본사</option>
-                                <option value="경기도">경기도</option>
-                                <option value="인천">인천</option>
-                                <option value="대전">대전</option>
-                                <option value="세종">세종</option>
-                                <option value="광주">광주</option>
-                                <option value="대구">대구</option>
-                                <option value="울산">울산</option>
-                                <option value="전라남도">전라남도</option>
-                                <option value="전라북도">전라북도</option>
-                                <option value="충청남도">충청남도</option>
-                                <option value="충청북도">충청북도</option>
-                                <option value="경상남도">경상남도</option>
-                                <option value="경상북도">경상북도</option>
-                                <option value="제주도">제주도</option>
+                                <option value="all" ${selectedArea == 'all' ? 'selected' : ''}>전체</option>
+                                <option value="본사" ${selectedArea == '본사' ? 'selected' : ''}>본사</option>
+                                <option value="경기도" ${selectedArea == '경기도' ? 'selected' : ''}>경기도</option>
+                                <option value="인천" ${selectedArea == '인천' ? 'selected' : ''}>인천</option>
+                                <option value="대전" ${selectedArea == '대전' ? 'selected' : ''}>대전</option>
+                                <option value="세종" ${selectedArea == '세종' ? 'selected' : ''}>세종</option>
+                                <option value="광주" ${selectedArea == '광주' ? 'selected' : ''}>광주</option>
+                                <option value="대구" ${selectedArea == '대구' ? 'selected' : ''}>대구</option>
+                                <option value="울산" ${selectedArea == '울산' ? 'selected' : ''}>울산</option>
+                                <option value="전라남도" ${selectedArea == '전라남도' ? 'selected' : ''}>전라남도</option>
+                                <option value="전라북도" ${selectedArea == '전라북도' ? 'selected' : ''}>전라북도</option>
+                                <option value="충청남도" ${selectedArea == '충청남도' ? 'selected' : ''}>충청남도</option>
+                                <option value="충청북도" ${selectedArea == '충청북도' ? 'selected' : ''}>충청북도</option>
+                                <option value="경상남도" ${selectedArea == '경상남도' ? 'selected' : ''}>경상남도</option>
+                                <option value="경상북도" ${selectedArea == '경상북도' ? 'selected' : ''}>경상북도</option>
+                                <option value="제주도" ${selectedArea == '제주도' ? 'selected' : ''}>제주도</option>
                             </select>
                         </li>
                     </ul>
@@ -152,7 +152,7 @@
 </main>
 <%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
 <script>
-    const ctx = ${pageContext.request.contextPath};
+    const ctx = "${pageContext.request.contextPath}";
 </script>
 <script src="${pageContext.request.contextPath}/static/js/admin_mgm.js?<%=System.currentTimeMillis()%>"></script>
 </body>
