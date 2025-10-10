@@ -2,7 +2,6 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.*;
-import org.example.ramian_pj.mapper.NoticeMapper;
 import org.example.ramian_pj.service.AdminService;
 import org.example.ramian_pj.service.NoticeService;
 import org.example.ramian_pj.service.ReserveService;
@@ -82,8 +81,7 @@ public class AdminController {
 
         List<UserJoinDTO> allUsers = userService.getAllUsers();
         List<AdminReserveDTO> reservesForAdmin = reserveService.getAllReservesForAdmin();
-        log.info("*>*******");
-        log.info("reservesForAdmin: {}", reservesForAdmin);
+
 
         model.addAttribute("Users", allUsers);
         model.addAttribute("reserves", reservesForAdmin);
@@ -132,7 +130,6 @@ public class AdminController {
 
     @GetMapping("/userList")
     public String userList(@ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
-        log.info("searchConditionDTO = {}", searchConditionDTO);
         PageDTO pageInfo = userService.getPagedUsers(searchConditionDTO);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("searchConDTO", searchConditionDTO);
@@ -253,7 +250,6 @@ public class AdminController {
     @ResponseBody
     public String noticeDel(@RequestParam String nid) {
         int resultSign = noticeService.deleteNotice(nid);
-        log.info("resultSign = {}", resultSign);
         if(resultSign <= 0){
             return "NO_OK";
         }
@@ -268,7 +264,22 @@ public class AdminController {
      * 관리자 현황 PART
      */
     @GetMapping("/member")
-    public String adminMember() {
+    public String adminMember(
+            @RequestParam(value = "aarea", required = false,defaultValue = "all") String aarea,
+            Model model) {
+
+        List<AdminMemberDTO> admins;
+
+        if("all".equals(aarea)){
+            admins = adminService.getAllAdmins();
+        }
+        else {
+            admins = adminService.getAdminsByArea(aarea);
+        }
+
+        model.addAttribute("admins", admins);
+        model.addAttribute("selectedArea", aarea);
+
         return "admin/admin_mgm";
     }
 

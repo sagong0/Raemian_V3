@@ -26,23 +26,23 @@
                     <ul>
                         <li class="prochoL procfont">소속</li>
                         <li class="prochoL">
-                            <select class="adlistcsel1" name="aarea" id="aarea">
-                                <option value="all">전체</option>
-                                <option value="본사">본사</option>
-                                <option value="경기도">경기도</option>
-                                <option value="인천">인천</option>
-                                <option value="대전">대전</option>
-                                <option value="세종">세종</option>
-                                <option value="광주">광주</option>
-                                <option value="대구">대구</option>
-                                <option value="울산">울산</option>
-                                <option value="전라남도">전라남도</option>
-                                <option value="전라북도">전라북도</option>
-                                <option value="충청남도">충청남도</option>
-                                <option value="충청북도">충청북도</option>
-                                <option value="경상남도">경상남도</option>
-                                <option value="경상북도">경상북도</option>
-                                <option value="제주도">제주도</option>
+                            <select class="adlistcsel1" name="aarea" id="aarea" onchange="filterAdminsByArea()">
+                                <option value="all" ${selectedArea == 'all' ? 'selected' : ''}>전체</option>
+                                <option value="본사" ${selectedArea == '본사' ? 'selected' : ''}>본사</option>
+                                <option value="경기도" ${selectedArea == '경기도' ? 'selected' : ''}>경기도</option>
+                                <option value="인천" ${selectedArea == '인천' ? 'selected' : ''}>인천</option>
+                                <option value="대전" ${selectedArea == '대전' ? 'selected' : ''}>대전</option>
+                                <option value="세종" ${selectedArea == '세종' ? 'selected' : ''}>세종</option>
+                                <option value="광주" ${selectedArea == '광주' ? 'selected' : ''}>광주</option>
+                                <option value="대구" ${selectedArea == '대구' ? 'selected' : ''}>대구</option>
+                                <option value="울산" ${selectedArea == '울산' ? 'selected' : ''}>울산</option>
+                                <option value="전라남도" ${selectedArea == '전라남도' ? 'selected' : ''}>전라남도</option>
+                                <option value="전라북도" ${selectedArea == '전라북도' ? 'selected' : ''}>전라북도</option>
+                                <option value="충청남도" ${selectedArea == '충청남도' ? 'selected' : ''}>충청남도</option>
+                                <option value="충청북도" ${selectedArea == '충청북도' ? 'selected' : ''}>충청북도</option>
+                                <option value="경상남도" ${selectedArea == '경상남도' ? 'selected' : ''}>경상남도</option>
+                                <option value="경상북도" ${selectedArea == '경상북도' ? 'selected' : ''}>경상북도</option>
+                                <option value="제주도" ${selectedArea == '제주도' ? 'selected' : ''}>제주도</option>
                             </select>
                         </li>
                     </ul>
@@ -81,76 +81,79 @@
                         </thead>
                         <tbody>
 
-<%--                        <c:if test="${empty admins}">--%>
-<%--                            <tr height="30">--%>
-<%--                                <td class="listcenter" colspan="9">등록된 관리자가 없습니다.</td>--%>
-<%--                            </tr>--%>
-<%--                        </c:if>--%>
+                        <c:if test="${empty admins}">
+                            <tr height="30">
+                                <td class="listcenter" colspan="9">등록된 관리자가 없습니다.</td>
+                            </tr>
+                        </c:if>
 
-<%--                        <c:if test="${not empty admins}">--%>
-<%--                            <c:forEach var="admin" items="${admins}" varStatus="loop">--%>
-<%--                                <tr class="master_list">--%>
-<%--                                    <td class="listcenter" width=50>${loop.index + 1}</td>--%>
-<%--                                    <td class="listcenter" width=150>${admin.aarea}</td>--%>
-<%--                                    <td class="listcenter" width=150>${admin.aid}</td>--%>
-<%--                                    <td class="listcenter" width=120>${admin.aname}</td>--%>
-<%--                                    <td class="listcenter" width=80>${admin.aposition}</td>--%>
-<%--                                    <td class="listcenter" width=200>${admin.aemail}</td>--%>
-<%--                                    <td class="listcenter" width=120>${admin.atel}</td>--%>
-<%--                                    <td class="listcenter" width=120>--%>
-<%--                                        <select id="status${admin.aidx}" class="adlistsel3">--%>
-<%--                                            <c:choose>--%>
-<%--                                                <c:when test="${admin.ause eq 'N'}">--%>
-<%--                                                    <option>근무중</option>--%>
-<%--                                                    <option selected>퇴직중</option>--%>
-<%--                                                </c:when>--%>
-<%--                                                <c:otherwise>--%>
-<%--                                                    <option selected>근무중</option>--%>
-<%--                                                    <option>퇴직중</option>--%>
-<%--                                                </c:otherwise>--%>
-<%--                                            </c:choose>--%>
-<%--                                        </select></td>--%>
-<%--                                    <td class="listcenter" width=110>--%>
-<%--                                        <button type="button" class="listclick" onclick="applyAdmin(${admin.aidx});">적용</button>--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                            </c:forEach>--%>
-<%--                        </c:if>--%>
+                        <c:if test="${not empty admins}">
+                            <c:forEach var="admin" items="${admins}" varStatus="loop">
+                                <tr class="master_list">
+                                    <td class="listcenter" width=50>${loop.index + 1}</td>
+                                    <td class="listcenter" width=150>${admin.department}</td>
+                                    <td class="listcenter" width=150>${admin.userid}</td>
+                                    <td class="listcenter" width=120>${admin.name}</td>
+                                    <td class="listcenter" width=80>${admin.position}</td>
+                                    <td class="listcenter" width=200>${admin.email}</td>
+                                    <td class="listcenter" width=120>${admin.phone}</td>
+                                    <td class="listcenter" width=120>
+                                        <select id="status${admin.id}" class="adlistsel3">
+                                            <c:choose>
+                                                <c:when test="${admin.deletedAt == null}">
+                                                    <option selected>근무중</option>
+                                                    <option>퇴직중</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option>근무중</option>
+                                                    <option selected>퇴직중</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </select></td>
+                                    <td class="listcenter" width=110>
+                                        <button type="button" class="listclick" onclick="applyAdmin(${admin.id});">적용</button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
                         </tbody>
                     </table>
                 </div>
 
-                <c:if test="${not empty admins}">
-                    <div class="propagebt">
-                        <ul>
-                            <c:set var="aarea" value="${param.aarea}" />
-                            <!-- Previous 시작 -->
-                            <li style="color: white;"
-                                onclick="adminPagination(${list.startPage > 5 ? list.startPage - 5 : 1 },'${not empty aarea ? aarea : ''}','${not empty param.searchType ? param.searchType : ''}','${not empty param.searchVal ? param.searchVal : ''}');"
-                                <c:if test='${list.startPage<6 }'>disabled</c:if>>
-                                Prev</li>
-                            <!-- Page번호 시작 -->
-                            <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">
-                                <li style="color:white;"onclick="adminPagination(${pNo},'${not empty aarea ? aarea : ''}','${not empty param.searchType ? param.searchType : ''}','${not empty param.searchVal ? param.searchVal : ''}');"
-                                    <c:if test='${param.currentPage eq pNo }'>active</c:if>>
-                                        ${pNo}</li>
-                            </c:forEach>
-                            <!-- Page번호 끝 -->
-                            <!-- Next 시작 -->
-                            <li style="color: white;"
-                                onclick="adminPagination(${list.totalPages < 5 ? list.endPage : list.startPage+5 },'${not empty aarea ? aarea : ''}','${not empty param.searchType ? param.searchType : ''}','${not empty param.searchVal ? param.searchVal : ''}');"
-                                <c:if test='${list.endPage>=list.totalPages }'>disabled</c:if> >
-                                Next</li>
-                            <!-- Next 끝 -->
-                        </ul>
-                    </div>
-                </c:if>
+<%--                <c:if test="${not empty admins}">--%>
+<%--                    <div class="propagebt">--%>
+<%--                        <ul>--%>
+<%--                            <c:set var="aarea" value="${param.aarea}" />--%>
+<%--                            <!-- Previous 시작 -->--%>
+<%--                            <li style="color: white;"--%>
+<%--                                onclick="adminPagination(${list.startPage > 5 ? list.startPage - 5 : 1 },'${not empty aarea ? aarea : ''}','${not empty param.searchType ? param.searchType : ''}','${not empty param.searchVal ? param.searchVal : ''}');"--%>
+<%--                                <c:if test='${list.startPage<6 }'>disabled</c:if>>--%>
+<%--                                Prev</li>--%>
+<%--                            <!-- Page번호 시작 -->--%>
+<%--                            <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">--%>
+<%--                                <li style="color:white;"onclick="adminPagination(${pNo},'${not empty aarea ? aarea : ''}','${not empty param.searchType ? param.searchType : ''}','${not empty param.searchVal ? param.searchVal : ''}');"--%>
+<%--                                    <c:if test='${param.currentPage eq pNo }'>active</c:if>>--%>
+<%--                                        ${pNo}</li>--%>
+<%--                            </c:forEach>--%>
+<%--                            <!-- Page번호 끝 -->--%>
+<%--                            <!-- Next 시작 -->--%>
+<%--                            <li style="color: white;"--%>
+<%--                                onclick="adminPagination(${list.totalPages < 5 ? list.endPage : list.startPage+5 },'${not empty aarea ? aarea : ''}','${not empty param.searchType ? param.searchType : ''}','${not empty param.searchVal ? param.searchVal : ''}');"--%>
+<%--                                <c:if test='${list.endPage>=list.totalPages }'>disabled</c:if> >--%>
+<%--                                Next</li>--%>
+<%--                            <!-- Next 끝 -->--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
+<%--                </c:if>--%>
             </div>
         </form>
         <!-- 관리자 리스트 끝 -->
     </section>
 </main>
 <%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
-
+<script>
+    const ctx = "${pageContext.request.contextPath}";
+</script>
+<script src="${pageContext.request.contextPath}/static/js/admin_mgm.js?<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

@@ -11,4 +11,6 @@ public interface AdminMapper {
     AdminMemberDTO getAdminById(String userid);
 
     int saveAdmin(AdminJoinDTO adminJoinDTO);
+
+    List<AdminMemberDTO> getAdminsByArea(String aarea);
 }

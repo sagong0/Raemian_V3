@@ -11,4 +11,6 @@ public interface AdminRepository {
     AdminMemberDTO findAdminByUserId(String aid);
 
     int saveAdmin(AdminJoinDTO adminJoinDTO);
+
+    List<AdminMemberDTO> getAdminsByArea(String aarea);
 }
