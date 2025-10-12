@@ -1,9 +1,10 @@
 package org.example.ramian_pj.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.ramian_pj.dto.AdminJoinDTO;
-import org.example.ramian_pj.dto.AdminLoginDTO;
-import org.example.ramian_pj.dto.AdminMemberDTO;
+import org.example.ramian_pj.domain.AdminMemberSearchType;
+import org.example.ramian_pj.domain.ClientMemberSearchType;
+import org.example.ramian_pj.domain.SortOption;
+import org.example.ramian_pj.dto.*;
 import org.example.ramian_pj.repository.AdminRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,29 @@ public class AdminService {
      */
     public List<AdminMemberDTO> getAdminsByArea(String aarea) {
         return adminRepository.getAdminsByArea(aarea);
+    }
+
+    public PageDTO getPagedAdmins(SearchConditionDTO searchConditionDTO) {
+        // 검색 조건 화이트 리스트 검증
+        if(!AdminMemberSearchType.values().contains(searchConditionDTO.getSearchType())){
+            // 기본 검색 기준 -> userID
+            searchConditionDTO.setSearchType("userid");
+        }
+        // 정렬 기준 화이트 리스트 검증
+        if(!SortOption.adminValues().contains(searchConditionDTO.getSortBy())){
+            // 기본 정렬 값 - created_at
+            searchConditionDTO.setSortBy("created_at");
+        }
+
+        // 내림차순 및 오름차순 검증
+        if(!"desc".contains(searchConditionDTO.getOrder())){
+            searchConditionDTO.setOrder("asc");
+        }
+
+        int offset = (searchConditionDTO.getPage() - 1) * searchConditionDTO.getPageSize();
+        List<NoticeDTO> notices = adminRepository.getAdminsBySearch(searchConditionDTO, offset);
+        int totalCount = adminRepository.countSearchAdmins(searchConditionDTO);
+
+        return new PageDTO(notices, totalCount, searchConditionDTO.getPage(), searchConditionDTO.getPageSize());
     }
 }

@@ -2,7 +2,6 @@ package org.example.ramian_pj.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.ramian_pj.domain.SearchType;
 import org.example.ramian_pj.domain.SortOption;
 import org.example.ramian_pj.dto.NoticeDTO;
 import org.example.ramian_pj.dto.NoticeFileDTO;

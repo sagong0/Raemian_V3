@@ -265,27 +265,17 @@ public class AdminController {
      */
     @GetMapping("/member")
     public String adminMember(
-            @RequestParam(value = "aarea", required = false,defaultValue = "all") String aarea,
-            Model model) {
+            @ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
 
-        List<AdminMemberDTO> admins;
+        PageDTO adminPageInfo = adminService.getPagedAdmins(searchConditionDTO);
+        log.info("test = {}", adminPageInfo.getList());
 
-        if("all".equals(aarea)){
-            admins = adminService.getAllAdmins();
-        }
-        else {
-            admins = adminService.getAdminsByArea(aarea);
-        }
+        model.addAttribute("adminPageInfo", adminPageInfo);
+        model.addAttribute("searchConDTO", searchConditionDTO);
 
-        model.addAttribute("admins", admins);
-        model.addAttribute("selectedArea", aarea);
 
         return "admin/admin_mgm";
     }
-
-
-
-
 }
 
 

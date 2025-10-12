@@ -5,6 +5,9 @@ import lombok.Data;
 
 @Data
 public class SearchConditionDTO {
+    // Admin Member List 전용 필드
+    private String aarea = "all";
+
     private String keyword;
 
     // username, userid, user_tell
