@@ -15,12 +15,26 @@ public interface SortOption {
     String noticeId = "notice_id";
     String reg_date = "reg_date";
 
+    // Admin 관리자 테이블 전용
+    String adminName = "name";
+    String adminId = "userid";
+    String adminPhone = "phone";
 
+
+
+    // 회원 전용
     static List<String> values(){
         return Arrays.asList(userName, userId, created_At);
     }
 
+
+    // 공지사항
     static List<String> noticeValues(){
         return Arrays.asList(noticeId, reg_date);
     }
+
+
+    // Admin
+    static List<String> adminValues(){return Arrays.asList(adminName, adminId, adminPhone);}
+
 }

@@ -21,5 +21,5 @@ public class AdminMemberDTO {
     private String position;
 
     // 삭제 여부(활성화 여부)
-    private String deletedAt;
+    private String deleted_at;
 }
