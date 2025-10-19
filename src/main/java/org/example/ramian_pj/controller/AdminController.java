@@ -276,6 +276,14 @@ public class AdminController {
 
         return "admin/admin_mgm";
     }
+
+
+    @ResponseBody
+    @PostMapping("/member/status")
+    public String memberStatusUpdate(@RequestParam Integer id, @RequestParam String status){
+
+        return adminService.updateAdminStatus(id, status) > 0 ? "OK" : "FAIL";
+    }
 }
 
 

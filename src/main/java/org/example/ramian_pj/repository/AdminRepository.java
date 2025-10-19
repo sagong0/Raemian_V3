@@ -19,4 +19,6 @@ public interface AdminRepository {
     List<NoticeDTO> getAdminsBySearch(SearchConditionDTO searchConditionDTO, int offset);
 
     int countSearchAdmins(SearchConditionDTO searchConditionDTO);
+
+    int updateAdminStatus(Integer id, String status);
 }

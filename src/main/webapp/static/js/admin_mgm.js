@@ -53,3 +53,32 @@ function member_search() {
     // 폼 전송은 막고, JS 처리
     return false;
 }
+
+
+// 근무중, 퇴직중 AJAX 처리
+async function applyAdmin(id) {
+    const status = document.getElementById('status' + id).value;
+    if (!confirm(`${status}으로 변경하시겠습니까?`)) return;
+
+    try {
+        const res = await fetch(`${ctx}/admin/member/status`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ id, status }).toString()
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const text = await res.text();
+        if (text === 'OK') {
+            alert('상태가 변경되었습니다.');
+            location.reload();
+        } else {
+            alert('변경 실패: ' + text);
+        }
+    } catch (e) {
+        console.error(e);
+        alert('요청 중 오류가 발생했습니다.');
+    }
+
+    
+}
