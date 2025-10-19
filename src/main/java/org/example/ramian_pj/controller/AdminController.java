@@ -267,7 +267,7 @@ public class AdminController {
     public String adminMember(
             @ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
 
-        PageDTO adminPageInfo = adminService.getPagedAdmins(searchConditionDTO);
+        PageDTO<AdminMemberDTO> adminPageInfo = adminService.getPagedAdmins(searchConditionDTO);
         log.info("test = {}", adminPageInfo.getList());
 
         model.addAttribute("adminPageInfo", adminPageInfo);

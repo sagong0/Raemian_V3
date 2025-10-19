@@ -35,3 +35,21 @@ function adminPagination(p) {
     location.href = ctx + "/admin/member?" + params.toString();
 }
 
+function member_search() {
+    const aarea = document.getElementById('aarea')?.value || "all";
+    const searchType = document.getElementById('searchType')?.value || "userid";
+    const keyword = document.getElementById('searchVal')?.value || "";
+
+    const params = new URLSearchParams({
+        aarea, searchType, keyword,
+        page: 1,
+        pageSize: window.SEARCH_CON.pageSize,
+        sortBy: window.SEARCH_CON.sortBy,
+        order: window.SEARCH_CON.order
+    });
+
+    location.href = ctx + "/admin/member?" + params.toString();
+
+    // 폼 전송은 막고, JS 처리
+    return false;
+}
