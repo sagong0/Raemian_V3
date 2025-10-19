@@ -154,6 +154,15 @@
 <%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
 <script>
     const ctx = "${pageContext.request.contextPath}";
+    window.PAGING_TOTAL = ${adminPageInfo.totalPages};
+    window.SEARCH_CON = {
+        aarea: "${searchConDTO.aarea}",
+        searchType: "${searchConDTO.searchType}",
+        keyword: "${fn:escapeXml(searchConDTO.keyword)}",
+        sortBy: "${searchConDTO.sortBy}",
+        order: "${searchConDTO.order}",
+        pageSize: "${searchConDTO.pageSize}"
+    };
 </script>
 <script src="${pageContext.request.contextPath}/static/js/admin_mgm.js?<%=System.currentTimeMillis()%>"></script>
 </body>
