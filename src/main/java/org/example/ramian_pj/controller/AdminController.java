@@ -284,6 +284,12 @@ public class AdminController {
 
         return adminService.updateAdminStatus(id, status) > 0 ? "OK" : "FAIL";
     }
+
+    @GetMapping("/faq")
+    public String faqList(){
+
+        return "";
+    }
 }
 
 
