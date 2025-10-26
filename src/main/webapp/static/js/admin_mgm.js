@@ -82,3 +82,9 @@ async function applyAdmin(id) {
 
     
 }
+
+// 전체 버튼
+document.getElementById("allBtn")
+    .addEventListener("click", ()=>{
+    location.href = ctx + "/admin/member/";
+});
