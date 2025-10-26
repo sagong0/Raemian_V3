@@ -45,4 +45,9 @@ public class AdminRepoImpl implements AdminRepository{
     public int countSearchAdmins(SearchConditionDTO searchConditionDTO) {
         return adminMapper.countSearchAdmins(searchConditionDTO);
     }
+
+    @Override
+    public int updateAdminStatus(Integer id, String status) {
+        return adminMapper.updateAdminStatus(id, status);
+    }
 }

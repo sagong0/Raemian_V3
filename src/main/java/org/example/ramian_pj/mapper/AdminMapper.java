@@ -20,4 +20,6 @@ public interface AdminMapper {
     List<NoticeDTO> getAdminBySearchOption(@Param("searchConditionDTO") SearchConditionDTO searchConditionDTO, @Param("offset") int offset);
 
     int countSearchAdmins(@Param("searchConditionDTO") SearchConditionDTO searchConditionDTO);
+
+    int updateAdminStatus(@Param("id") Integer id, @Param("status") String status);
 }

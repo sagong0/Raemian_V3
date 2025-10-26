@@ -82,4 +82,8 @@ public class AdminService {
 
         return new PageDTO(notices, totalCount, searchConditionDTO.getPage(), searchConditionDTO.getPageSize());
     }
+
+    public int updateAdminStatus(Integer id, String status) {
+        return adminRepository.updateAdminStatus(id, status);
+    }
 }

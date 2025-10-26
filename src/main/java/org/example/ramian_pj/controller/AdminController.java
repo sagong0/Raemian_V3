@@ -267,7 +267,7 @@ public class AdminController {
     public String adminMember(
             @ModelAttribute SearchConditionDTO searchConditionDTO, Model model) {
 
-        PageDTO adminPageInfo = adminService.getPagedAdmins(searchConditionDTO);
+        PageDTO<AdminMemberDTO> adminPageInfo = adminService.getPagedAdmins(searchConditionDTO);
         log.info("test = {}", adminPageInfo.getList());
 
         model.addAttribute("adminPageInfo", adminPageInfo);
@@ -275,6 +275,14 @@ public class AdminController {
 
 
         return "admin/admin_mgm";
+    }
+
+
+    @ResponseBody
+    @PostMapping("/member/status")
+    public String memberStatusUpdate(@RequestParam Integer id, @RequestParam String status){
+
+        return adminService.updateAdminStatus(id, status) > 0 ? "OK" : "FAIL";
     }
 }
 

@@ -53,9 +53,9 @@
                         <li class="prochoL procfont">검색형식</li>
                         <li class="prochoL ">
                             <select id="searchType" class="adlistcsel1" name="search_part">
-                                <option value="이름">이름</option>
-                                <option value="아이디">아이디</option>
-                                <option value="연락처">연락처</option>
+                                <option value="name">이름</option>
+                                <option value="userid">아이디</option>
+                                <option value="phone">연락처</option>
                             </select>
                         </li>
                         <li class="prochoL">
@@ -154,6 +154,15 @@
 <%@include file="/WEB-INF/views/admin/fragments/footer.jsp" %>
 <script>
     const ctx = "${pageContext.request.contextPath}";
+    window.PAGING_TOTAL = ${adminPageInfo.totalPages};
+    window.SEARCH_CON = {
+        aarea: "${searchConDTO.aarea}",
+        searchType: "${searchConDTO.searchType}",
+        keyword: "${fn:escapeXml(searchConDTO.keyword)}",
+        sortBy: "${searchConDTO.sortBy}",
+        order: "${searchConDTO.order}",
+        pageSize: "${searchConDTO.pageSize}"
+    };
 </script>
 <script src="${pageContext.request.contextPath}/static/js/admin_mgm.js?<%=System.currentTimeMillis()%>"></script>
 </body>
