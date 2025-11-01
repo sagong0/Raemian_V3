@@ -2,10 +2,7 @@ package org.example.ramian_pj.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ramian_pj.dto.*;
-import org.example.ramian_pj.service.AdminService;
-import org.example.ramian_pj.service.NoticeService;
-import org.example.ramian_pj.service.ReserveService;
-import org.example.ramian_pj.service.UserService;
+import org.example.ramian_pj.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -36,6 +33,7 @@ public class AdminController {
     private final UserService userService;
     private final NoticeService noticeService;
     private final ReserveService reserveService;
+    private final FaqService faqService;
 
     @GetMapping({"", "/"})
     public String loginPage() {
@@ -287,8 +285,9 @@ public class AdminController {
 
     @GetMapping("/faq")
     public String faqList(){
+        faqService.findAllFaqs();
 
-        return "";
+        return "admin/faq_list";
     }
 }
 

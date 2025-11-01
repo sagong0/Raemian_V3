@@ -75,24 +75,24 @@
        <input type="button" onclick="add_faq();" value="FAQ 등록" class="meno_btn2">
        </span>
 
-                    <aside>
-                        <c:if test="${not empty faqs}">
-                            <div class="page_number">
-                                <ul>
-                                    <c:set var="searchVal" value="${param.searchVal}" />
-                                    <!-- Page번호 시작 -->
-                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">
-                                        <li style="color:white;"
-                                            onclick="faqPagination(${pNo},'${not empty searchVal ? searchVal : ''}');"
-                                            class="<c:if test='${param.currentPage eq pNo}'>active</c:if>">
-                                                ${pNo}
-                                        </li>
-                                    </c:forEach>
-                                    <!-- Page번호 끝 -->
-                                </ul>
-                            </div>
-                        </c:if>
-                    </aside>
+<%--                    <aside>--%>
+<%--                        <c:if test="${not empty faqs}">--%>
+<%--                            <div class="page_number">--%>
+<%--                                <ul>--%>
+<%--                                    <c:set var="searchVal" value="${param.searchVal}" />--%>
+<%--                                    <!-- Page번호 시작 -->--%>
+<%--                                    <c:forEach var="pNo" begin="${list.startPage}" end="${list.endPage}" step="1">--%>
+<%--                                        <li style="color:white;"--%>
+<%--                                            onclick="faqPagination(${pNo},'${not empty searchVal ? searchVal : ''}');"--%>
+<%--                                            class="<c:if test='${param.currentPage eq pNo}'>active</c:if>">--%>
+<%--                                                ${pNo}--%>
+<%--                                        </li>--%>
+<%--                                    </c:forEach>--%>
+<%--                                    <!-- Page번호 끝 -->--%>
+<%--                                </ul>--%>
+<%--                            </div>--%>
+<%--                        </c:if>--%>
+<%--                    </aside>--%>
                 </section>
             </div>
         </div>
